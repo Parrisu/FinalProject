@@ -1,5 +1,7 @@
 package com.skilldistillery.stack.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,10 +14,28 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	String password;
+	private String username;
 	
-	String role;
+	private String password;
 	
+	private boolean enabled;
+	
+	private String role;
+	
+	
+	
+	public User() {
+		super();
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -41,13 +61,38 @@ public class User {
 	}
 
 	public boolean isEnabled() {
-		return isEnabled;
+		return enabled;
 	}
 
 	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
+		this.enabled = isEnabled;
 	}
 
-	boolean isEnabled;
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return id == other.id;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", isEnabled=" + enabled
+				+ ", role=" + role + "]";
+	}
 
 }
+
