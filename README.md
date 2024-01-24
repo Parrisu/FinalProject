@@ -1,6 +1,6 @@
 <h2 align="center">
     <a href="#" target="blank_">
-        <img height="100" alt="Stack Logo" src= />
+        <img height="100" alt="Stack Logo" src=https://github.com/Parrisu/FinalProject/blob/main/Images/stackicon.png/>
     </a>
     <br>
     The Stack: Push. Pop. Progress.
