@@ -38,11 +38,8 @@ public class Function {
 	@Column(name="created_on")
 	private LocalDateTime created;
 	
-	@Column(name="update_on")
+	@Column(name="updated_on")
 	private LocalDateTime updated;
-	
-	@Column(name="open_to_public")
-	private boolean isPublic;
 	
 	@Column(name="max_attendees")
 	private int cap;
@@ -138,14 +135,6 @@ public class Function {
 		this.updated = updated;
 	}
 
-	public boolean isPublic() {
-		return isPublic;
-	}
-
-	public void setPublic(boolean isPublic) {
-		this.isPublic = isPublic;
-	}
-
 	public int getCap() {
 		return cap;
 	}
@@ -174,7 +163,7 @@ public class Function {
 	public String toString() {
 		return "Function [id=" + id + ", name=" + name + ", cancelled=" + cancelled + ", enabled=" + enabled + ", date="
 				+ date + ", description=" + description + ", start=" + start + ", end=" + end + ", created=" + created
-				+ ", updated=" + updated + ", isPublic=" + isPublic + ", cap=" + cap + ", imgUrl=" + imgUrl
+				+ ", updated=" + updated + ", cap=" + cap + ", imgUrl=" + imgUrl
 				+ ", comments=" + comments + "]";
 	}
 	
