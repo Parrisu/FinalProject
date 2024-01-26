@@ -9,7 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Function {
@@ -52,6 +55,18 @@ public class Function {
 	
 	@OneToMany(mappedBy="function")
 	private List<FunctionImage> images;
+	
+	@OneToOne
+	@JoinColumn(name="address_id")
+	private Address address;
+	
+	@OneToOne
+	@JoinColumn(name="created_by")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="node_id")
+	private Node node;
 
 	public Function() {}
 
@@ -157,6 +172,38 @@ public class Function {
 
 	public void setComments(List<FunctionComment> comments) {
 		this.comments = comments;
+	}
+
+	public List<FunctionImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<FunctionImage> images) {
+		this.images = images;
+	}
+
+	public Node getNode() {
+		return node;
+	}
+
+	public void setNode(Node node) {
+		this.node = node;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override
