@@ -1,5 +1,6 @@
 package com.skilldistillery.stack.entities;
 
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
