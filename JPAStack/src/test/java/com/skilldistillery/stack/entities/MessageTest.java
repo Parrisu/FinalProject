@@ -15,40 +15,43 @@ import jakarta.persistence.Persistence;
 
 class MessageTest {
 
-	private static EntityManagerFactory emf;
-	private EntityManager em;
-	private Message message;
+		private static EntityManagerFactory emf;
+		private EntityManager em;
+		private Message message;
+		
+		@BeforeAll
+		static void setUpBeforeClass() throws Exception {
+			emf = Persistence.createEntityManagerFactory("JPAStack");
+			
+		}
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		emf = Persistence.createEntityManagerFactory("JPAStack");
+		@AfterAll
+		static void tearDownAfterClass() throws Exception {
+			
+			emf.close();
+		}
+
+		@BeforeEach
+		void setUp() throws Exception {
+			em = emf.createEntityManager();
+			message = em.find(Message.class, 1);
+		}
+
+		@AfterEach
+		void tearDown() throws Exception {
+			em.close();
+			message = null;
+			
+		}
+
+		@Test
+		void test_Message_entity_mapping() {
+			assertNotNull(message);
+			assertEquals("admin", message.getReceiver().getFirstName());
+			
+		}
 
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
 
-		emf.close();
-	}
 
-	@BeforeEach
-	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		message = em.find(Message.class, 1);
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-		em.close();
-		message = null;
-
-	}
-
-	@Test
-	void test_Message_entity_mapping() {
-		assertNotNull(message);
-		assertEquals(1, message.getReceiver());
-
-	}
-
-}
