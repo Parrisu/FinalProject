@@ -97,13 +97,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `user_technology` ;
 
 CREATE TABLE IF NOT EXISTS `user_technology` (
-  `user_d` INT NOT NULL,
+  `user_id` INT NOT NULL,
   `technology_id` INT NOT NULL,
-  PRIMARY KEY (`user_d`, `technology_id`),
+  PRIMARY KEY (`user_id`, `technology_id`),
   INDEX `fk_user_profile_has_technology_technology1_idx` (`technology_id` ASC),
-  INDEX `fk_user_profile_has_technology_user_profile1_idx` (`user_d` ASC),
+  INDEX `fk_user_profile_has_technology_user_profile1_idx` (`user_id` ASC),
   CONSTRAINT `fk_user_profile_has_technology_user_profile1`
-    FOREIGN KEY (`user_d`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -287,19 +287,19 @@ DROP TABLE IF EXISTS `message` ;
 CREATE TABLE IF NOT EXISTS `message` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `sender_id` INT NOT NULL,
-  `reciever_id` INT NOT NULL,
+  `receiver_id` INT NOT NULL,
   `body` TEXT NOT NULL,
   `created_on` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_message_user1_idx` (`sender_id` ASC),
-  INDEX `fk_message_user2_idx` (`reciever_id` ASC),
+  INDEX `fk_message_user2_idx` (`receiver_id` ASC),
   CONSTRAINT `fk_message_user1`
     FOREIGN KEY (`sender_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_message_user2`
-    FOREIGN KEY (`reciever_id`)
+    FOREIGN KEY (`receiver_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -568,7 +568,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `user_technology` (`user_d`, `technology_id`) VALUES (1, 1);
+INSERT INTO `user_technology` (`user_id`, `technology_id`) VALUES (1, 1);
 
 COMMIT;
 
@@ -638,7 +638,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `message` (`id`, `sender_id`, `reciever_id`, `body`, `created_on`) VALUES (1, 2, 1, 'You\'re a wizard admin', NULL);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `body`, `created_on`) VALUES (1, 2, 1, 'You\'re a wizard admin', NULL);
 
 COMMIT;
 
