@@ -48,7 +48,6 @@ class MessageTest {
 	void test_Message_entity_mapping() {
 		assertNotNull(message);
 		assertEquals(1, message.getReceiver());
-
 	}
 
 }
