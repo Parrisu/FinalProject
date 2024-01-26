@@ -30,9 +30,8 @@ public class Address {
 	@JoinColumn(name = "city_id")
 	private City city;
 	
-	@ManyToOne
-	@JoinColumn(name = "address_id")
-	private Function function;
+	@OneToMany(mappedBy = "address")
+	private List<Function> functions;
 
 	public Address() {
 		super();
@@ -80,12 +79,13 @@ public class Address {
 		this.city = city;
 	}
 
-	public Function getFunction() {
-		return function;
+
+	public List<Function> getFunctions() {
+		return functions;
 	}
 
-	public void setFunction(Function function) {
-		this.function = function;
+	public void setFunctions(List<Function> functions) {
+		this.functions = functions;
 	}
 
 	@Override

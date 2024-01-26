@@ -58,5 +58,11 @@ class AddressTest {
 		assertTrue(address.getUsers().size()> 0);
 		assertTrue(address.getUsers().toString().contains("admin"));
 	}
+	@Test
+	void test_Address_Function_mapping() {
+		assertNotNull(address);
+		assertTrue(address.getFunctions().size()> 0);
+		assertTrue(address.getFunctions().toString().contains("Java"));
+	}
 
 }
