@@ -2,8 +2,7 @@ package com.skilldistillery.stack.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.time.LocalDateTime;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -20,16 +19,16 @@ class AddressTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Address address;
-	
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPAStack");
-		
+
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		
+
 		emf.close();
 	}
 
@@ -43,7 +42,7 @@ class AddressTest {
 	void tearDown() throws Exception {
 		em.close();
 		address = null;
-		
+
 	}
 
 	@Test
@@ -52,12 +51,12 @@ class AddressTest {
 		assertEquals("7 havana St", address.getStreet());
 		assertEquals("80112", address.getZipCode());
 	}
-	
-//	@Test
-//	void test_Address_function_mapping() {
-//		assertNotNull(address);
-//		assertEquals("Super Java bros", address.get);
-//	}
-	
+
+	@Test
+	void test_Address_User_mapping() {
+		assertNotNull(address);
+		assertTrue(address.getUsers().size()> 0);
+		assertTrue(address.getUsers().toString().contains("admin"));
+	}
 
 }

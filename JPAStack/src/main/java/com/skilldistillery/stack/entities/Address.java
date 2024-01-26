@@ -1,10 +1,10 @@
 package com.skilldistillery.stack.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,14 +24,14 @@ public class Address {
 	private String zipCode;
 	
 	@OneToMany(mappedBy = "address")
-	private User user;
+	private List<User> users;
 	
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
 	
 	@ManyToOne
-//	@JoinColumn(name = "city_id")
+	@JoinColumn(name = "address_id")
 	private Function function;
 
 	public Address() {
@@ -60,6 +60,32 @@ public class Address {
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+
+	
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Function getFunction() {
+		return function;
+	}
+
+	public void setFunction(Function function) {
+		this.function = function;
 	}
 
 	@Override
