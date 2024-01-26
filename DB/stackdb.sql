@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `updated_on` DATETIME NULL,
   `role` VARCHAR(45) NOT NULL,
   `about_me` TEXT NULL,
-  `first_name` VARCHAR(45) NULL,
-  `last_name` VARCHAR(45) NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
   `profile_image_url` VARCHAR(2000) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_profile_address1_idx` (`address_id` ASC),
@@ -122,8 +122,8 @@ DROP TABLE IF EXISTS `profile_link` ;
 
 CREATE TABLE IF NOT EXISTS `profile_link` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `url` VARCHAR(2000) NULL,
-  `name` VARCHAR(60) NULL,
+  `url` VARCHAR(2000) NOT NULL,
+  `name` VARCHAR(60) NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_profile_link_user1_idx` (`user_id` ASC),
@@ -177,16 +177,16 @@ CREATE TABLE IF NOT EXISTS `function` (
   `address_id` INT NOT NULL,
   `node_id` INT NOT NULL,
   `cancelled` TINYINT NULL,
-  `enabled` TINYINT NULL,
-  `function_date` DATE NULL,
+  `enabled` TINYINT NOT NULL,
+  `function_date` DATE NOT NULL,
   `description` TEXT NULL,
-  `start_time` TIME NULL,
-  `end_time` TIME NULL,
+  `start_time` TIME NOT NULL,
+  `end_time` TIME NOT NULL,
   `created_on` DATETIME NULL,
   `updated_on` DATETIME NULL,
   `created_by` INT NOT NULL,
   `open_to_public` TINYINT NULL,
-  `max_attendees` INT NULL,
+  `max_attendees` INT NOT NULL,
   `image_url` VARCHAR(2000) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_function_address1_idx` (`address_id` ASC),
@@ -217,7 +217,7 @@ DROP TABLE IF EXISTS `node_role` ;
 
 CREATE TABLE IF NOT EXISTS `node_role` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `role` VARCHAR(100) NULL,
+  `role` VARCHAR(100) NOT NULL,
   `description` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `sender_id` INT NOT NULL,
   `reciever_id` INT NOT NULL,
-  `body` TEXT NULL,
+  `body` TEXT NOT NULL,
   `created_on` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_message_user1_idx` (`sender_id` ASC),
@@ -580,7 +580,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `profile_link` (`id`, `url`, `name`, `user_id`) VALUES (1, 'image.123', 'test image', 1);
+INSERT INTO `profile_link` (`id`, `url`, `name`, `user_id`) VALUES (1, 'linkedin.com', 'linkedin', 1);
 
 COMMIT;
 
@@ -600,7 +600,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `function` (`id`, `name`, `address_id`, `node_id`, `cancelled`, `enabled`, `function_date`, `description`, `start_time`, `end_time`, `created_on`, `updated_on`, `created_by`, `open_to_public`, `max_attendees`, `image_url`) VALUES (1, 'Java meet up', 1, 1, 0, 1, NULL, 'discussing the philosphy of java', '', '', NULL, NULL, 1, NULL, NULL, NULL);
+INSERT INTO `function` (`id`, `name`, `address_id`, `node_id`, `cancelled`, `enabled`, `function_date`, `description`, `start_time`, `end_time`, `created_on`, `updated_on`, `created_by`, `open_to_public`, `max_attendees`, `image_url`) VALUES (1, 'Java meet up', 1, 1, 0, 1, '2024-01-22', 'discussing the philosphy of java', '1:00', '3:00', NULL, NULL, 1, NULL, 10, '123.image');
 
 COMMIT;
 

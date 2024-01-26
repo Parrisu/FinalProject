@@ -77,7 +77,7 @@ To set up this project to run on your own computer follow the steps below.
             root
             ```
        
-5. Make sure MAMP is running on port 8090, and launch from the Spring `Boot Dashboard`.
+5. Make sure MAMP is running on port 3306, and launch from the Spring `Boot Dashboard`.
         * Click on the globe after it's up and check out the site!
 
 Otherwise just head to the deployed website above.
