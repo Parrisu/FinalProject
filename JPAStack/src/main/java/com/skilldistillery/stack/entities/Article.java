@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Article {
@@ -22,6 +24,14 @@ public class Article {
 	
 	@Column(name="updated_on")
 	private LocalDateTime updated;
+	
+	@OneToOne
+	@JoinColumn(name="node_id")
+	private Node node;
+	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	public Article() {}
 
@@ -55,6 +65,22 @@ public class Article {
 
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
+	}
+
+	public Node getNode() {
+		return node;
+	}
+
+	public void setNode(Node node) {
+		this.node = node;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
