@@ -560,7 +560,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (1, 'Java', NULL, 'Its java');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (1, 'Java', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Angular-Dark.svg', 'Its java');
 
 COMMIT;
 
