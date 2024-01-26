@@ -56,7 +56,7 @@ DROP TABLE IF EXISTS `user` ;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `address_id` INT NOT NULL,
-  `username` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `enabled` TINYINT NOT NULL,
   `email` VARCHAR(255) NOT NULL,
@@ -486,7 +486,7 @@ CREATE TABLE IF NOT EXISTS `article_comment` (
   `updated_on` DATETIME NULL,
   `article_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `article_comment_id` INT NOT NULL,
+  `article_comment_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_article_comment_article1_idx` (`article_id` ASC),
   INDEX `fk_article_comment_user1_idx` (`user_id` ASC),
@@ -524,11 +524,205 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (1, NULL, NULL);
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (2, NULL, NULL);
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (3, NULL, NULL);
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (4, NULL, NULL);
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (5, NULL, NULL);
+INSERT INTO `city` (`id`, `name`, `state`) VALUES (1, 'Denver', 'Colorado');
+INSERT INTO `city` (`id`, `name`, `state`) VALUES (2, 'Centennial', 'Colorado');
+INSERT INTO `city` (`id`, `name`, `state`) VALUES (3, 'Aurora', 'Colorado');
+INSERT INTO `city` (`id`, `name`, `state`) VALUES (4, 'Littleton', 'Colorado');
+INSERT INTO `city` (`id`, `name`, `state`) VALUES (5, 'Boulder', 'Colorado');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `address`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `address` (`id`, `street`, `zip_code`, `city_id`) VALUES (1, '7 havana St', '80112', 2);
+INSERT INTO `address` (`id`, `street`, `zip_code`, `city_id`) VALUES (2, 'dover st', '80123', 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (1, 1, 'admin', 'admin', 1, 'admin@admin.com', NULL, NULL, 'admin', 'I\'m admin, and I\'m an admin', 'admin', 'admin', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (2, 2, 'SteveB', 'steveB', 1, 'steveBuschemi@g.com', NULL, NULL, 'user', 'I\'m in a class case of emotion', 'Steve', 'Buschemi ', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `technology`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (1, 'Java', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Angular-Dark.svg', 'Its java');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_technology`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `user_technology` (`user_d`, `technology_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `profile_link`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `profile_link` (`id`, `url`, `name`, `user_id`) VALUES (1, 'image.123', 'test image', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `node`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `city_id`, `description`, `image_url`) VALUES (1, 'Super Java bros', 1, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 'We love java', '123.image');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `function`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `function` (`id`, `name`, `address_id`, `node_id`, `cancelled`, `enabled`, `function_date`, `description`, `start_time`, `end_time`, `created_on`, `updated_on`, `created_by`, `open_to_public`, `max_attendees`, `image_url`) VALUES (1, 'Java meet up', 1, 1, 0, 1, NULL, 'discussing the philosphy of java', '', '', NULL, NULL, 1, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `node_role`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `node_role` (`id`, `role`, `description`) VALUES (1, 'Owner', 'The owner of the node');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `node_member`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `node_member` (`node_id`, `user_id`, `approved`, `date_joined`, `date_approved`, `node_role_id`) VALUES (1, 1, 1, NULL, NULL, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `node_technology`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `message` (`id`, `sender_id`, `reciever_id`, `body`, `created_on`) VALUES (1, 2, 1, 'You\'re a wizard admin', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `notification`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `notification` (`id`, `content`, `enabled`, `type`, `created_on`) VALUES (1, 'Event cancelled', 1, 'Cancellation', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_notification`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `user_notification` (`user_id`, `notification_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `function_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `function_comment` (`id`, `function_id`, `content`, `created_on`, `user_id`, `reply_to_comment_id`) VALUES (1, 1, 'Java is for the birds', NULL, 1, NULL);
+INSERT INTO `function_comment` (`id`, `function_id`, `content`, `created_on`, `user_id`, `reply_to_comment_id`) VALUES (2, 1, 'You\'re for the birds ', NULL, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `attendee`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `attendee` (`function_id`, `user_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `node_resource`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `node_resource` (`id`, `url`, `title`, `created_on`, `updated_on`, `node_id`) VALUES (1, 'discord.com', 'Our discord', NULL, NULL, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `function_image`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `function_image` (`id`, `image_url`, `function_id`) VALUES (1, '123.image', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `article`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `article` (`id`, `content`, `created_on`, `updated_on`, `node_id`, `user_id`) VALUES (1, 'What is life', NULL, NULL, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `article_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stackdb`;
+INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `article_comment_id`) VALUES (1, 'Wrong node to ask that bro', NULL, NULL, 1, 2, NULL);
+INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `article_comment_id`) VALUES (2, 'My bad', NULL, NULL, 1, 1, 1);
 
 COMMIT;
 
