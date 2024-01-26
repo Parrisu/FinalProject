@@ -150,6 +150,7 @@ CREATE TABLE IF NOT EXISTS `node` (
   `city_id` INT NOT NULL,
   `description` TEXT NULL,
   `image_url` VARCHAR(2000) NULL,
+  `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_sub_stack_user_profile1_idx` (`user_id` ASC),
   INDEX `fk_node_city1_idx` (`city_id` ASC),
@@ -588,7 +589,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `city_id`, `description`, `image_url`) VALUES (1, 'Super Java bros', 1, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 'We love java', '123.image');
+INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `city_id`, `description`, `image_url`, `enabled`) VALUES (1, 'Super Java bros', 1, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 'We love java', '123.image', 1);
 
 COMMIT;
 
