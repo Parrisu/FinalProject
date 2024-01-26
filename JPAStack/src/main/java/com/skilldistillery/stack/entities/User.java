@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -59,9 +60,16 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_technology", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
 	private List<Technology> stack;
+
+	@OneToMany(mappedBy = "user")
+	private List<ProfileLink> profileLinks;
+
+	@ManyToMany
+	@JoinTable(name = "user_notification", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
+	private List<Notification> notifications;
 
 	public User() {
 		super();
@@ -177,6 +185,22 @@ public class User {
 
 	public void setStack(List<Technology> stack) {
 		this.stack = stack;
+	}
+
+	public List<ProfileLink> getProfileLinks() {
+		return profileLinks;
+	}
+
+	public void setProfileLinks(List<ProfileLink> profileLinks) {
+		this.profileLinks = profileLinks;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
 	}
 
 	@Override
