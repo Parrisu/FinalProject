@@ -547,8 +547,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (1, 1, 'admin', 'admin', 1, 'admin@admin.com', NULL, NULL, 'admin', 'I\'m admin, and I\'m an admin', 'admin', 'admin', NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (2, 2, 'SteveB', 'steveB', 1, 'steveBuschemi@g.com', NULL, NULL, 'user', 'I\'m in a class case of emotion', 'Steve', 'Buschemi ', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (1, 1, 'admin', '$2a$10$YIVc0suGYF7SlCurrPbkjOvrULm35jlDAZ0bb8UlBReumopVMxtEq', 1, 'admin@admin.com', NULL, NULL, 'admin', 'I\'m admin, and I\'m an admin', 'admin', 'admin', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (2, 2, 'SteveB', '$2a$10$YIVc0suGYF7SlCurrPbkjOvrULm35jlDAZ0bb8UlBReumopVMxtEq', 1, 'steveBuschemi@g.com', NULL, NULL, 'user', 'I\'m in a class case of emotion', 'Steve', 'Buschemi ', NULL);
 
 COMMIT;
 
