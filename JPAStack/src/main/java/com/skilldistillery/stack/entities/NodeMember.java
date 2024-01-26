@@ -18,7 +18,7 @@ public class NodeMember {
 	@EmbeddedId
 	private NodeMemberId id;
 
-	private Boolean approved;
+	private boolean approved;
 
 	@Column(name = "date_joined")
 	@CreationTimestamp
@@ -40,11 +40,11 @@ public class NodeMember {
 		this.id = id;
 	}
 
-	public Boolean getApproved() {
+	public boolean getApproved() {
 		return approved;
 	}
 
-	public void setApproved(Boolean approved) {
+	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
 
