@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `node` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NULL,
   `user_id` INT NOT NULL,
-  `open_to_public` TINYINT NULL,
+  `open_to_public` TINYINT NOT NULL,
   `created_on` DATETIME NOT NULL,
   `updated_on` DATETIME NOT NULL,
   `city_id` INT NOT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `function` (
   `name` VARCHAR(300) NOT NULL,
   `address_id` INT NOT NULL,
   `node_id` INT NOT NULL,
-  `cancelled` TINYINT NULL,
+  `cancelled` TINYINT NOT NULL,
   `enabled` TINYINT NOT NULL,
   `function_date` DATE NOT NULL,
   `description` TEXT NULL,
@@ -185,7 +185,6 @@ CREATE TABLE IF NOT EXISTS `function` (
   `created_on` DATETIME NULL,
   `updated_on` DATETIME NULL,
   `created_by` INT NOT NULL,
-  `open_to_public` TINYINT NULL,
   `max_attendees` INT NOT NULL,
   `image_url` VARCHAR(2000) NULL,
   PRIMARY KEY (`id`),
@@ -231,9 +230,8 @@ DROP TABLE IF EXISTS `node_member` ;
 CREATE TABLE IF NOT EXISTS `node_member` (
   `node_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `approved` TINYINT NULL,
+  `approved` TINYINT NOT NULL,
   `date_joined` DATETIME NULL,
-  `date_approved` DATETIME NULL,
   `node_role_id` INT NOT NULL,
   PRIMARY KEY (`node_id`, `user_id`),
   INDEX `fk_sub_stack_has_user_profile_user_profile1_idx` (`user_id` ASC),
@@ -316,7 +314,7 @@ DROP TABLE IF EXISTS `notification` ;
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(255) NULL,
-  `enabled` TINYINT NULL,
+  `enabled` TINYINT NOT NULL,
   `type` VARCHAR(55) NULL,
   `created_on` DATETIME NULL,
   PRIMARY KEY (`id`))
@@ -486,11 +484,11 @@ CREATE TABLE IF NOT EXISTS `article_comment` (
   `updated_on` DATETIME NULL,
   `article_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `article_comment_id` INT NULL,
+  `reply_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_article_comment_article1_idx` (`article_id` ASC),
   INDEX `fk_article_comment_user1_idx` (`user_id` ASC),
-  INDEX `fk_article_comment_article_comment1_idx` (`article_comment_id` ASC),
+  INDEX `fk_article_comment_article_comment1_idx` (`reply_id` ASC),
   CONSTRAINT `fk_article_comment_article1`
     FOREIGN KEY (`article_id`)
     REFERENCES `article` (`id`)
@@ -502,7 +500,7 @@ CREATE TABLE IF NOT EXISTS `article_comment` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_article_comment_article_comment1`
-    FOREIGN KEY (`article_comment_id`)
+    FOREIGN KEY (`reply_id`)
     REFERENCES `article_comment` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -600,7 +598,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `function` (`id`, `name`, `address_id`, `node_id`, `cancelled`, `enabled`, `function_date`, `description`, `start_time`, `end_time`, `created_on`, `updated_on`, `created_by`, `open_to_public`, `max_attendees`, `image_url`) VALUES (1, 'Java meet up', 1, 1, 0, 1, '2024-01-22', 'discussing the philosphy of java', '1:00', '3:00', NULL, NULL, 1, NULL, 10, '123.image');
+INSERT INTO `function` (`id`, `name`, `address_id`, `node_id`, `cancelled`, `enabled`, `function_date`, `description`, `start_time`, `end_time`, `created_on`, `updated_on`, `created_by`, `max_attendees`, `image_url`) VALUES (1, 'Java meet up', 1, 1, 0, 1, '2024-01-22', 'discussing the philosphy of java', '1:00', '3:00', NULL, NULL, 1, 10, '123.image');
 
 COMMIT;
 
@@ -620,7 +618,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `node_member` (`node_id`, `user_id`, `approved`, `date_joined`, `date_approved`, `node_role_id`) VALUES (1, 1, 1, NULL, NULL, 1);
+INSERT INTO `node_member` (`node_id`, `user_id`, `approved`, `date_joined`, `node_role_id`) VALUES (1, 1, 1, NULL, 1);
 
 COMMIT;
 
@@ -721,8 +719,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `article_comment_id`) VALUES (1, 'Wrong node to ask that bro', NULL, NULL, 1, 2, NULL);
-INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `article_comment_id`) VALUES (2, 'My bad', NULL, NULL, 1, 1, 1);
+INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `reply_id`) VALUES (1, 'Wrong node to ask that bro', NULL, NULL, 1, 2, NULL);
+INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `reply_id`) VALUES (2, 'My bad', NULL, NULL, 1, 1, 1);
 
 COMMIT;
 
