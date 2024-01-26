@@ -22,12 +22,10 @@ class UserTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPAStack");
-		
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		
 		emf.close();
 	}
 
@@ -41,7 +39,6 @@ class UserTest {
 	void tearDown() throws Exception {
 		em.close();
 		user = null;
-		
 	}
 
 	@Test

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   tempTestDeleteMeLater(): void {
-    this.auth.login('admin', 'test').subscribe({
+    this.auth.login('admin', 'password123').subscribe({
       next: (data) => {
         console.log("Logged In:");
         console.log(JSON.stringify(data));
