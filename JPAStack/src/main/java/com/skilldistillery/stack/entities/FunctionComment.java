@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,9 +29,16 @@ public class FunctionComment {
 	@ManyToOne
 	@JoinColumn(name = "function_id")
 	private Function function;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	@OneToOne
+	@JoinColumn(name = "reply_to_comment_id")
+	private FunctionComment reply;
 
 	public FunctionComment() {
-		super();
 	}
 
 	public int getId() {
@@ -63,6 +71,22 @@ public class FunctionComment {
 
 	public void setFunction(Function function) {
 		this.function = function;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public FunctionComment getReply() {
+		return reply;
+	}
+
+	public void setReply(FunctionComment reply) {
+		this.reply = reply;
 	}
 
 	@Override

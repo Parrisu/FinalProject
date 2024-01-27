@@ -13,11 +13,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class FunctionImageTest {
+class FunctionCommentTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private FunctionImage functionImage;
+	private FunctionComment functionComment, functionReply;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,27 +34,41 @@ class FunctionImageTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		functionImage = em.find(FunctionImage.class, 1);
+		functionComment = em.find(FunctionComment.class, 1);
+		functionReply = em.find(FunctionComment.class, 2);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		functionImage = null;
+		functionComment = null;
 		
 	}
 
 	@Test
-	void test_FunctionImage_entity_mapping() {
-		assertNotNull(functionImage);
-		assertEquals("123.image", functionImage.getImgUrl());
+	void test_FunctionComment_entity_mapping() {
+		assertNotNull(functionComment);
+		assertEquals("Java is for the birds", functionComment.getContent());
 		
 	}
 	
 	@Test
-	void test_FunctionImage_Function_mapping() {
-		assertNotNull(functionImage);
-		assertEquals("Java meet up", functionImage.getFunction().getName());
+	void test_FunctionComment_Function_mapping() {
+		assertNotNull(functionComment);
+		assertEquals("Java meet up", functionComment.getFunction().getName());
+	}
+
+	@Test
+	void test_FunctionComment_User_mapping() {
+		assertNotNull(functionComment);
+		assertEquals("admin", functionComment.getUser().getFirstName());
+	}
+	
+	@Test
+	void test_FunctionComment_FunctionReply_mapping() {
+		assertNotNull(functionComment);
+		assertEquals(null, functionComment.getReply());
+		assertEquals("You're for the birds ", functionReply.getContent());
 	}
 
 }

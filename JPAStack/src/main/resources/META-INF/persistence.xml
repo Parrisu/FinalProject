@@ -6,6 +6,7 @@
 	
 	<class>com.skilldistillery.stack.entities.Address</class>
 	<class>com.skilldistillery.stack.entities.Article</class>
+	<class>com.skilldistillery.stack.entities.ArticleComment</class>
 	<class>com.skilldistillery.stack.entities.City</class>
 	<class>com.skilldistillery.stack.entities.Message</class>
 	<class>com.skilldistillery.stack.entities.Function</class>

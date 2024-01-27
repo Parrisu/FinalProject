@@ -4,14 +4,17 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
-public class Article {
+@Table(name="article_comment")
+public class ArticleComment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,18 +28,38 @@ public class Article {
 	@Column(name="updated_on")
 	private LocalDateTime updated;
 	
-	@OneToOne
-	@JoinColumn(name="node_id")
-	private Node node;
+	@ManyToOne
+	@JoinColumn(name="article_id")
+	private Article article;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	public Article() {}
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn(name="reply_id")
+	private ArticleComment reply;
+	
+	public ArticleComment() {}
 
 	public int getId() {
 		return id;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public ArticleComment getReply() {
+		return reply;
+	}
+
+	public void setReply(ArticleComment reply) {
+		this.reply = reply;
 	}
 
 	public void setId(int id) {
@@ -67,13 +90,6 @@ public class Article {
 		this.updated = updated;
 	}
 
-	public Node getNode() {
-		return node;
-	}
-
-	public void setNode(Node node) {
-		this.node = node;
-	}
 
 	public User getUser() {
 		return user;
