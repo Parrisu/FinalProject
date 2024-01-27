@@ -1,7 +1,6 @@
 package com.skilldistillery.stack.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,42 +12,50 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class MessageTest {
+class NotificationTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Message message;
+	private Notification notification;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPAStack");
-
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-
 		emf.close();
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		message = em.find(Message.class, 1);
+		notification = em.find(Notification.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		message = null;
-
+		notification = null;
 	}
 
 	@Test
-	void test_Message_entity_mapping() {
-		assertNotNull(message);
-		assertEquals("admin", message.getReceiver().getFirstName());
+	void test_content_mapping() {
+		assertNotNull(notification);
+		assertFalse(notification.getContent().isBlank());
+	}
 
+	@Test
+	void test_enabled_mapping() {
+		assertNotNull(notification);
+		assertFalse(notification.isEnabled());
+	}
+
+	@Test
+	void test_type_mapping() {
+		assertNotNull(notification);
+		assertEquals("Cancellation", notification.getType());
 	}
 
 }

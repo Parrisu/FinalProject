@@ -56,7 +56,7 @@ public class Function {
 	@OneToMany(mappedBy="function")
 	private List<FunctionImage> images;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
 	
@@ -211,7 +211,7 @@ public class Function {
 		return "Function [id=" + id + ", name=" + name + ", cancelled=" + cancelled + ", enabled=" + enabled + ", date="
 				+ date + ", description=" + description + ", start=" + start + ", end=" + end + ", created=" + created
 				+ ", updated=" + updated + ", cap=" + cap + ", imgUrl=" + imgUrl
-				+ ", comments=" + comments + "]";
+				+ "]";
 	}
 	
 	
