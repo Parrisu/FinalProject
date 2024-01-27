@@ -14,11 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class AddressTest {
+class CityTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Address address;
+	private City city;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -35,39 +35,37 @@ class AddressTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		address = em.find(Address.class, 1);
+		city = em.find(City.class, 2);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		address = null;
+		city = null;
 
 	}
 
 	@Test
-	void test_Address_entity_mapping() {
-		assertNotNull(address);
-		assertEquals("7 havana St", address.getStreet());
-		assertEquals("80112", address.getZipCode());
+	void test_City_entity_mapping() {
+		assertNotNull(city);
+		assertEquals("Centennial", city.getName());
+		assertEquals("Colorado", city.getState());
 	}
 
 	@Test
-	void test_Address_User_mapping() {
-		assertNotNull(address);
-		assertTrue(address.getUsers().size()> 0);
-		assertTrue(address.getUsers().toString().contains("admin"));
+	void test_City_User_mapping() {
+		assertNotNull(city);
+		assertTrue(city.getAddresses().size()> 0);
+		assertTrue(city.getAddresses().toString().contains("havana"));
 	}
+	
 	@Test
-	void test_Address_Function_mapping() {
-		assertNotNull(address);
-		assertTrue(address.getFunctions().size()> 0);
-		assertTrue(address.getFunctions().toString().contains("Java"));
-	}
-	@Test
-	void test_Address_City_mapping() {
-		assertNotNull(address);
-		assertEquals(address.getCity().getName(), "Centennial");
+	void test_City_Nodes_mapping() {
+		city = em.find(City.class, 1);
+		assertNotNull(city);
+		assertTrue(city.getNodes().size()> 0);
+//		System.out.println(city.getNodes().toString());
+		assertTrue(city.getNodes().toString().contains("Super Java bros"));
 	}
 		
 
