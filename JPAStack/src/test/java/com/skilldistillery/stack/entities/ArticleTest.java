@@ -13,11 +13,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class FunctionImageTest {
+class ArticleTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private FunctionImage functionImage;
+	private Article article;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,27 +34,35 @@ class FunctionImageTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		functionImage = em.find(FunctionImage.class, 1);
+		article = em.find(Article.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		functionImage = null;
+		article = null;
 		
 	}
 
 	@Test
-	void test_FunctionImage_entity_mapping() {
-		assertNotNull(functionImage);
-		assertEquals("123.image", functionImage.getImgUrl());
+	void test_Article_entity_mapping() {
+		assertNotNull(article);
+		assertEquals("What is life", article.getContent());
 		
 	}
 	
 	@Test
-	void test_FunctionImage_Function_mapping() {
-		assertNotNull(functionImage);
-		assertEquals("Java meet up", functionImage.getFunction().getName());
+	void test_Article_User_mapping() {
+		assertNotNull(article);
+		assertEquals("admin", article.getUser().getFirstName());
 	}
+
+	@Test
+	void test_Article_Node_mapping() {
+		assertNotNull(article);
+		assertEquals("Super Java bros", article.getNode().getName());
+		
+	}
+	
 
 }

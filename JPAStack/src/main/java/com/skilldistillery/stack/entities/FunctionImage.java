@@ -20,7 +20,7 @@ public class FunctionImage {
 	@Column(name="image_url")
 	private String imgUrl;
 	
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name="function_id")
 	private Function function;
 	
@@ -40,6 +40,14 @@ public class FunctionImage {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public Function getFunction() {
+		return function;
+	}
+
+	public void setFunction(Function function) {
+		this.function = function;
 	}
 
 	@Override

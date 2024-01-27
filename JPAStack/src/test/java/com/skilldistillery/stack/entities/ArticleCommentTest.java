@@ -13,11 +13,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class FunctionImageTest {
+class ArticleCommentTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private FunctionImage functionImage;
+	private ArticleComment articleComment, reply;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -27,34 +27,37 @@ class FunctionImageTest {
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		
 		emf.close();
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		functionImage = em.find(FunctionImage.class, 1);
+		articleComment = em.find(ArticleComment.class, 1);
+		reply = em.find(ArticleComment.class, 2);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		functionImage = null;
+		articleComment = null;
 		
 	}
 
 	@Test
-	void test_FunctionImage_entity_mapping() {
-		assertNotNull(functionImage);
-		assertEquals("123.image", functionImage.getImgUrl());
+	void test_ArticleComment_entity_mapping() {
+		assertNotNull(articleComment);
+		assertEquals("Wrong node to ask that bro", articleComment.getContent());
+		assertEquals("Wrong node to ask that bro", reply.getReply().getContent());
 		
 	}
 	
 	@Test
-	void test_FunctionImage_Function_mapping() {
-		assertNotNull(functionImage);
-		assertEquals("Java meet up", functionImage.getFunction().getName());
+	void test_ArticleComment_Article_mapping() {
+		assertNotNull(articleComment);
+		assertEquals("What is life", articleComment.getArticle().getContent());
 	}
+
+	
 
 }
