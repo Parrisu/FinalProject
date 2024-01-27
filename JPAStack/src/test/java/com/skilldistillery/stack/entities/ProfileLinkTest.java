@@ -1,6 +1,8 @@
 package com.skilldistillery.stack.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -12,11 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class NotificationTest {
+class ProfileLinkTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Notification notification;
+	private ProfileLink link;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,31 +33,33 @@ class NotificationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		notification = em.find(Notification.class, 1);
+		link = em.find(ProfileLink.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		notification = null;
+		link = null;
 	}
 
 	@Test
-	void test_content_mapping() {
-		assertNotNull(notification);
-		assertFalse(notification.getContent().isBlank());
+	void test_url_mapping() {
+		assertNotNull(link);
+		assertNotNull(link.getUrl());
+		assertFalse(link.getUrl().isBlank());
 	}
-
+	
 	@Test
-	void test_enabled_mapping() {
-		assertNotNull(notification);
-		assertTrue(notification.isEnabled());
+	void test_name_mapping() {
+		assertNotNull(link);
+		assertNotNull(link.getName());
+		assertEquals("linkedin", link.getName());
 	}
-
+	
 	@Test
-	void test_type_mapping() {
-		assertNotNull(notification);
-		assertEquals("Cancellation", notification.getType());
+	void test_user_mapping() {
+		assertNotNull(link);
+		assertNotNull(link.getUser());
+		assertEquals(1, link.getUser().getId());
 	}
-
 }
