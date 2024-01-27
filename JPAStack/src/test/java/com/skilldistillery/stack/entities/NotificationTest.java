@@ -49,7 +49,7 @@ class NotificationTest {
 	@Test
 	void test_enabled_mapping() {
 		assertNotNull(notification);
-		assertFalse(notification.isEnabled());
+		assertTrue(notification.isEnabled());
 	}
 
 	@Test
