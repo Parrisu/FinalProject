@@ -15,25 +15,23 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Message {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne
-	@JoinColumn(name= "sender_id")
+	@JoinColumn(name = "sender_id")
 	private User sender;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name= "receiver_id")
+	@JoinColumn(name = "receiver_id")
 	private User receiver;
-	
+
 	private String body;
-	
+
 	@CreationTimestamp
-	@Column(name= "created_on")
+	@Column(name = "created_on")
 	private LocalDateTime createdOn;
 
 	public int getId() {
@@ -44,7 +42,6 @@ public class Message {
 		this.id = id;
 	}
 
-
 	public String getBody() {
 		return body;
 	}
@@ -52,7 +49,6 @@ public class Message {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	
 
 	public User getSender() {
 		return sender;
@@ -83,8 +79,6 @@ public class Message {
 		return Objects.hash(id);
 	}
 
-	
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -99,14 +93,8 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", sender=" + sender.getId() + ", receiver=" + receiver.getId() + ", body=" + body + ", createdOn="
-				+ createdOn + "]";
+		return "Message [id=" + id + ", sender=" + sender.getId() + ", receiver=" + receiver.getId() + ", body=" + body
+				+ ", createdOn=" + createdOn + "]";
 	}
 
-	
-	
-	
-	
-	
-	
 }

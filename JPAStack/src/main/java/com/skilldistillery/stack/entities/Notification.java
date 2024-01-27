@@ -72,12 +72,6 @@ public class Notification {
 	}
 
 	@Override
-	public String toString() {
-		return "Notification [id=" + id + ", content=" + content + ", enabled=" + enabled + ", type=" + type
-				+ ", createdOn=" + createdOn + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
@@ -94,4 +88,9 @@ public class Notification {
 		return id == other.id;
 	}
 
+	@Override
+	public String toString() {
+		return "Notification [id=" + id + ", content=" + content + ", enabled=" + enabled + ", type=" + type
+				+ ", createdOn=" + createdOn + "]";
+	}
 }

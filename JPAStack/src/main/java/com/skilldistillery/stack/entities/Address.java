@@ -22,19 +22,18 @@ public class Address {
 
 	@Column(name = "zip_code")
 	private String zipCode;
-	
+
 	@OneToMany(mappedBy = "address")
 	private List<User> users;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
-	
+
 	@OneToMany(mappedBy = "address")
 	private List<Function> functions;
 
 	public Address() {
-		super();
 	}
 
 	public int getId() {
@@ -61,8 +60,6 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 
-	
-
 	public List<User> getUsers() {
 		return users;
 	}
@@ -78,7 +75,6 @@ public class Address {
 	public void setCity(City city) {
 		this.city = city;
 	}
-
 
 	public List<Function> getFunctions() {
 		return functions;

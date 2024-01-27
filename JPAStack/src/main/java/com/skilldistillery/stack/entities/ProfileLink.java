@@ -62,10 +62,6 @@ public class ProfileLink {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "ProfileLink [id=" + id + ", url=" + url + ", name=" + name + "]";
-	}
 
 	@Override
 	public int hashCode() {
@@ -82,6 +78,11 @@ public class ProfileLink {
 			return false;
 		ProfileLink other = (ProfileLink) obj;
 		return id == other.id;
+	}
+
+	@Override
+	public String toString() {
+		return "ProfileLink [id=" + id + ", url=" + url + ", name=" + name + "]";
 	}
 
 }
