@@ -1,11 +1,13 @@
 package com.skilldistillery.stack.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class City {
@@ -17,6 +19,12 @@ public class City {
 	private String name;
 
 	private String state;
+	
+	@OneToMany(mappedBy="city")
+	private List<Address> addresses;
+	
+	@OneToMany(mappedBy="city")
+	private List<Node> nodes;
 
 	public City() {
 		super();
@@ -44,6 +52,22 @@ public class City {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	public List<Node> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<Node> nodes) {
+		this.nodes = nodes;
 	}
 
 	@Override

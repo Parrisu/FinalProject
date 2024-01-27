@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterAll;
@@ -13,42 +14,44 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class MessageTest {
+class NodeRoleTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Message message;
+	private NodeRole role;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPAStack");
-
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-
 		emf.close();
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		message = em.find(Message.class, 1);
+		role = em.find(NodeRole.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		message = null;
-
+		role = null;
 	}
 
 	@Test
-	void test_Message_entity_mapping() {
-		assertNotNull(message);
-		assertEquals("admin", message.getReceiver().getFirstName());
+	void test_role_mapping() {
+		assertNotNull(role);
+		assertEquals("Owner", role.getRole());
+	}
 
+	@Test
+	void test_description_mapping() {
+		assertNotNull(role);
+		assertFalse(role.getDescription().isBlank());
 	}
 
 }

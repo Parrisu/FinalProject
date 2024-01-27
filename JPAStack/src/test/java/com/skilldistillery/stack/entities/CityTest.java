@@ -2,6 +2,7 @@ package com.skilldistillery.stack.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,11 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class MessageTest {
+class CityTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Message message;
+	private City city;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,21 +35,38 @@ class MessageTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		message = em.find(Message.class, 1);
+		city = em.find(City.class, 2);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		message = null;
+		city = null;
 
 	}
 
 	@Test
-	void test_Message_entity_mapping() {
-		assertNotNull(message);
-		assertEquals("admin", message.getReceiver().getFirstName());
-
+	void test_City_entity_mapping() {
+		assertNotNull(city);
+		assertEquals("Centennial", city.getName());
+		assertEquals("Colorado", city.getState());
 	}
+
+	@Test
+	void test_City_User_mapping() {
+		assertNotNull(city);
+		assertTrue(city.getAddresses().size()> 0);
+		assertTrue(city.getAddresses().toString().contains("havana"));
+	}
+	
+	@Test
+	void test_City_Nodes_mapping() {
+		city = em.find(City.class, 1);
+		assertNotNull(city);
+		assertTrue(city.getNodes().size()> 0);
+//		System.out.println(city.getNodes().toString());
+		assertTrue(city.getNodes().toString().contains("Super Java bros"));
+	}
+		
 
 }

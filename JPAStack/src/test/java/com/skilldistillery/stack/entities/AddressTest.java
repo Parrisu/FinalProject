@@ -2,6 +2,7 @@ package com.skilldistillery.stack.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,11 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class MessageTest {
+class AddressTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Message message;
+	private Address address;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,21 +35,40 @@ class MessageTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		message = em.find(Message.class, 1);
+		address = em.find(Address.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		message = null;
+		address = null;
 
 	}
 
 	@Test
-	void test_Message_entity_mapping() {
-		assertNotNull(message);
-		assertEquals("admin", message.getReceiver().getFirstName());
-
+	void test_Address_entity_mapping() {
+		assertNotNull(address);
+		assertEquals("7 havana St", address.getStreet());
+		assertEquals("80112", address.getZipCode());
 	}
+
+	@Test
+	void test_Address_User_mapping() {
+		assertNotNull(address);
+		assertTrue(address.getUsers().size()> 0);
+		assertTrue(address.getUsers().toString().contains("admin"));
+	}
+	@Test
+	void test_Address_Function_mapping() {
+		assertNotNull(address);
+		assertTrue(address.getFunctions().size()> 0);
+		assertTrue(address.getFunctions().toString().contains("Java"));
+	}
+	@Test
+	void test_Address_City_mapping() {
+		assertNotNull(address);
+		assertEquals(address.getCity().getName(), "Centennial");
+	}
+		
 
 }

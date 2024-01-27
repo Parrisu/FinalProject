@@ -1,5 +1,6 @@
 package com.skilldistillery.stack.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -7,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -18,6 +22,16 @@ public class Address {
 
 	@Column(name = "zip_code")
 	private String zipCode;
+	
+	@OneToMany(mappedBy = "address")
+	private List<User> users;
+	
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
+	
+	@OneToMany(mappedBy = "address")
+	private List<Function> functions;
 
 	public Address() {
 		super();
@@ -45,6 +59,33 @@ public class Address {
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+
+	
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+
+	public List<Function> getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(List<Function> functions) {
+		this.functions = functions;
 	}
 
 	@Override
