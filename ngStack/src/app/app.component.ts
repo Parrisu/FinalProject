@@ -26,18 +26,18 @@ export class AppComponent implements OnInit {
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.tempTestDeleteMeLater();
+    // this.tempTestDeleteMeLater();
   }
 
-  tempTestDeleteMeLater(): void {
-    this.auth.login('admin', 'password123').subscribe({
-      next: (data) => {
-        console.log('Logged In:');
-        console.log(JSON.stringify(data));
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  // tempTestDeleteMeLater(): void {
+  //   this.auth.login('admin', 'password123').subscribe({
+  //     next: (data) => {
+  //       console.log('Logged In:');
+  //       console.log(JSON.stringify(data));
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
 }
