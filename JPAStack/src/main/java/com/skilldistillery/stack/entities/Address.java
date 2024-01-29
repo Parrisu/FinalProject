@@ -3,6 +3,8 @@ package com.skilldistillery.stack.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,15 +24,17 @@ public class Address {
 
 	@Column(name = "zip_code")
 	private String zipCode;
-	
+
 	@OneToMany(mappedBy = "address")
+	@JsonIgnore
 	private List<User> users;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
-	
+
 	@OneToMany(mappedBy = "address")
+	@JsonIgnore
 	private List<Function> functions;
 
 	public Address() {
@@ -61,8 +65,6 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 
-	
-
 	public List<User> getUsers() {
 		return users;
 	}
@@ -78,7 +80,6 @@ public class Address {
 	public void setCity(City city) {
 		this.city = city;
 	}
-
 
 	public List<Function> getFunctions() {
 		return functions;
