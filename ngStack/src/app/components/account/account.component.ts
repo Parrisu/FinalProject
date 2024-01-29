@@ -24,7 +24,6 @@ export class AccountComponent implements OnInit {
   }
 
   updateUser(user: User){
-    console.log('here')
     this.userServ.updateUser(user).subscribe(
       {
         next: (user) => {
@@ -40,11 +39,18 @@ export class AccountComponent implements OnInit {
 
   }
 
+  deleteCycle(id: number){
+    if(confirm("Are you sure you want to delete your account " + this.user.firstName + "?")){
+      console.log('DELETED')
+    } else {
+      console.log("NEVERMIND")
+    }
+  }
+
   loadData(){
     this.auth.getLoggedInUser().subscribe(
       {
         next: (user) => {
-          console.log(user)
           this.user, this.editUser = user;
         },
         error: (err)=> {
