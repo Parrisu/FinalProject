@@ -22,7 +22,7 @@ public class NodeServiceImpl implements NodeService {
 
 	@Override
 	public List<Node> findByNameContaining(String name) {
-		// TODO Auto-generated method stub
+
 		return nodeRepo.findByNameContaining(name);
 	}
 	
