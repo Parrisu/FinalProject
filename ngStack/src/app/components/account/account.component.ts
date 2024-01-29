@@ -41,7 +41,16 @@ export class AccountComponent implements OnInit {
 
   deleteCycle(id: number){
     if(confirm("Are you sure you want to delete your account " + this.user.firstName + "?")){
-      console.log('DELETED')
+      this.userServ.destroy(id).subscribe(
+        {
+          next: (data)=> {
+            console.log(data)
+          },
+          error: (errors) => {
+            console.log(errors);
+          }
+        }
+      )
     } else {
       console.log("NEVERMIND")
     }
