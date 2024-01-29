@@ -33,7 +33,7 @@ public class User {
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String password;
-	
+
 	private boolean enabled;
 
 	private String email;
@@ -60,7 +60,7 @@ public class User {
 	@Column(name = "profile_image_url")
 	private String profileImageUrl;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinColumn(name = "address_id")
 	private Address address;

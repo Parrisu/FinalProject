@@ -1,8 +1,8 @@
 package com.skilldistillery.stack.services;
 
 import com.skilldistillery.stack.entities.Address;
-import com.skilldistillery.stack.exceptions.InvalidEntityException;
+import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 
 public interface UserService {
-	Address updateUserAddress(int userId, Address address) throws InvalidEntityException;
+	Address updateUserAddress(int userId, int addressId) throws EntityDoesNotExistException;
 }

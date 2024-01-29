@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.exceptions.AuthException;
 import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.repositories.UserRepository;
 
@@ -21,6 +22,15 @@ public class AuthServiceImpl implements AuthService {
 
 	@Autowired
 	private PasswordEncoder pwE;
+
+	@Override
+	public void verifyUserIdMatches(String username, int userId) throws AuthException {
+		User user = userRepo.findByUsername(username);
+		boolean matches = user.getId() == userId;
+		if (!matches) {
+			throw new AuthException();
+		}
+	}
 
 	@Override
 	public User register(User user) throws InvalidEntityException {
