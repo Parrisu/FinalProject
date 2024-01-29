@@ -67,7 +67,7 @@ class FunctionTest {
 	@Test
 	void test_Function_comments_mapping() {
 		assertNotNull(function);
-		assertEquals("Java is for the birds", function.getComments().get(0).getContent());
+		assertEquals("You're for the birds ", function.getComments().get(0).getContent());
 	}
 	
 	@Test

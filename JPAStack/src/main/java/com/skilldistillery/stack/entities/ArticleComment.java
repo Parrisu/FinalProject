@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.entities;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,34 +14,35 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="article_comment")
+@Table(name = "article_comment")
 public class ArticleComment {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String content;
-	
-	@Column(name="created_on")
+
+	@Column(name = "created_on")
 	private LocalDateTime created;
-	
-	@Column(name="updated_on")
+
+	@Column(name = "updated_on")
 	private LocalDateTime updated;
-	
+
 	@ManyToOne
-	@JoinColumn(name="article_id")
+	@JoinColumn(name = "article_id")
 	private Article article;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn(name="reply_id")
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "reply_id")
 	private ArticleComment reply;
-	
-	public ArticleComment() {}
+
+	public ArticleComment() {
+	}
 
 	public int getId() {
 		return id;
@@ -90,7 +92,6 @@ public class ArticleComment {
 		this.updated = updated;
 	}
 
-
 	public User getUser() {
 		return user;
 	}
@@ -100,11 +101,25 @@ public class ArticleComment {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArticleComment other = (ArticleComment) obj;
+		return id == other.id;
+	}
+
+	@Override
 	public String toString() {
 		return "Article [id=" + id + ", content=" + content + ", created=" + created + ", updated=" + updated + "]";
 	}
-	
-	
-	
 
 }
