@@ -1,5 +1,7 @@
 package com.skilldistillery.stack;
 
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -11,8 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler({ InvalidEntityException.class })
-	public void handle400Exception(HttpServletResponse res, InvalidEntityException ex) {
+	public Map<String, String> handleInvalidEntityException(HttpServletResponse res, InvalidEntityException ex) {
 		res.setStatus(400);
+		return ex.getErrors();
 	}
 
 }
