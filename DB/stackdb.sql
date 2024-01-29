@@ -150,6 +150,7 @@ CREATE TABLE IF NOT EXISTS `node` (
   `city_id` INT NOT NULL,
   `description` TEXT NULL,
   `image_url` VARCHAR(2000) NULL,
+  `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_sub_stack_user_profile1_idx` (`user_id` ASC),
   INDEX `fk_node_city1_idx` (`city_id` ASC),
@@ -547,8 +548,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (1, 1, 'admin', '$2a$10$YIVc0suGYF7SlCurrPbkjOvrULm35jlDAZ0bb8UlBReumopVMxtEq', 1, 'admin@admin.com', NULL, NULL, 'admin', 'I\'m admin, and I\'m an admin', 'admin', 'admin', NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (2, 2, 'SteveB', '$2a$10$YIVc0suGYF7SlCurrPbkjOvrULm35jlDAZ0bb8UlBReumopVMxtEq', 1, 'steveBuschemi@g.com', NULL, NULL, 'user', 'I\'m in a class case of emotion', 'Steve', 'Buschemi ', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (1, 1, 'admin', '$2a$10$YIVc0suGYF7SlCurrPbkjOvrULm35jlDAZ0bb8UlBReumopVMxtEq', 1, 'admin@admin.com', '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'admin', 'I\'m admin, and I\'m an admin', 'admin', 'admin', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `email`, `created_on`, `updated_on`, `role`, `about_me`, `first_name`, `last_name`, `profile_image_url`) VALUES (2, 2, 'SteveB', '$2a$10$YIVc0suGYF7SlCurrPbkjOvrULm35jlDAZ0bb8UlBReumopVMxtEq', 1, 'steveBuschemi@g.com', '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'user', 'I\'m in a class case of emotion', 'Steve', 'Buschemi ', NULL);
 
 COMMIT;
 
@@ -588,7 +589,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `city_id`, `description`, `image_url`) VALUES (1, 'Super Java bros', 1, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 'We love java', '123.image');
+INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `city_id`, `description`, `image_url`, `enabled`) VALUES (1, 'Super Java bros', 1, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 'We love java', '123.image', 1);
 
 COMMIT;
 
@@ -598,7 +599,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `function` (`id`, `name`, `address_id`, `node_id`, `cancelled`, `enabled`, `function_date`, `description`, `start_time`, `end_time`, `created_on`, `updated_on`, `created_by`, `max_attendees`, `image_url`) VALUES (1, 'Java meet up', 1, 1, 0, 1, '2024-01-22', 'discussing the philosphy of java', '1:00', '3:00', NULL, NULL, 1, 10, '123.image');
+INSERT INTO `function` (`id`, `name`, `address_id`, `node_id`, `cancelled`, `enabled`, `function_date`, `description`, `start_time`, `end_time`, `created_on`, `updated_on`, `created_by`, `max_attendees`, `image_url`) VALUES (1, 'Java meet up', 1, 1, 0, 1, '2024-01-22', 'discussing the philosphy of java', '1:00', '3:00', '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 10, '123.image');
 
 COMMIT;
 
@@ -618,7 +619,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `node_member` (`node_id`, `user_id`, `approved`, `date_joined`, `node_role_id`) VALUES (1, 1, 1, NULL, 1);
+INSERT INTO `node_member` (`node_id`, `user_id`, `approved`, `date_joined`, `node_role_id`) VALUES (1, 1, 1, '2001-01-01 01:01:01', 1);
 
 COMMIT;
 
@@ -638,7 +639,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `body`, `created_on`) VALUES (1, 2, 1, 'You\'re a wizard admin', NULL);
+INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `body`, `created_on`) VALUES (1, 2, 1, 'You\'re a wizard admin', '2001-01-01 01:01:01');
 
 COMMIT;
 
@@ -648,7 +649,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `notification` (`id`, `content`, `enabled`, `type`, `created_on`) VALUES (1, 'Event cancelled', 1, 'Cancellation', NULL);
+INSERT INTO `notification` (`id`, `content`, `enabled`, `type`, `created_on`) VALUES (1, 'Event cancelled', 1, 'Cancellation', '2001-01-01 01:01:01');
 
 COMMIT;
 
@@ -689,7 +690,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `node_resource` (`id`, `url`, `title`, `created_on`, `updated_on`, `node_id`) VALUES (1, 'discord.com', 'Our discord', NULL, NULL, 1);
+INSERT INTO `node_resource` (`id`, `url`, `title`, `created_on`, `updated_on`, `node_id`) VALUES (1, 'discord.com', 'Our discord', '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1);
 
 COMMIT;
 
@@ -709,7 +710,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `article` (`id`, `content`, `created_on`, `updated_on`, `node_id`, `user_id`) VALUES (1, 'What is life', NULL, NULL, 1, 1);
+INSERT INTO `article` (`id`, `content`, `created_on`, `updated_on`, `node_id`, `user_id`) VALUES (1, 'What is life', '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 1);
 
 COMMIT;
 
@@ -719,8 +720,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `reply_id`) VALUES (1, 'Wrong node to ask that bro', NULL, NULL, 1, 2, NULL);
-INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `reply_id`) VALUES (2, 'My bad', NULL, NULL, 1, 1, 1);
+INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `reply_id`) VALUES (1, 'Wrong node to ask that bro', '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 2, NULL);
+INSERT INTO `article_comment` (`id`, `content`, `created_on`, `updated_on`, `article_id`, `user_id`, `reply_id`) VALUES (2, 'My bad', '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 1, 1);
 
 COMMIT;
 

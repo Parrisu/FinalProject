@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -12,15 +13,16 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class NotificationTest {
+class ArticleCommentTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Notification notification;
-
+	private ArticleComment articleComment, reply;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPAStack");
+		
 	}
 
 	@AfterAll
@@ -31,31 +33,31 @@ class NotificationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		notification = em.find(Notification.class, 1);
+		articleComment = em.find(ArticleComment.class, 1);
+		reply = em.find(ArticleComment.class, 2);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		notification = null;
+		articleComment = null;
+		
 	}
 
 	@Test
-	void test_content_mapping() {
-		assertNotNull(notification);
-		assertFalse(notification.getContent().isBlank());
+	void test_ArticleComment_entity_mapping() {
+		assertNotNull(articleComment);
+		assertEquals("Wrong node to ask that bro", articleComment.getContent());
+		assertEquals("Wrong node to ask that bro", reply.getReply().getContent());
+		
+	}
+	
+	@Test
+	void test_ArticleComment_Article_mapping() {
+		assertNotNull(articleComment);
+		assertEquals("What is life", articleComment.getArticle().getContent());
 	}
 
-	@Test
-	void test_enabled_mapping() {
-		assertNotNull(notification);
-		assertTrue(notification.isEnabled());
-	}
-
-	@Test
-	void test_type_mapping() {
-		assertNotNull(notification);
-		assertEquals("Cancellation", notification.getType());
-	}
+	
 
 }

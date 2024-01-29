@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -12,50 +13,56 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class NotificationTest {
+class ArticleTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Notification notification;
-
+	private Article article;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPAStack");
+		
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+		
 		emf.close();
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		notification = em.find(Notification.class, 1);
+		article = em.find(Article.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		notification = null;
+		article = null;
+		
 	}
 
 	@Test
-	void test_content_mapping() {
-		assertNotNull(notification);
-		assertFalse(notification.getContent().isBlank());
+	void test_Article_entity_mapping() {
+		assertNotNull(article);
+		assertEquals("What is life", article.getContent());
+		
+	}
+	
+	@Test
+	void test_Article_User_mapping() {
+		assertNotNull(article);
+		assertEquals("admin", article.getUser().getFirstName());
 	}
 
 	@Test
-	void test_enabled_mapping() {
-		assertNotNull(notification);
-		assertTrue(notification.isEnabled());
+	void test_Article_Node_mapping() {
+		assertNotNull(article);
+		assertEquals("Super Java bros", article.getNode().getName());
+		
 	}
-
-	@Test
-	void test_type_mapping() {
-		assertNotNull(notification);
-		assertEquals("Cancellation", notification.getType());
-	}
+	
 
 }

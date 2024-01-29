@@ -19,11 +19,11 @@ public class City {
 	private String name;
 
 	private String state;
-	
-	@OneToMany(mappedBy="city")
+
+	@OneToMany(mappedBy = "city")
 	private List<Address> addresses;
-	
-	@OneToMany(mappedBy="city")
+
+	@OneToMany(mappedBy = "city")
 	private List<Node> nodes;
 
 	public City() {

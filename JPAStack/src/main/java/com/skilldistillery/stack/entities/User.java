@@ -203,12 +203,6 @@ public class User {
 		this.notifications = notifications;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", email=" + email + ", role=" + role + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
-				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
-	}
 
 	@Override
 	public int hashCode() {
@@ -227,4 +221,10 @@ public class User {
 		return id == other.id;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
+				+ ", email=" + email + ", role=" + role + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
+				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
 }

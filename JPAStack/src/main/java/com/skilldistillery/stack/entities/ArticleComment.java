@@ -5,17 +5,17 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "function_comment")
-public class FunctionComment {
+@Table(name = "article_comment")
+public class ArticleComment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,23 +26,42 @@ public class FunctionComment {
 	@Column(name = "created_on")
 	private LocalDateTime created;
 
-	@ManyToOne
-	@JoinColumn(name = "function_id")
-	private Function function;
+	@Column(name = "updated_on")
+	private LocalDateTime updated;
 
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "article_id")
+	private Article article;
+
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToOne
-	@JoinColumn(name = "reply_to_comment_id")
-	private FunctionComment reply;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "reply_id")
+	private ArticleComment reply;
 
-	public FunctionComment() {
+	public ArticleComment() {
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public ArticleComment getReply() {
+		return reply;
+	}
+
+	public void setReply(ArticleComment reply) {
+		this.reply = reply;
 	}
 
 	public void setId(int id) {
@@ -65,12 +84,12 @@ public class FunctionComment {
 		this.created = created;
 	}
 
-	public Function getFunction() {
-		return function;
+	public LocalDateTime getUpdated() {
+		return updated;
 	}
 
-	public void setFunction(Function function) {
-		this.function = function;
+	public void setUpdated(LocalDateTime updated) {
+		this.updated = updated;
 	}
 
 	public User getUser() {
@@ -79,14 +98,6 @@ public class FunctionComment {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public FunctionComment getReply() {
-		return reply;
-	}
-
-	public void setReply(FunctionComment reply) {
-		this.reply = reply;
 	}
 
 	@Override
@@ -102,14 +113,13 @@ public class FunctionComment {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FunctionComment other = (FunctionComment) obj;
+		ArticleComment other = (ArticleComment) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "FunctionComment [id=" + id + ", content=" + content + ", created=" + created + ", function=" + function
-				+ "]";
+		return "Article [id=" + id + ", content=" + content + ", created=" + created + ", updated=" + updated + "]";
 	}
 
 }
