@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import "@fortawesome/fontawesome-free/css/all.css";
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/*
+  for mobile
+https://css-tricks.com/almanac/properties/t/touch-action/
+*/
+body {
+  touch-action: pan-y;
+}
