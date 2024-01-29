@@ -8,4 +8,15 @@ export class City {
     this.name = name;
     this.state = state;
   }
+
+  intoJsObject(): any {
+    const data: any = { id: this.id };
+    if (this.name.replace(/\s/g, '') !== '') {
+      data.name = this.name;
+    }
+    if (this.state.replace(/\s/g, '') !== '') {
+      data.state = this.state;
+    }
+    return data;
+  }
 }

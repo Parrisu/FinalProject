@@ -18,17 +18,15 @@ export class Address {
     this.city = city;
   }
 
-  intoJsonBody(): any {
+  intoJsObject(): any {
     const data: any = { id: this.id };
-    if (this.id !== 0) {
-      data.id = this.id;
-    }
     if (this.street.replace(/\s/g, '') !== '') {
       data.street = this.street;
     }
     if (this.zipCode.replace(/\s/g, '') !== '') {
       data.zipCode = this.zipCode;
     }
+    data.city = this.city.intoJsObject();
     return data;
   }
 }

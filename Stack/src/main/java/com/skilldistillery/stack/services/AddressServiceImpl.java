@@ -25,10 +25,10 @@ public class AddressServiceImpl implements AddressService {
 	private CityRepository cityRepo;
 
 	@Override
-	public Address createAddress(Address address, int cityId)
+	public Address createAddress(Address address)
 			throws EntityDoesNotExistException, InvalidEntityException {
 
-		City city = cityRepo.findById(cityId).orElse(null);
+		City city = cityRepo.findById(address.getCity().getId()).orElse(null);
 		if (city == null) {
 			throw new EntityDoesNotExistException("City does not exist.");
 		}

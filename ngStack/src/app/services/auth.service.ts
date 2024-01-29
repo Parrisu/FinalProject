@@ -43,7 +43,6 @@ export class AuthService {
         'X-Requested-With': 'XMLHttpRequest',
       }),
     };
-
     // Create GET request to authenticate credentials
     return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
       tap((newUser) => {
@@ -106,4 +105,5 @@ export class AuthService {
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
+
 }
