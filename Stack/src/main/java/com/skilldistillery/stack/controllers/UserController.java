@@ -25,9 +25,10 @@ public class UserController {
 	
 	@PostMapping(path = "account" )
 	public User UpdateAccount(@RequestBody User user, HttpServletRequest req, HttpServletResponse res, Principal principal){
+		User updated = null;
 		if(user != null) {
 			try {
-				userServ.Update(user);
+				updated = userServ.Update(user);
 				res.setStatus(201);
 				
 			} catch (Exception e) {
@@ -36,7 +37,7 @@ public class UserController {
 			}
 			
 		}
-		return user;
+		return updated;
 		
 	}
 

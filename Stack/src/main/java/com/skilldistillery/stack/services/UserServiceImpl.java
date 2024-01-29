@@ -14,7 +14,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User Update(User user) {
-		return userRepo.saveAndFlush(user);
+		User update = userRepo.findByUsername(user.getUsername());
+		update.setAboutMe(user.getAboutMe());
+		update.setFirstName(user.getFirstName());
+		update.setLastName(user.getLastName());
+		update.setProfileImageUrl(user.getProfileImageUrl());
+		return userRepo.saveAndFlush(update);
 	}
 
 	@Override
