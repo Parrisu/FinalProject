@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `address_id` INT NOT NULL,
+  `address_id` INT NULL,
   `username` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `enabled` TINYINT NOT NULL,
