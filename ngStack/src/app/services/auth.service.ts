@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
@@ -63,7 +63,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
-    localStorage.clear
+    localStorage.clear;
     this.setAuthStatus();
   }
 
@@ -106,5 +106,4 @@ export class AuthService {
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
-
 }
