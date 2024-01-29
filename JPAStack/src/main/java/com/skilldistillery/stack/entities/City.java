@@ -3,6 +3,8 @@ package com.skilldistillery.stack.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +23,11 @@ public class City {
 	private String state;
 	
 	@OneToMany(mappedBy="city")
+	@JsonIgnore
 	private List<Address> addresses;
 	
 	@OneToMany(mappedBy="city")
+	@JsonIgnore
 	private List<Node> nodes;
 
 	public City() {
