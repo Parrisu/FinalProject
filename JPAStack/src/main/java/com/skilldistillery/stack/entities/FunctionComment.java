@@ -14,7 +14,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="function_comment")
+@Table(name = "function_comment")
 public class FunctionComment {
 
 	@Id
@@ -29,11 +29,11 @@ public class FunctionComment {
 	@ManyToOne
 	@JoinColumn(name = "function_id")
 	private Function function;
-	
+
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@OneToOne
 	@JoinColumn(name = "reply_to_comment_id")
 	private FunctionComment reply;

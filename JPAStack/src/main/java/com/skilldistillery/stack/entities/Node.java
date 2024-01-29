@@ -49,6 +49,11 @@ public class Node {
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
 	private List<Technology> stack;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Node() {
 		super();
@@ -124,6 +129,14 @@ public class Node {
 
 	public void setStack(List<Technology> stack) {
 		this.stack = stack;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

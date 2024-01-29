@@ -79,6 +79,10 @@ public class User {
 
 	@JoinTable(name = "user_notification", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
 	private List<Notification> notifications;
+	
+	@OneToMany(mappedBy = "user" )
+	private List<Node> nodes;
+	
 
 	public User() {
 		super();
@@ -212,11 +216,13 @@ public class User {
 		this.notifications = notifications;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", email=" + email + ", role=" + role + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
-				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+
+	public List<Node> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<Node> nodes) {
+		this.nodes = nodes;
 	}
 
 	@Override
@@ -236,4 +242,10 @@ public class User {
 		return id == other.id;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
+				+ ", email=" + email + ", role=" + role + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
+				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
 }

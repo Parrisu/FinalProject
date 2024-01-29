@@ -38,7 +38,6 @@ public class Address {
 	private List<Function> functions;
 
 	public Address() {
-		super();
 	}
 
 	public int getId() {
