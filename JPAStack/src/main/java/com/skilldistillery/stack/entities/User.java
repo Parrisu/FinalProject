@@ -7,6 +7,9 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,8 +31,9 @@ public class User {
 
 	private String username;
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String password;
-
+	
 	private boolean enabled;
 
 	private String email;
@@ -56,18 +60,23 @@ public class User {
 	@Column(name = "profile_image_url")
 	private String profileImageUrl;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "address_id")
 	private Address address;
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_technology", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
 	private List<Technology> stack;
 
-	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private List<ProfileLink> profileLinks;
 
-	@ManyToMany
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER)
+
 	@JoinTable(name = "user_notification", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
 	private List<Notification> notifications;
 	

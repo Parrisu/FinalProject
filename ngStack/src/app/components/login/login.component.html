@@ -1,0 +1,39 @@
+<div id="login-wrap" class="row">
+  <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
+  <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4">
+    <div class="auth-form-container">
+      <div #errorDisplay></div>
+      <form class="mt-4">
+        <div #usernameErrorDiv class="error"></div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Username</div>
+          </div>
+          <input type="text" class="form-control" id="inlineUsernameInput" name="username" [(ngModel)]="username"
+            (change)="verifyUsername()">
+        </div>
+        <br>
+        <div #passwordErrorDiv class="error"></div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Password</div>
+          </div>
+          <input [type]="showPassword? 'text' : 'password'" class="form-control" id="inlinePasswordInput"
+            name="password" [(ngModel)]="password" (change)="verifyPassword()">
+        </div>
+        <br>
+        <div class="form-inline">
+          <label class="col-form-label p-0" for="showPasswordToggler">Show Password</label>
+          <input class="form-check-input" type="checkbox" name="showPasswordToggler" id="showPasswordToggler"
+            [(ngModel)]="showPassword">
+        </div>
+        <br>
+        <div class="input-group">
+          <button (click)="submitLogin()" name="submit" class="btn btn-primary form-control"
+            [disabled]="disableForm">Log In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
+</div>

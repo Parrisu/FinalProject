@@ -36,6 +36,7 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET,"/api/nodes").permitAll() // Requests for our REST API must be authorized.
             .requestMatchers(HttpMethod.GET,"/api/technologies/**").permitAll() // Requests for our REST API must be authorized.
             .requestMatchers(HttpMethod.GET,"/api/technologies").permitAll() // Requests for our REST API must be authorized.
+            .requestMatchers("/authenticate").authenticated() // Requests for our REST API must be authorized.
             .anyRequest().permitAll());               // All other requests are allowed without authentication.
 
         http.sessionManagement(management -> management

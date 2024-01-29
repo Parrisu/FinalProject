@@ -1,18 +1,25 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError, tap } from 'rxjs';
-import { User } from '../models/user';
-import { environment } from '../../environments/environment';
 import { Buffer } from 'buffer';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { User } from '../models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  public isLoggedIn = false;
 
   private url = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.setAuthStatus();
+  }
+
+  public setAuthStatus(): void {
+    this.isLoggedIn = this.checkLogin();
+  }
 
   register(user: User): Observable<User> {
     // Create POST request to register a new account
@@ -43,6 +50,7 @@ export class AuthService {
         // While credentials are stored in browser localStorage, we consider
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
+        this.setAuthStatus();
         return newUser;
       }),
       catchError((err: any) => {
@@ -56,6 +64,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
+    this.setAuthStatus();
   }
 
   getLoggedInUser(): Observable<User> {
@@ -70,16 +79,17 @@ export class AuthService {
         'X-Requested-with': 'XMLHttpRequest',
       },
     };
-    return this.http
-      .get<User>(this.url + 'authenticate', httpOptions)
-      .pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError(
-            () => new Error( 'AuthService.getUserById(): error retrieving user: ' + err )
-          );
-        })
-      );
+    return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'AuthService.getUserById(): error retrieving user: ' + err
+            )
+        );
+      })
+    );
   }
 
   checkLogin(): boolean {
@@ -96,6 +106,4 @@ export class AuthService {
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
-
-
 }

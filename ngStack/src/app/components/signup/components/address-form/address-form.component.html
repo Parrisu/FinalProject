@@ -1,0 +1,27 @@
+<h3 class="text-center">Address Details</h3>
+<div #formError class="error"></div>
+<form class="mt-4">
+  <div #streetError class="error"></div>
+  <div class="form-group">
+    <label for="street">Street</label>
+    <input type="text" name="street" class="form-control" id="street" [(ngModel)]="street" (change)="validateStreet()"
+      placeholder="4635 address blvd" />
+  </div>
+  <br>
+
+  <div #zipCodeError class="error"></div>
+  <div class="form-group">
+    <label for="zipCode">Zip Code</label>
+    <input type="text" name="zipCode" class="form-control" id="zipCode" [(ngModel)]="zipCode" (change)="validateZipCode()"
+      placeholder="80959" />
+  </div>
+  <br>
+
+  <div #cityError class="error"></div>
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" name="city" class="form-control" id="city" [(ngModel)]="city" (change)="validateCity()"
+      placeholder="Aurora, Colorado" />
+  </div>
+  <br>
+</form>
