@@ -8,5 +8,7 @@ public interface NodeService {
 	
 	public List<Node> showAllNodes();
 	
+	public List<Node> findByNameContaining(String name);
+	
 
 }
