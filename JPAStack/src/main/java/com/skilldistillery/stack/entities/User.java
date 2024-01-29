@@ -70,6 +70,10 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "user_notification", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
 	private List<Notification> notifications;
+	
+	@OneToMany(mappedBy = "user" )
+	private List<Node> nodes;
+	
 
 	public User() {
 		super();
@@ -203,6 +207,14 @@ public class User {
 		this.notifications = notifications;
 	}
 
+
+	public List<Node> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<Node> nodes) {
+		this.nodes = nodes;
+	}
 
 	@Override
 	public int hashCode() {

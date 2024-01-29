@@ -84,5 +84,11 @@ class NodeTest {
 		assertNotNull(node.getImageUrl());
 		assertFalse(node.getImageUrl().isBlank());
 	}
+	@Test
+	void test_user_mapping() {
+		assertNotNull(node);
+		assertNotNull(node.getUser().getId());
+		assertEquals(1, node.getUser().getId());
+	}
 
 }

@@ -14,7 +14,6 @@ public class TechServiceImpl implements TechService {
 	
 
 
-
 	@Override
 	public List<Technology> showAllTech() {
 		return techRepo.findAll();
