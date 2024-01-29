@@ -8,7 +8,7 @@ export class Nodes {
   constructor(
     id: number = 0,
     name: string = '',
-    openToPublic: boolean,
+    openToPublic: boolean = true,
     description: string = '',
     imageUrl: string = '',
   ) {

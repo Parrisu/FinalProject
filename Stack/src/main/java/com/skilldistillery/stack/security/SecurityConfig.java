@@ -31,11 +31,11 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // For CORS, the preflight request
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
-            .requestMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
             .requestMatchers(HttpMethod.GET,"/api/nodes/**").permitAll() // Requests for our REST API must be authorized.
             .requestMatchers(HttpMethod.GET,"/api/nodes").permitAll() // Requests for our REST API must be authorized.
             .requestMatchers(HttpMethod.GET,"/api/technologies/**").permitAll() // Requests for our REST API must be authorized.
             .requestMatchers(HttpMethod.GET,"/api/technologies").permitAll() // Requests for our REST API must be authorized.
+            .requestMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
             .requestMatchers("/authenticate").authenticated() // Requests for our REST API must be authorized.
             .anyRequest().permitAll());               // All other requests are allowed without authentication.
 
