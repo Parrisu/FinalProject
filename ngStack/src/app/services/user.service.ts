@@ -4,16 +4,16 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl = `${environment.baseUrl}/users`;
-
+  baseUrl = `${environment.baseUrl}api/users`;
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  public setUserAddress(userId: number, address: Address): Observable<Address> {
+  setUserAddress(userId: number, address: Address): Observable<Address> {
     const endpoint = `${this.baseUrl}/${userId}/address`;
     const credentials = this.auth.getCredentials();
     const body = address.intoJsObject();
@@ -38,4 +38,33 @@ export class UserService {
         })
       );
   }
+
+  updateUser(user: User){
+    const endpoint = `${this.baseUrl}/account`;
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+    }
+
+    return this.http
+      .post<User>(endpoint, user, httpOptions).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(`
+                UserService.updateUser(user: User);
+                Error while attempting POST to ${endpoint}.
+                With body ${JSON.stringify(user)}
+              `)
+          );
+        })
+      );
+  }
+
+
 }
+

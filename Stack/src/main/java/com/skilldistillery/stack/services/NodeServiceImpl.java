@@ -2,9 +2,12 @@ package com.skilldistillery.stack.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.repositories.NodeRepository;
 
+@Service
 public class NodeServiceImpl implements NodeService {
 
 	private NodeRepository nodeRepo;
