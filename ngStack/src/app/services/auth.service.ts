@@ -63,6 +63,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
+    localStorage.clear
     this.setAuthStatus();
   }
 

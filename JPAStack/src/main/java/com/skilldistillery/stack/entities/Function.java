@@ -3,6 +3,7 @@ package com.skilldistillery.stack.entities;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,59 +17,60 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Function {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String name;
-	
+
 	private boolean cancelled;
-	
+
 	private boolean enabled;
-	
-	@Column(name="function_date")
+
+	@Column(name = "function_date")
 	private Date date;
-	
+
 	private String description;
-	
-	@Column(name="start_time")
+
+	@Column(name = "start_time")
 	private LocalDateTime start;
-	
-	@Column(name="end_time")
+
+	@Column(name = "end_time")
 	private LocalDateTime end;
-	
-	@Column(name="created_on")
+
+	@Column(name = "created_on")
 	private LocalDateTime created;
-	
-	@Column(name="updated_on")
+
+	@Column(name = "updated_on")
 	private LocalDateTime updated;
-	
-	@Column(name="max_attendees")
+
+	@Column(name = "max_attendees")
 	private int cap;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imgUrl;
-	
-	@OneToMany(mappedBy="function")
+
+	@OneToMany(mappedBy = "function")
 	private List<FunctionComment> comments;
-	
-	@OneToMany(mappedBy="function")
+
+	@OneToMany(mappedBy = "function")
 	private List<FunctionImage> images;
-	
+
 	@ManyToOne
-	@JoinColumn(name="address_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
 	@OneToOne
-	@JoinColumn(name="created_by")
+	@JoinColumn(name = "created_by")
 	private User user;
-	
+
 	@ManyToOne
-	@JoinColumn(name="node_id")
+	@JoinColumn(name = "node_id")
 	private Node node;
 
-	public Function() {}
+	public Function() {
+	}
 
 	public int getId() {
 		return id;
@@ -207,15 +209,27 @@ public class Function {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Function other = (Function) obj;
+		return id == other.id;
+	}
+
+	@Override
 	public String toString() {
 		return "Function [id=" + id + ", name=" + name + ", cancelled=" + cancelled + ", enabled=" + enabled + ", date="
 				+ date + ", description=" + description + ", start=" + start + ", end=" + end + ", created=" + created
-				+ ", updated=" + updated + ", cap=" + cap + ", imgUrl=" + imgUrl
-				+ "]";
+				+ ", updated=" + updated + ", cap=" + cap + ", imgUrl=" + imgUrl + "]";
 	}
-	
-	
-	
-	
 
 }
