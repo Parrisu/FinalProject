@@ -14,8 +14,7 @@ export class NodeService {
   private url = this.baseUrl + 'api/nodes';
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
-    private auth: AuthService
+
   ) {}
 
   public showAll(): Observable<Nodes[]> {

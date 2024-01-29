@@ -1,4 +1,4 @@
-import { TechnologyService } from './../technology.service';
+import { TechnologyService } from '../../services/technology.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';

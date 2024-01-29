@@ -15,8 +15,8 @@ export class TechnologyService {
   private url = this.baseUrl + 'api/technologies';
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
-    private auth: AuthService
+
+
 
     ) { }
 

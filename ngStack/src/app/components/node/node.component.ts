@@ -1,4 +1,4 @@
-import { NodeService } from './../node.service';
+import { NodeService } from '../../services/node.service';
 import { Component, OnInit } from '@angular/core';
 import { Nodes } from '../../models/node';
 
