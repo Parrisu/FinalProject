@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
@@ -43,7 +43,6 @@ export class AuthService {
         'X-Requested-With': 'XMLHttpRequest',
       }),
     };
-
     // Create GET request to authenticate credentials
     return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
       tap((newUser) => {
@@ -64,6 +63,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
+    localStorage.clear;
     this.setAuthStatus();
   }
 

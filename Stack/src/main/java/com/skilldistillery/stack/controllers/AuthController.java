@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.services.AuthService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,7 +23,7 @@ public class AuthController {
 	private AuthService authService;
 
 	@PostMapping("register")
-	public User register(@RequestBody User user, HttpServletResponse res) {
+	public User register(@RequestBody User user, HttpServletResponse res) throws InvalidEntityException {
 		user = authService.register(user);
 		return user;
 	}

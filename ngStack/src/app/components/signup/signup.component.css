@@ -1,3 +1,7 @@
+.error {
+  color: red;
+}
+
 #signup-wrap {
   margin: 0;
   margin-top: 3vh;
