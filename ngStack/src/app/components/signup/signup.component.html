@@ -1,0 +1,30 @@
+<div id="signup-wrap" class="row">
+  <div class="col-sm-1 col-md-2 col-xl-3 col-xxl-4"></div>
+  <div class="col-sm-10 col-md-8 col-xl-6 px-5 col-xxl-4">
+    <div class="auth-form-container">
+      @switch (currentSlide) {
+        @case (1) {
+          <app-details-form #detailsForm></app-details-form>
+        }
+        @case (2) {
+          <app-profile-form #profileForm></app-profile-form>
+        }
+        @case (3) {
+          <app-address-form #addressForm></app-address-form>
+        }
+      }
+      <div class="form-group d-flex">
+        @if (currentSlide != 1) {
+          <button type="submit" name="submit" class="btn btn-secondary form-control" (click)="previousSlide()">Back</button>
+          <div class="btn-inline-spacer"></div>
+        }
+        @if (currentSlide != maxSlides) {
+          <button type="submit" name="submit" class="btn btn-primary form-control" (click)="nextSlide()">Next</button>
+        } @else {
+          <button type="submit" name="submit" class="btn btn-primary form-control" (click)="submitForm()">Submit</button>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-1 col-md-2 col-xl-3 col-xxl-4"></div>
+</div>

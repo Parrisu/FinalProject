@@ -9,7 +9,6 @@
   padding-bottom: 2rem;
   padding-inline: 3rem;
   border-radius: 0.4rem;
-  /*box-shadow: [horizontal offset] [vertical offset] [blur radius] [spread radius] [color];*/
 }
 
 #showPasswordToggler {
@@ -28,8 +27,9 @@
 }
 
 /* https://getbootstrap.com/docs/5.0/layout/breakpoints/ */
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .auth-form-container {
+    /*box-shadow: [horizontal offset] [vertical offset] [blur radius] [spread radius] [color];*/
     box-shadow: 0 0.15rem 0.4rem 0.2rem rgba(0, 0, 0, 0.3);
   }
 }
