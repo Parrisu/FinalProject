@@ -33,4 +33,13 @@ public class UserServiceImpl implements UserService {
 		return address;
 	}
 
+	@Override
+	public Address getUserAddress(int userId) throws EntityDoesNotExistException {
+		User user = userRepo.findById(userId).orElse(null);
+		if (user == null) {
+			throw new EntityDoesNotExistException("User does not exist.");
+		}
+		return user.getAddress();
+	}
+
 }

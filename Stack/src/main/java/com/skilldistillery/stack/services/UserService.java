@@ -5,4 +5,6 @@ import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 
 public interface UserService {
 	Address updateUserAddress(int userId, int addressId) throws EntityDoesNotExistException;
+
+	Address getUserAddress(int userId) throws EntityDoesNotExistException;
 }

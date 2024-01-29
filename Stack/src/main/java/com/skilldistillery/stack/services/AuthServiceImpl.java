@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.AuthException;
+import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.repositories.UserRepository;
 
@@ -24,7 +25,10 @@ public class AuthServiceImpl implements AuthService {
 	private PasswordEncoder pwE;
 
 	@Override
-	public void verifyUserIdMatches(String username, int userId) throws AuthException {
+	public void verifyUserIdMatches(String username, int userId) throws AuthException, EntityDoesNotExistException {
+		if (!userRepo.existsById(userId)) {
+			throw new EntityDoesNotExistException("User does not exist.");
+		}
 		User user = userRepo.findByUsername(username);
 		boolean matches = user.getId() == userId;
 		if (!matches) {

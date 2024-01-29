@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,14 +28,15 @@ public class UserController {
 	@Autowired
 	private AuthService authService;
 
-	@PostMapping({ "{userId}/address" })
+	@PutMapping({ "{userId}/address" })
 	public Address setAddressForUser(@PathVariable("userId") int userId, @RequestParam("addressId") int addressId,
 			Principal principal) throws EntityDoesNotExistException {
 		return userService.updateUserAddress(userId, addressId);
 	}
 
 	@GetMapping({ "{userId}/address" })
-	public Address getAddressForUser(@PathVariable("userId") int userId, Principal principal) throws AuthException {
+	public Address getAddressForUser(@PathVariable("userId") int userId, Principal principal)
+			throws AuthException, EntityDoesNotExistException {
 		authService.verifyUserIdMatches(principal.getName(), userId);
 		return userService.getUserAddress(userId);
 	}
