@@ -32,10 +32,13 @@
               Up</a>
           </li>
           } @else {
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'home'" (click)="auth.logout()" (click)="isMenuCollapsed = true">Log
-              Out</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'profile'" (click)="isMenuCollapsed = true">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'home'" (click)="auth.logout()" (click)="isMenuCollapsed = true">Log
+                Out</a>
+            </li>
           }
         </ul>
       </div>

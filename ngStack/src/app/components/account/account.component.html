@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form name="editAccount">
+        <label for="firstName" class="label-control"><strong>First Name</strong></label>
+        <input class="form-control" type="text" name="firstName" [(ngModel)]="editUser.firstName">
+        <label for="lastName" class="label-control"><strong>Last Name</strong></label>
+        <input class="form-control" type="text" name="lastName" [(ngModel)]="editUser.lastName">
+        <label for="profileImageUrl" class="label-control"><strong>Image Link</strong></label>
+        <input class="form-control" type="text" name="profileImageUrl" [(ngModel)]="editUser.profileImageUrl">
+        <button class="btn btn-success my-2" (click)="updateUser(editUser)">Save Changes</button>
+      </form>
+    </div>
+  </div>
+</div>
