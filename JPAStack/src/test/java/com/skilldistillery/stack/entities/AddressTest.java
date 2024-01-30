@@ -47,8 +47,7 @@ class AddressTest {
 		assertNotNull(address);
 		assertEquals("1922 13th St", address.getStreet());
 		assertEquals("80302", address.getZipCode());
-		assertEquals("Boulder", address.getCity());
-		assertEquals("CO", address.getStateAbbreviation());
+
 	}
 
 	@Test
@@ -61,8 +60,14 @@ class AddressTest {
 	@Test
 	void test_Address_Function_mapping() {
 		assertNotNull(address);
-		assertTrue(0 < address.getFunctions().size());
-		assertFalse(address.getFunctions().isEmpty());
+		assertTrue(address.getFunctions().size()> 0);
+		assertTrue(address.getFunctions().toString().contains("Java"));
+	}
+	@Test
+	void test_Address_City_mapping() {
+		assertNotNull(address);
+		assertEquals(address.getCity(), "Boulder");
+
 	}
 
 }

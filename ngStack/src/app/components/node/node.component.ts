@@ -1,6 +1,6 @@
+import { Nodes } from './../../models/node';
 import { NodeService } from '../../services/node.service';
 import { Component, OnInit } from '@angular/core';
-import { Nodes } from '../../models/node';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +18,7 @@ export class NodeComponent implements OnInit {
   singleNode: Nodes | null = null;
   nodeName: string = "";
   searching: Nodes[] | null = null;
+  newNode: Nodes = new Nodes();
   //constructor
   constructor(private nodeService: NodeService) {}
   //lifecycle
@@ -52,5 +53,28 @@ export class NodeComponent implements OnInit {
           }
         }
         )
+      }
+      addNewNode(node: Nodes){
+        this.nodeService.create(node).subscribe({
+          next: (createNode) => {
+            this.newNode = new Nodes();
+            this.reload();
+          },
+          error: (oops) => {
+            console.error('NodesComponent.addNewNode: error creating new node');
+            console.error(oops);
+          },
+        });
+      }
+
+      reload() {
+        this.nodeService.showAll().subscribe({
+          next: (nodes) => {
+            this.nodes = nodes;
+          },
+          error: (fail) => {
+            console.error('Nodes.reload: error getting nodes');
+          },
+        });
       }
 }

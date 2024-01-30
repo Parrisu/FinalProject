@@ -44,10 +44,11 @@ public class UserController {
 	}
 
 	@GetMapping({ "address" })
-	public Address getAddressForUser(@PathVariable("userId") int userId, Principal principal)
+	public Address getAddressForUser(Principal principal)
 			throws AuthException, EntityDoesNotExistException {
-		authService.verifyUserIdMatches(principal.getName(), userId);
-		return userService.getUserAddress(userId);
+		User user = userService.getUserByUsername(principal.getName());
+		authService.verifyUserIdMatches(principal.getName(), user.getId());
+		return userService.getUserAddress(user.getId());
 	}
 	
 	@PostMapping(path = "account" )

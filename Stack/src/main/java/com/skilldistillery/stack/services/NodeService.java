@@ -10,5 +10,7 @@ public interface NodeService {
 	
 	public List<Node> findByNameContaining(String name);
 	
+	public Node create(String username, Node node);
+	
 
 }
