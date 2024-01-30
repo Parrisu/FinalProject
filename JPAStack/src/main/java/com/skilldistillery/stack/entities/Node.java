@@ -48,9 +48,6 @@ public class Node {
 
 	@Column(name = "image_url")
 	private String imageUrl;
-	
-	@Column(name = "state_abbreviation")
-	private String stateAbbr;
 
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
@@ -111,14 +108,6 @@ public class Node {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public String getStateAbbrev() {
-		return stateAbbreviation;
-	}
-
-	public void setStateAbbrev(String stateAbbrev) {
-		this.stateAbbreviation = stateAbbrev;
 	}
 
 	public String getDescription() {

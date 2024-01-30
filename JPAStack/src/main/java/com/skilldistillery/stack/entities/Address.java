@@ -33,12 +33,6 @@ public class Address {
 	private List<User> users;
 
 
-	
-	private String city;
-	
-	@Column(name = "state_abbreviation")
-	private String stateAbbreviation;
-
 
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
@@ -88,15 +82,6 @@ public class Address {
 	}
 
 
-	public String getStateAbbreviation() {
-		return stateAbbreviation;
-	}
-
-	public void setStateAbbreviation(String stateAbbreviation) {
-		this.stateAbbreviation = stateAbbreviation;
-	}
-
-
 	public List<Function> getFunctions() {
 		return functions;
 	}
@@ -113,13 +98,6 @@ public class Address {
 		this.stateAbbreviation = stateAbbreviation;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	@Override
 	public int hashCode() {

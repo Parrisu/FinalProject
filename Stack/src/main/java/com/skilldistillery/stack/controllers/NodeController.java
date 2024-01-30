@@ -1,9 +1,11 @@
 package com.skilldistillery.stack.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -80,4 +82,24 @@ public class NodeController {
 
 	}
 
+	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
+	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
+			Principal principal) {
+		Node node = nodeService.getNodeById(nodeId);
+
+		if (node == null) {
+			res.setStatus(404);
+
+		} else {
+			boolean leftNode = nodeService.leaveNode(principal.getName(), node);
+			if(leftNode) {
+				res.setStatus(204);
+				
+			} else {
+				res.setStatus(404);
+			}
+			
+		}
+
+	}
 }
