@@ -2,13 +2,17 @@ package com.skilldistillery.stack.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.repositories.NodeRepository;
 
+@Service
 public class NodeServiceImpl implements NodeService {
-
+	@Autowired
 	private NodeRepository nodeRepo;
-	private Node node;
+	
 	
 	@Override
 	public List<Node> showAllNodes() {
@@ -19,7 +23,7 @@ public class NodeServiceImpl implements NodeService {
 
 	@Override
 	public List<Node> findByNameContaining(String name) {
-		// TODO Auto-generated method stub
+
 		return nodeRepo.findByNameContaining(name);
 	}
 	
