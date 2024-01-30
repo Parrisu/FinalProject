@@ -37,9 +37,7 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City city;
+	private String city;
 
 	private String description;
 
@@ -99,11 +97,12 @@ public class Node {
 		this.updatedOn = updatedOn;
 	}
 
-	public City getCity() {
+
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
