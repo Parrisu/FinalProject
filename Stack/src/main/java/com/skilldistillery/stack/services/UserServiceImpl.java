@@ -2,7 +2,6 @@ package com.skilldistillery.stack.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.skilldistillery.stack.entities.Address;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
@@ -11,9 +10,9 @@ import com.skilldistillery.stack.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+	
 	@Autowired
-	private UserRepository userRepo;
+	UserRepository userRepo;
 
 	@Autowired
 	private AddressService addressService;
@@ -37,6 +36,44 @@ public class UserServiceImpl implements UserService {
 			throw new EntityDoesNotExistException("User does not exist.");
 		}
 		return user.getAddress();
-	}
 
+	}
+	@Override
+	public User Update(User user) {
+		User update = userRepo.findByUsername(user.getUsername());
+		update.setAboutMe(user.getAboutMe());
+		update.setFirstName(user.getFirstName());
+		update.setLastName(user.getLastName());
+		update.setProfileImageUrl(user.getProfileImageUrl());
+		return userRepo.saveAndFlush(update);
+	}
+	
+	@Override
+	public User getUserByUsername(String username) {
+		return userRepo.findByUsername(username);
+	}
+	
+	@Override
+	public boolean Destroy(int id) {
+		User user = userRepo.findById(id).get();
+		if(user.isEnabled() == true) {
+			user.setEnabled(false);
+			userRepo.saveAndFlush(user);
+			return true;
+		}
+		return false;
+
+	}
+	
+	@Override
+	public boolean ReActivate(int id) {
+		User user = userRepo.findById(id).get();
+		if(user.isEnabled() == false) {
+			user.setEnabled(true);
+			userRepo.saveAndFlush(user);
+			return true;
+		}
+		return false;
+		
+	}
 }
