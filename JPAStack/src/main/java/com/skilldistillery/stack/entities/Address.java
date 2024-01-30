@@ -32,7 +32,6 @@ public class Address {
 	@JsonIgnore
 	private List<User> users;
 
-
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
 	private List<Function> functions;
@@ -81,6 +80,14 @@ public class Address {
 	}
 
 
+	public List<Function> getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(List<Function> functions) {
+		this.functions = functions;
+	}
+
 	public String getStateAbbreviation() {
 		return stateAbbreviation;
 	}
@@ -89,14 +96,6 @@ public class Address {
 		this.stateAbbreviation = stateAbbreviation;
 	}
 
-
-	public List<Function> getFunctions() {
-		return functions;
-	}
-
-	public void setFunctions(List<Function> functions) {
-		this.functions = functions;
-	}
 
 	@Override
 	public int hashCode() {

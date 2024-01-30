@@ -17,6 +17,6 @@ public interface NodeService {
 	
 	public Node getNodeById(int id);
 	
-	
+	public boolean leaveNode(String username, Node node);
 
 }
