@@ -32,8 +32,6 @@ public class Address {
 	@JsonIgnore
 	private List<User> users;
 
-
-
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
 	private List<Function> functions;
