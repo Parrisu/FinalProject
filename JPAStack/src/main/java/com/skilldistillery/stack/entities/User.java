@@ -79,8 +79,9 @@ public class User {
 
 	@JoinTable(name = "user_notification", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
 	private List<Notification> notifications;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user" )
+	@JsonIgnore
 	private List<Node> nodes;
 	
 
