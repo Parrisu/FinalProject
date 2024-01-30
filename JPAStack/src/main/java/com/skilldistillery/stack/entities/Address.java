@@ -34,7 +34,7 @@ public class Address {
 	private String city;
 	
 	@Column(name = "state_abbreviation")
-	private String stateAbbr;
+	private String stateAbbreviation;
 
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
@@ -83,12 +83,13 @@ public class Address {
 		this.city = city;
 	}
 
-	public String getStateAbbr() {
-		return stateAbbr;
+
+	public String getStateAbbreviation() {
+		return stateAbbreviation;
 	}
 
-	public void setStateAbbr(String stateAbbr) {
-		this.stateAbbr = stateAbbr;
+	public void setStateAbbreviation(String stateAbbreviation) {
+		this.stateAbbreviation = stateAbbreviation;
 	}
 
 	public List<Function> getFunctions() {
@@ -118,7 +119,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + "]";
+		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city
+				+ ", stateAbbreviation=" + stateAbbreviation + "]";
 	}
 
 }

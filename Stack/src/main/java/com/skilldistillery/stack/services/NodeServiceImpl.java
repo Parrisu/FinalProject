@@ -39,6 +39,7 @@ public class NodeServiceImpl implements NodeService {
 			node.setUser(user);
 			return nodeRepo.saveAndFlush(node);
 		}
+		node.setEnabled(true);
 		return node;
 	}
 	

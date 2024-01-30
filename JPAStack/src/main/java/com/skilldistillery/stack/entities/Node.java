@@ -27,7 +27,7 @@ public class Node {
 	private String name;
 
 	@Column(name = "open_to_public")
-	private Boolean openToPublic;
+	private boolean openToPublic;
 
 	@Column(name = "created_on")
 	@CreationTimestamp
@@ -39,7 +39,7 @@ public class Node {
 	
 	private String city;
 	@Column(name = "state_abbreviation")
-	private String stateAbbrev;
+	private String stateAbbreviation;
 	
 	private String description;
 
@@ -54,6 +54,8 @@ public class Node {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	private boolean enabled;
 
 	public Node() {
 		super();
@@ -75,13 +77,6 @@ public class Node {
 		this.name = name;
 	}
 
-	public Boolean getOpenToPublic() {
-		return openToPublic;
-	}
-
-	public void setOpenToPublic(Boolean openToPublic) {
-		this.openToPublic = openToPublic;
-	}
 
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
@@ -108,11 +103,11 @@ public class Node {
 	}
 
 	public String getStateAbbrev() {
-		return stateAbbrev;
+		return stateAbbreviation;
 	}
 
 	public void setStateAbbrev(String stateAbbrev) {
-		this.stateAbbrev = stateAbbrev;
+		this.stateAbbreviation = stateAbbrev;
 	}
 
 	public String getDescription() {
@@ -147,6 +142,30 @@ public class Node {
 		this.user = user;
 	}
 
+	public String getStateAbbreviation() {
+		return stateAbbreviation;
+	}
+
+	public void setStateAbbreviation(String stateAbbreviation) {
+		this.stateAbbreviation = stateAbbreviation;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setOpenToPublic(boolean openToPublic) {
+		this.openToPublic = openToPublic;
+	}
+
+	public boolean isOpenToPublic() {
+		return openToPublic;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -167,8 +186,8 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [id=" + id + ", name=" + name + ", openToPublic=" + openToPublic + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + ", city=" + city + ", stateAbbrev=" + stateAbbrev + ", description="
-				+ description + ", imageUrl=" + imageUrl + "]";
+				+ ", updatedOn=" + updatedOn + ", city=" + city + ", stateAbbreviation=" + stateAbbreviation
+				+ ", description=" + description + ", imageUrl=" + imageUrl + "]";
 	}
 
 }
