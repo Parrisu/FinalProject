@@ -12,6 +12,7 @@ public class InvalidEntityException extends Exception {
 	}
 
 	public InvalidEntityException(Map<String, String> errors) {
+		super(errors.toString());
 		this.errors = errors;
 	}
 

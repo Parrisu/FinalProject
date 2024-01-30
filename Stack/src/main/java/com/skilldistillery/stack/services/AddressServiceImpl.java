@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.Address;
-import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.repositories.AddressRepository;
 
@@ -20,14 +19,13 @@ public class AddressServiceImpl implements AddressService {
 	private AddressRepository addressRepo;
 
 	@Override
-	public Address createAddress(Address address)
-			throws EntityDoesNotExistException, InvalidEntityException {
-
+	public Address createAddress(Address address) throws InvalidEntityException {
 
 		Map<String, String> errors = new HashMap<>();
-		
+
 		if (!fieldIsValid(address.getStateAbbreviation(), 3)) {
-			errors.put("stateAbbreviation", "State Abbreviation must not be empty and must be under 3 characters in length.");
+			errors.put("stateAbbreviation",
+					"State Abbreviation must not be empty and must be under 3 characters in length.");
 		}
 
 		if (!fieldIsValid(address.getCity(), 200)) {

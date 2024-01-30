@@ -61,7 +61,6 @@ public class User {
 	private String profileImageUrl;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnore
 	@JoinColumn(name = "address_id")
 	private Address address;
 
