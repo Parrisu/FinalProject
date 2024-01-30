@@ -5,6 +5,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { User } from '../models/user';
+import { Technology } from '../models/technology';
 
 @Injectable({
   providedIn: 'root',
@@ -111,4 +112,36 @@ export class UserService {
       })
     );
   }
+
+  addOrRemoveTech(id: number, tech: Technology){
+    const endpoint = `${this.baseUrl}/account/${id}`;
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+    };
+
+    return this.http.post<User>(endpoint, tech, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+                UserService.updateUser(user: User);
+                Error while attempting POST to ${endpoint}.
+                With body ${JSON.stringify(tech)}
+              `)
+        );
+      })
+    );
+  }
+
+
+
+
+
+
+
 }

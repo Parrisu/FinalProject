@@ -5,13 +5,9 @@
       <button class="btn btn-outline-secondary btn-sm my-2" [routerLink]="['/account']" routerLinkActive="router-link-active" >Edit Profile</button>
       <h4>{{user.firstName}}</h4>
       <h4>{{user.lastName}}</h4>
-      <h5>Stack</h5>
-      <div *ngFor="let tech of user.stack">
-        <span>{{tech.name}}, </span>
-      </div>
-      <div>
-        <table class="table">
-          <thead>
+      <div *ngIf="showStack">
+        <table class="table table-hover">
+          <thead class="table-dark">
             <tr>
               <th>Technology</th>
               <th>Name</th>
@@ -22,15 +18,30 @@
             <tr *ngFor="let tech of user.stack">
               <th>{{tech.id}}</th>
               <td>{{tech.name}}</td>
-              <td><i class="fa fa-trash" aria-hidden="true"></i></td>
+              <td><i id="icon" class="fa fa-trash" aria-hidden="true" (click)="popOrPushTech(user, tech)"></i></td>
             </tr>
           </tbody>
         </table>
-        <form name="stackAddition">
-
-        </form>
+        </div>
+        <div *ngIf="showStack">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Technology</th>
+                <th>Add</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tech of theStack">
+                <th>
+                  {{tech.name}}
+                </th>
+                <td><i id="icon" class="fa fa-plus" aria-hidden="true" (click)="popOrPushTech(user, tech)"></i></td>
+              </tr>
+            </tbody>
+          </table>
       </div>
-      <button class="btn btn-outline-secondary btn-sm my-2">Edit Stack</button>
+      <button class="btn btn-outline-secondary btn-sm my-2" (click)="show()">Edit Stack</button>
 
     </div>
     <div class="col-6">
