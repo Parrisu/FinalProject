@@ -523,7 +523,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (1, 'Java', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Angular-Dark.svg', 'Its java');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (1, 'Java', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Angular-Dark.svg', 'a multi-platform, object-oriented, and network-centric language that can be used as a platform in itself');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (2, 'Python', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Python-Dark.svg', 'an interpreted, object-oriented, high-level programming language with dynamic semantics');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (3, 'JavaScript', 'https://github.com/tandpfun/skill-icons/raw/main/icons/JavaScript.svg', 'a multi-paradigm, dynamic language with types and operators, standard built-in objects, and methods. ');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (4, 'C++', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CPP.svg', 'a cross-platform language that can be used to create high-performance applications');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (5, 'C#', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CS.svg', 'a modern, object-oriented, and type-safe programming language');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (6, 'C', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CS.svg', 'an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (7, 'CSS', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CSS.svg', 'a style sheet language used for specifying the presentation and styling of a document written in a markup language such as HTML or XML.');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (8, 'HTML', 'https://github.com/tandpfun/skill-icons/raw/main/icons/HTML.svg', 'the standard markup language for documents designed to be displayed in a web browser.');
 
 COMMIT;
 
