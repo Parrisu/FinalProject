@@ -214,15 +214,14 @@ export class SignupComponent {
     user.lastName = this.lastName;
     user.profileImageUrl = this.profileImageUrl;
     user.aboutMe = this.aboutMe;
-
     this.authService.register(user).subscribe({
-      next: (returnedUser: User) => this.submitAddress(user.id),
+      next: () => this.submitAddress(),
       error: this.onSubmissionError,
     });
   }
 
-  submitAddress(userId: number): void {
-    this.userService.setUserAddress(userId, this.address).subscribe({
+  submitAddress(): void {
+    this.userService.setUserAddress(this.address).subscribe({
       next: () => this.router.navigateByUrl(this.navigateOnSubmission),
       error: this.onSubmissionError,
     });

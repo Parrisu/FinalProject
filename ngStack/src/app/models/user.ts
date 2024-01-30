@@ -1,3 +1,5 @@
+import { Address } from './address';
+
 export class User {
   id: number;
   username: string;
@@ -9,6 +11,7 @@ export class User {
   lastName: string;
   profileImageUrl: string | null;
   aboutMe: string | null;
+  address: Address | null;
 
   constructor(
     id: number = 0,
@@ -20,7 +23,8 @@ export class User {
     firstName: string = '',
     lastName: string = '',
     profileImageUrl: string | null = null,
-    aboutMe: string | null = null
+    aboutMe: string | null = null,
+    address: Address | null = null
   ) {
     this.id = id;
     this.username = username;
@@ -32,5 +36,12 @@ export class User {
     this.lastName = lastName;
     this.profileImageUrl = profileImageUrl;
     this.aboutMe = aboutMe;
+    this.address = address;
+  }
+
+  intoJsObject(): any {
+    const body: any = {
+      id: this.id,
+    }
   }
 }
