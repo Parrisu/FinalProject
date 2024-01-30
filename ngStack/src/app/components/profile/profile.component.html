@@ -1,10 +1,11 @@
-<div class="container text-center">
+<div class="container">
   <div class="row">
     <div class="col-6">
       <img [src]=user.profileImageUrl alt="profile pic for {{user.firstName}}">
       <h4>{{user.firstName}}</h4>
       <h4>{{user.lastName}}</h4>
-          <button class="btn btn-primary my-2" [routerLink]="['/account']" routerLinkActive="router-link-active" >Edit Profile</button>
+      <h5>Stack</h5>
+      <button class="btn btn-primary my-2" [routerLink]="['/account']" routerLinkActive="router-link-active" >Edit Profile</button>
     </div>
     <div class="col-6">
       <h1>Groups</h1>
