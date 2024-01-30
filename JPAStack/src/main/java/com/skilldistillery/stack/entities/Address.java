@@ -7,12 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -26,13 +23,14 @@ public class Address {
 	@Column(name = "zip_code")
 	private String zipCode;
 
+	@Column(name = "state_abbreviation")
+	private String stateAbbreviation;
+
+	private String city;
+
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
 	private List<User> users;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "city_id")
-	private City city;
 
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
@@ -73,20 +71,28 @@ public class Address {
 		this.users = users;
 	}
 
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
-	}
-
 	public List<Function> getFunctions() {
 		return functions;
 	}
 
 	public void setFunctions(List<Function> functions) {
 		this.functions = functions;
+	}
+
+	public String getStateAbbreviation() {
+		return stateAbbreviation;
+	}
+
+	public void setStateAbbreviation(String stateAbbreviation) {
+		this.stateAbbreviation = stateAbbreviation;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	@Override
@@ -108,7 +114,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + "]";
+		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", stateAbbreviation="
+				+ stateAbbreviation + ", city=" + city + ", users=" + users + ", functions=" + functions + "]";
 	}
 
 }
