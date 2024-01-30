@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.NodeMember;
+import com.skilldistillery.stack.entities.NodeMemberId;
+import com.skilldistillery.stack.entities.NodeRole;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.repositories.NodeMemberRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
 import com.skilldistillery.stack.repositories.UserRepository;
 
@@ -16,6 +19,8 @@ public class NodeServiceImpl implements NodeService {
 	
 	@Autowired
 	private NodeRepository nodeRepo;
+	@Autowired
+	private NodeMemberRepository nodeMemberRepo;
 	@Autowired
 	private UserRepository userRepo;
 
@@ -47,11 +52,16 @@ public class NodeServiceImpl implements NodeService {
 		List<User> users = null;
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
+			NodeMemberId id = new NodeMemberId(node.getId(), user.getId());
 			NodeMember nodeMember = new NodeMember();
+			nodeMember.setId(id);
 			nodeMember.setUser(user);
 			nodeMember.setNode(node);
-			node.getNodeMembers().add(nodeMember);
-			nodeRepo.saveAndFlush(node);
+			NodeRole role = new NodeRole();
+			role.setId(1);
+			nodeMember.setNodeRole(role);
+			nodeMember.setApproved(true);
+			nodeMemberRepo.saveAndFlush(nodeMember);
 			users = userRepo.getMembersByNodeId(node.getId());
 		}
 		return users;
@@ -61,6 +71,18 @@ public class NodeServiceImpl implements NodeService {
 	public Node getNodeById(int id) {
 		return nodeRepo.findById(id).orElse(null);
 
+	}
+
+	@Override
+	public boolean leaveNode(String username, Node node) {
+		User user = userRepo.findByUsername(username);
+		NodeMemberId id = new NodeMemberId(node.getId(), user.getId());
+		NodeMember nodeMember = nodeMemberRepo.findById(id).orElse(null);
+		if (nodeMember != null) {
+			nodeMemberRepo.delete(nodeMember);
+			return true;
+		}
+		return false;
 	}
 
 }

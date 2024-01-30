@@ -39,7 +39,6 @@ public class Node {
 	private LocalDateTime updatedOn;
 
 	private String city;
-	
 	@Column(name = "state_abbreviation")
 	private String stateAbbreviation;
 
@@ -51,7 +50,8 @@ public class Node {
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
 	private List<Technology> stack;
-
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
