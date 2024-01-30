@@ -11,6 +11,7 @@ import { User } from '../models/user';
 })
 export class UserService {
   baseUrl = `${environment.baseUrl}api/users`;
+
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   setUserAddress(userId: number, address: Address): Observable<Address> {

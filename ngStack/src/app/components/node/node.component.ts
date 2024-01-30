@@ -15,6 +15,9 @@ export class NodeComponent implements OnInit {
 
   //Fields
   nodes: Nodes[] = [];
+  singleNode: Nodes | null = null;
+  nodeName: string = "";
+  searching: Nodes[] | null = null;
   //constructor
   constructor(private nodeService: NodeService) {}
   //lifecycle
