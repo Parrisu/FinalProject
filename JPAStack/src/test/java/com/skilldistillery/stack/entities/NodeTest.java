@@ -64,12 +64,14 @@ class NodeTest {
 		assertEquals(2001, node.getUpdatedOn().getYear());
 	}
 
+
 	@Test
 	void test_city_mapping() {
 		assertNotNull(node);
 		assertNotNull(node.getCity());
-		assertEquals(1, node.getCity().getId());
+		assertEquals("Denver", node.getCity());
 	}
+
 
 	@Test
 	void test_description_mapping() {
