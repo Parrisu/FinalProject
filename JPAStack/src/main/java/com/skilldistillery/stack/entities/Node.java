@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Node {
@@ -61,6 +62,10 @@ public class Node {
 	private User user;
 	
 	private boolean enabled;
+	
+	@OneToMany(mappedBy = "node")
+	private List<NodeMember> nodeMembers;
+	 
 
 	public Node() {
 		super();
@@ -171,6 +176,14 @@ public class Node {
 	public boolean isOpenToPublic() {
 		return openToPublic;
 
+	}
+
+	public List<NodeMember> getNodeMembers() {
+		return nodeMembers;
+	}
+
+	public void setNodeMembers(List<NodeMember> nodeMembers) {
+		this.nodeMembers = nodeMembers;
 	}
 
 	@Override

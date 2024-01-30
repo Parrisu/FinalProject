@@ -81,6 +81,7 @@ public class User {
 	@OneToMany(mappedBy = "user" )
 	private List<Node> nodes;
 	
+	
 
 	public User() {
 		super();

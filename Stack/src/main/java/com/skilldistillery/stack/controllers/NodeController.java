@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Node;
+import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.services.NodeService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,6 +56,28 @@ public class NodeController {
 			node = null;
 		}
 		return node;
+
+	}
+
+	@PostMapping(path = { "nodes/{nodeId}/members" })
+	public List<User> joinNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
+			Principal principal) {
+		List<User> users = null;
+		Node node = nodeService.getNodeById(nodeId);
+		try {
+			if (node == null) {
+				res.setStatus(404);
+
+			} else {
+				users = nodeService.joinNode(principal.getName(), node);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			res.setStatus(400);
+			node = null;
+		}
+		return users;
 
 	}
 
