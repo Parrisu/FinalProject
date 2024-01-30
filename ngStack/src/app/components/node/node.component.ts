@@ -1,11 +1,13 @@
 import { NodeService } from '../../services/node.service';
 import { Component, OnInit } from '@angular/core';
 import { Nodes } from '../../models/node';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-node',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './node.component.html',
   styleUrl: './node.component.css'
 })
@@ -17,7 +19,7 @@ export class NodeComponent implements OnInit {
   constructor(private nodeService: NodeService) {}
   //lifecycle
   ngOnInit(): void {
-    this.showAllNodes;
+    this.showAllNodes();
   }
 
   //methods

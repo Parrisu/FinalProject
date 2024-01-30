@@ -19,7 +19,7 @@ export class TechnologyComponent implements OnInit {
   constructor(private technologyService: TechnologyService) {}
   //lifecycle
   ngOnInit(): void {
-    this.showAllTechnologies
+    this.showAllTechnologies();
   }
 
   //methods
