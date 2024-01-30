@@ -1,4 +1,11 @@
-<p>node works!</p>
-<div *ngFor="let node of nodes">
+<p>node works! </p>
+<form name="SelectedNode">
+  <input [(ngModel)]="nodeName" type="text" name="search"/>
+  <button (click)="findNodesByName(nodeName)" >Search for Node</button>
+</form>
+
+<form name="Display all nodes" *ngIf="!searching">
+<div *ngFor="let node of nodes" >
 <h2>{{node.name}}</h2>
 </div>
+</form>
