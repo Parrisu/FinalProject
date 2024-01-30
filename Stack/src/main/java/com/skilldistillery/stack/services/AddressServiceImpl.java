@@ -26,11 +26,11 @@ public class AddressServiceImpl implements AddressService {
 
 		Map<String, String> errors = new HashMap<>();
 		
-		if (!fieldIsValid(address.getStreet(), 3)) {
+		if (!fieldIsValid(address.getStateAbbreviation(), 3)) {
 			errors.put("stateAbbreviation", "State Abbreviation must not be empty and must be under 3 characters in length.");
 		}
 
-		if (!fieldIsValid(address.getStreet(), 200)) {
+		if (!fieldIsValid(address.getCity(), 200)) {
 			errors.put("city", "City must not be empty and must be under 200 characters in length.");
 		}
 

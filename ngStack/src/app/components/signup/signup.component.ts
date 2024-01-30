@@ -4,14 +4,13 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { FormatCityPipe } from '../../pipes/formatCity.pipe';
 import { Address } from '../../models/address';
 import { AddressService } from '../../services/address.service';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, FormatCityPipe],
+  imports: [FormsModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
