@@ -37,10 +37,6 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 	
-	
-
-	
-	@Column(name = "city_id")
 	private String city;
 	@Column(name = "state_abbreviation")
 	private String stateAbbrev;

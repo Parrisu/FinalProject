@@ -48,8 +48,8 @@ class AddressTest {
 	@Test
 	void test_Address_entity_mapping() {
 		assertNotNull(address);
-		assertEquals("7 havana St", address.getStreet());
-		assertEquals("80112", address.getZipCode());
+		assertEquals("1922 13th St", address.getStreet());
+		assertEquals("80302", address.getZipCode());
 	}
 
 	@Test
@@ -67,7 +67,7 @@ class AddressTest {
 	@Test
 	void test_Address_City_mapping() {
 		assertNotNull(address);
-		assertEquals(address.getCity().getName(), "Centennial");
+		assertEquals(address.getCity(), "Boulder");
 	}
 		
 

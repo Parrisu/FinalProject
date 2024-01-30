@@ -30,9 +30,11 @@ public class Address {
 	@JsonIgnore
 	private List<User> users;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "city_id")
-	private City city;
+	
+	private String city;
+	
+	@Column(name = "state_abbreviation")
+	private String stateAbbr;
 
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
@@ -73,12 +75,20 @@ public class Address {
 		this.users = users;
 	}
 
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getStateAbbr() {
+		return stateAbbr;
+	}
+
+	public void setStateAbbr(String stateAbbr) {
+		this.stateAbbr = stateAbbr;
 	}
 
 	public List<Function> getFunctions() {

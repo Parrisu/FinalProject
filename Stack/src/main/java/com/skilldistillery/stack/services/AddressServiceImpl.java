@@ -21,17 +21,10 @@ public class AddressServiceImpl implements AddressService {
 	@Autowired
 	private AddressRepository addressRepo;
 
-	@Autowired
-	private CityRepository cityRepo;
-
 	@Override
 	public Address createAddress(Address address)
 			throws EntityDoesNotExistException, InvalidEntityException {
 
-		City city = cityRepo.findById(address.getCity().getId()).orElse(null);
-		if (city == null) {
-			throw new EntityDoesNotExistException("City does not exist.");
-		}
 
 		Map<String, String> errors = new HashMap<>();
 
