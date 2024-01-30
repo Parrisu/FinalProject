@@ -9,6 +9,27 @@
       <div *ngFor="let tech of user.stack">
         <span>{{tech.name}}, </span>
       </div>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Technology</th>
+              <th>Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tech of user.stack">
+              <th>{{tech.id}}</th>
+              <td>{{tech.name}}</td>
+              <td><i class="fa fa-trash" aria-hidden="true"></i></td>
+            </tr>
+          </tbody>
+        </table>
+        <form name="stackAddition">
+
+        </form>
+      </div>
       <button class="btn btn-outline-secondary btn-sm my-2">Edit Stack</button>
 
     </div>

@@ -37,29 +37,24 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-	
 	private String city;
+
 	@Column(name = "state_abbreviation")
 	private String stateAbbreviation;
-	
 
 	private String description;
 
 	@Column(name = "image_url")
 	private String imageUrl;
-	
-	@Column(name = "state_abbreviation")
-	private String stateAbbr;
 
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
 	private List<Technology> stack;
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	private boolean enabled;
 
 	public Node() {
@@ -82,7 +77,6 @@ public class Node {
 		this.name = name;
 	}
 
-
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
@@ -98,7 +92,6 @@ public class Node {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
-
 
 	public String getCity() {
 		return city;
