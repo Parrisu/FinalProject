@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl = `${environment.baseUrl}/users`;
+  baseUrl = `${environment.baseUrl}api/users`;
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
