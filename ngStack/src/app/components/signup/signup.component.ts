@@ -1,13 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { City } from '../../models/city';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
-import { CityService } from '../../services/city.service';
 import { UserService } from '../../services/user.service';
 import { FormatCityPipe } from '../../pipes/formatCity.pipe';
 import { Address } from '../../models/address';
+import { AddressService } from '../../services/address.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,61 +15,46 @@ import { Address } from '../../models/address';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   private navigateOnSubmission = '/login';
-
-  cities: City[] = [];
 
   @ViewChild('errorField') errorField!: ElementRef<HTMLDivElement>;
 
   // --------------------------- Begin First Form Fields ---------------------------
   @ViewChild('formError') formError!: ElementRef<HTMLDivElement>;
   @ViewChild('usernameError') usernameError!: ElementRef<HTMLDivElement>;
-  public username = '';
   @ViewChild('emailError') emailError!: ElementRef<HTMLDivElement>;
-  public email = '';
   @ViewChild('passwordOneError') passwordOneError!: ElementRef<HTMLDivElement>;
-  public passwordOne = '';
   @ViewChild('passwordTwoError') passwordTwoError!: ElementRef<HTMLDivElement>;
-  public passwordTwo = '';
-  showPassword = false;
-  // --------------------------- End First Form Fields ---------------------------
-
-  // --------------------------- Begin Second Form Fields ---------------------------
   @ViewChild('firstNameError') firstNameError!: ElementRef<HTMLDivElement>;
-  public firstName = '';
   @ViewChild('lastNameError') lastNameError!: ElementRef<HTMLDivElement>;
-  public lastName = '';
-  public profileImageUrl = '';
-  public aboutMe: string = '';
-  // --------------------------- End Second Form Fields ---------------------------
+
+  username = '';
+  email = '';
+  passwordOne = '';
+  passwordTwo = '';
+  firstName = '';
+  lastName = '';
+  profileImageUrl = '';
+  aboutMe: string = '';
+  street = '';
+  zipCode = '';
+  showPassword = false;
 
   // --------------------------- Begin Third Form Fields ---------------------------
-  @ViewChild('streetError') streetError!: ElementRef<HTMLDivElement>;
-  public street = '';
-  @ViewChild('zipCodeError') zipCodeError!: ElementRef<HTMLDivElement>;
-  public zipCode = '';
-  @ViewChild('cityError') cityError!: ElementRef<HTMLDivElement>;
-  public city: City | null = null;
+  addressFormErrorText = '';
+  address = new Address();
   // --------------------------- End Third Form Fields ---------------------------
 
   currentSlide = 1;
   maxSlides = 3;
 
   constructor(
+    private addressService: AddressService,
     private authService: AuthService,
     private userService: UserService,
-    private cityService: CityService,
     private router: Router
   ) {}
-
-  ngOnInit(): void {
-    this.cityService.getAll().subscribe({
-      next: (cities: City[]) => {
-        this.cities = cities;
-      },
-    });
-  }
 
   previousSlide(): void {
     if (1 < this.currentSlide) this.currentSlide -= 1;
@@ -158,7 +142,7 @@ export class SignupComponent implements OnInit {
 
   // ------------------------------ END FIRST SLIDE  ------------------------------
 
-  // ------------------------------ BEGIN PROFILE FORM  ------------------------------
+  // ------------------------------ BEGIN SECOND FORM  ------------------------------
   validateFirstName(): boolean {
     const isValid =
       this.firstName.replace(/\s/g, '') != '' && this.firstName.length < 50;
@@ -185,40 +169,44 @@ export class SignupComponent implements OnInit {
     return isValid;
   }
 
-  validateProfileDetails(): boolean {
+  validateAddress(): boolean {
+    return true; // TEMP
+  }
+
+  validateSecondForm(): boolean {
     let firstNameIsValid = this.validateFirstName();
     let lastNameIsValid = this.validateLastName();
     return firstNameIsValid && lastNameIsValid;
   }
 
-  submitProfileForm(): void {
-    if (this.validateProfileDetails()) this.nextSlide();
+  submitSecondForm(): void {
+    if (this.validateSecondForm()) this.nextSlide();
   }
-  // ------------------------------ END PROFILE FORM  ------------------------------
+  // ------------------------------ END SECOND FORM  ------------------------------
 
-  // ------------------------------ BEGIN ADDRESS FORM  ------------------------------
-  validateStreet(): void {}
-  validateZipCode(): boolean {
-    return /^\\d{5}(?:[-\\s]\\d{4})?$/.test(this.zipCode);
-  } // TEMPORARY UNTIL CITY CONTROLLER
-  validateCity(): boolean {
-    let isValid = this.city !== null;
-    if (!isValid) {
-      this.cityError.nativeElement.innerHTML = 'City is a required field.';
-    }
-    return isValid;
+  // ------------------------------ BEGIN THIRD FORM  ------------------------------
+  submitThirdForm(): void {
+    this.addressService.validateAddress(this.address).subscribe({
+      next: (address: Address | null) => {
+        if (address) {
+          this.addressFormErrorText = '';
+          this.address = address;
+          this.submitForm();
+        } else {
+          this.addressFormErrorText = 'Invalid address.';
+        }
+      },
+      error: () => {
+        this.addressFormErrorText = 'Something went wrong.';
+      },
+    });
   }
-  validateAddress(): boolean {
-    return this.validateCity();
-  }
-  // ------------------------------ END ADDRESS FORM  ------------------------------
+
+  // ------------------------------ END THIRD FORM  ------------------------------
 
   // ------------------------------ BEGIN GLOBAL SUBMISSION  ------------------------------
 
   submitForm(): void {
-    if (!this.validateAddress()) {
-      return;
-    }
     let user = new User();
     user.username = this.username;
     user.password = this.passwordOne;
@@ -229,24 +217,14 @@ export class SignupComponent implements OnInit {
     user.aboutMe = this.aboutMe;
 
     this.authService.register(user).subscribe({
-      next: this.createUserAddress,
+      next: (returnedUser: User) => this.submitAddress(user.id),
       error: this.onSubmissionError,
     });
   }
 
-  createUserAddress(user: User): void {
-    let address = new Address();
-    address.street = this.street;
-    address.zipCode = this.zipCode;
-
-    if (this.city) {
-      address.city = this.city;
-    }
-
-    this.userService.setUserAddress(user.id, address).subscribe({
-      next: () => {
-        this.router.navigateByUrl(this.navigateOnSubmission);
-      },
+  submitAddress(userId: number): void {
+    this.userService.setUserAddress(userId, this.address).subscribe({
+      next: () => this.router.navigateByUrl(this.navigateOnSubmission),
       error: this.onSubmissionError,
     });
   }

@@ -91,51 +91,43 @@
             (click)="previousSlide()">Back</button>
           <div class="btn-inline-spacer"></div>
           <button type="button" name="submit" class="btn btn-primary form-control"
-            (click)="submitProfileForm()">Next</button>
+            (click)="submitSecondForm()">Next</button>
         </div>
-
       </form>
       }
-      @case (3) {
-      <h3 class="text-center">Address Details</h3>
-      <div #formError class="error"></div>
-      <form class="mt-4">
-        <div #streetError class="error"></div>
-        <div class="form-group">
-          <label for="street">Street</label>
-          <input type="text" name="street" class="form-control" id="street" [(ngModel)]="street"
-            (change)="validateStreet()" placeholder="4635 address blvd" />
-        </div>
-        <br>
+      @case(3) {
+        <h3 class="text-center">Address Details</h3>
+        <div class="error">{{addressFormErrorText}}</div>
 
-        <div #zipCodeError class="error"></div>
-        <div class="form-group">
-          <label for="zipCode">Zip Code</label>
-          <input type="text" name="zipCode" class="form-control" id="zipCode" [(ngModel)]="zipCode"
-            (change)="validateZipCode()" placeholder="80959" />
-        </div>
-        <br>
+        <form class="mt-4">
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" name="street" class="form-control" placeholder="554 example rd" [(ngModel)]="address.street"/>
+          </div>
+          <br>
 
-        <div #cityError class="error"></div>
-        <div class="form-group">
-          <label for="city">City</label>
-          <select class="form-select" aria-label="Default select example" name="city" [(ngModel)]="city">
-            <option [ngValue]="null">None</option>
-            @for (city of cities; track $index) {
-              <option ngValue="city">{{city|formatCity}}</option>
-            }
-          </select>
-        </div>
-        <br>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" name="city" class="form-control" id="city" placeholder="Denver" [(ngModel)]="address.city"
+              (change)="validateLastName()" />
+          </div>
+          <br>
 
-        <div class="form-group d-flex">
-          <button type="button" name="submit" class="btn btn-secondary form-control"
-            (click)="previousSlide()">Back</button>
-          <div class="btn-inline-spacer"></div>
-          <button type="button" name="submit" class="btn btn-primary form-control"
-            (click)="submitForm()">Submit</button>
-        </div>
-      </form>
+          <div class="form-group">
+            <label for="stateAbbreviation">State Abbreviation</label>
+            <input type="text" name="stateAbbreviation" class="form-control" id="stateAbbreviation" placeholder="CO"
+              [(ngModel)]="address.stateAbbreviation" />
+          </div>
+          <br>
+
+          <div class="form-group d-flex">
+            <button type="submit" name="submit" class="btn btn-secondary form-control"
+              (click)="previousSlide()">Back</button>
+            <div class="btn-inline-spacer"></div>
+            <button type="button" name="submit" class="btn btn-primary form-control"
+              (click)="submitThirdForm()">Submit</button>
+          </div>
+        </form>
       }
       }
     </div>
