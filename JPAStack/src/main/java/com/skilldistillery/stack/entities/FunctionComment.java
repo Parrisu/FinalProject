@@ -3,6 +3,8 @@ package com.skilldistillery.stack.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,8 @@ public class FunctionComment {
 
 	@Column(name = "created_on")
 	private LocalDateTime created;
-
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "function_id")
 	private Function function;
@@ -34,6 +37,7 @@ public class FunctionComment {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "reply_to_comment_id")
 	private FunctionComment reply;
