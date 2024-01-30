@@ -44,6 +44,9 @@ public class Node {
 
 	@Column(name = "image_url")
 	private String imageUrl;
+	
+	@Column(name = "state_abbreviation")
+	private String stateAbbr;
 
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
@@ -139,6 +142,14 @@ public class Node {
 		this.user = user;
 	}
 
+	public String getStateAbbr() {
+		return stateAbbr;
+	}
+
+	public void setStateAbbr(String stateAbbr) {
+		this.stateAbbr = stateAbbr;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -159,7 +170,8 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [id=" + id + ", name=" + name + ", openToPublic=" + openToPublic + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + "]";
+				+ ", updatedOn=" + updatedOn + ", city=" + city + ", description=" + description + ", imageUrl="
+				+ imageUrl + ", stateAbbr=" + stateAbbr + ", stack=" + stack + ", user=" + user + "]";
 	}
 
 }
