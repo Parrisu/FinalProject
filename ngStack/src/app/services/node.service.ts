@@ -10,9 +10,9 @@ import { Nodes } from '../models/node';
 export class NodeService {
   private baseUrl = environment.baseUrl; // adjust port to match server
   private url = this.baseUrl + 'api/nodes';
-  constructor(
-    private http: HttpClient,
 
+  constructor(
+    private http: HttpClient
   ) {}
 
   public showAll(): Observable<Nodes[]> {

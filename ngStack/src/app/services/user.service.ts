@@ -40,7 +40,7 @@ export class UserService {
       );
   }
 
-  updateUser(user: User){
+  updateUser(user: User) {
     const endpoint = `${this.baseUrl}/account`;
     const credentials = this.auth.getCredentials();
     const httpOptions = {
@@ -48,24 +48,23 @@ export class UserService {
         Authorization: `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest',
       }),
-    }
+    };
 
-    return this.http
-      .post<User>(endpoint, user, httpOptions).pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError(
-            () =>
-              new Error(`
+    return this.http.post<User>(endpoint, user, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
                 UserService.updateUser(user: User);
                 Error while attempting POST to ${endpoint}.
                 With body ${JSON.stringify(user)}
               `)
-          );
-        })
-      );
+        );
+      })
+    );
   }
-  destroy(id: number){
+  destroy(id: number) {
     const endpoint = `${this.baseUrl}/account/${id}`;
     const credentials = this.auth.getCredentials();
     const httpOptions = {
@@ -73,24 +72,23 @@ export class UserService {
         Authorization: `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest',
       }),
-    }
+    };
 
-    return this.http
-      .delete<User>(endpoint, httpOptions).pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError(
-            () =>
-              new Error(`
+    return this.http.delete<User>(endpoint, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
                 UserService.Destroy(id: number);
                 Error while attempting Delete to ${endpoint}.
               `)
-          );
-        })
-      );
+        );
+      })
+    );
   }
 
-  reactivate(id: number){
+  reactivate(id: number) {
     const endpoint = `${this.baseUrl}/account/${id}`;
     const credentials = this.auth.getCredentials();
     const httpOptions = {
@@ -98,23 +96,19 @@ export class UserService {
         Authorization: `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest',
       }),
-    }
+    };
 
-    return this.http
-      .get<User>(endpoint, httpOptions).pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError(
-            () =>
-              new Error(`
+    return this.http.get<User>(endpoint, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
                 UserService.reactivate(id: number);
                 Error while attempting GET to ${endpoint}.
               `)
-          );
-        })
-      );
+        );
+      })
+    );
   }
-
-
 }
-
