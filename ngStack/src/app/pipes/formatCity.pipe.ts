@@ -7,6 +7,6 @@ import { City } from '../models/city';
 })
 export class FormatCityPipe implements PipeTransform {
   transform(city: City): string {
-    return `${city.id}, ${city.state}`;
+    return `${city.name}, ${city.state}`;
   }
 }

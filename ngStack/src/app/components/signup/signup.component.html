@@ -119,17 +119,13 @@
         <div #cityError class="error"></div>
         <div class="form-group">
           <label for="city">City</label>
-          <input type="text" name="city" class="form-control" id="city" [(ngModel)]="city" (change)="validateCity()"
-            placeholder="Aurora, Colorado" />
+          <select class="form-select" aria-label="Default select example" name="city" [(ngModel)]="city">
+            <option [ngValue]="null">None</option>
+            @for (city of cities; track $index) {
+              <option ngValue="city">{{city|formatCity}}</option>
+            }
+          </select>
         </div>
-        <br>
-
-        <select class="form-select" aria-label="Default select example" [(ngModel)]="city">
-          <option [ngValue]="null">None</option>
-          @for (city of cities; track $index) {
-          <option ngValue="city">{{city|formatCity}}</option>
-          }
-        </select>
         <br>
 
         <div class="form-group d-flex">
