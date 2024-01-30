@@ -1,6 +1,5 @@
 package com.skilldistillery.stack.controllers;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class TechController {
 	private TechService techService;
 	
 	@GetMapping(path = {"technologies", "technologies/"} )
-	public List<Technology> showAllTech(HttpServletRequest req, HttpServletResponse res, Principal principal){
+	public List<Technology> showAllTech(HttpServletRequest req, HttpServletResponse res){
 		List<Technology> tech = techService.showAllTech();
 		return tech;
 		

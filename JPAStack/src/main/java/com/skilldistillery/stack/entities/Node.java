@@ -36,15 +36,20 @@ public class Node {
 	@Column(name = "updated_on")
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
+
 	
 	private String city;
 	@Column(name = "state_abbreviation")
 	private String stateAbbreviation;
 	
+
 	private String description;
 
 	@Column(name = "image_url")
 	private String imageUrl;
+	
+	@Column(name = "state_abbreviation")
+	private String stateAbbr;
 
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
@@ -93,6 +98,7 @@ public class Node {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
+
 
 	public String getCity() {
 		return city;
@@ -164,6 +170,7 @@ public class Node {
 
 	public boolean isOpenToPublic() {
 		return openToPublic;
+
 	}
 
 	@Override
@@ -186,8 +193,10 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [id=" + id + ", name=" + name + ", openToPublic=" + openToPublic + ", createdOn=" + createdOn
+
 				+ ", updatedOn=" + updatedOn + ", city=" + city + ", stateAbbreviation=" + stateAbbreviation
 				+ ", description=" + description + ", imageUrl=" + imageUrl + "]";
+
 	}
 
 }

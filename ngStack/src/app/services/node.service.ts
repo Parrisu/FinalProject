@@ -12,11 +12,11 @@ export class NodeService {
 
   private baseUrl = environment.baseUrl; // adjust port to match server
   private url = this.baseUrl + 'api/nodes';
+
   constructor(
     private http: HttpClient,
     private auth: AuthService
-
-  ) {}
+    ) {}
 
   getHttpOptions() {
     let options = {
@@ -56,6 +56,7 @@ export class NodeService {
     );
   }
 
+
   public create(newNode: Nodes): Observable<Nodes> {
     newNode.name = '';
     newNode.description = '';
@@ -72,4 +73,5 @@ export class NodeService {
       })
     );
   }
+
 }
