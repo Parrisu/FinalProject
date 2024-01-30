@@ -13,6 +13,7 @@ import com.skilldistillery.stack.repositories.UserRepository;
 
 @Service
 public class NodeServiceImpl implements NodeService {
+	
 	@Autowired
 	private NodeRepository nodeRepo;
 	@Autowired
