@@ -33,13 +33,6 @@ public class Address {
 	private List<User> users;
 
 
-	
-	private String city;
-	
-	@Column(name = "state_abbreviation")
-	private String stateAbbreviation;
-
-
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
 	private List<Function> functions;
@@ -103,22 +96,6 @@ public class Address {
 
 	public void setFunctions(List<Function> functions) {
 		this.functions = functions;
-	}
-
-	public String getStateAbbreviation() {
-		return stateAbbreviation;
-	}
-
-	public void setStateAbbreviation(String stateAbbreviation) {
-		this.stateAbbreviation = stateAbbreviation;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
 	}
 
 	@Override
