@@ -37,10 +37,6 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City city;
-
 	private String description;
 
 	@Column(name = "image_url")
@@ -97,14 +93,6 @@ public class Node {
 
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
-	}
-
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
 	}
 
 	public String getDescription() {
