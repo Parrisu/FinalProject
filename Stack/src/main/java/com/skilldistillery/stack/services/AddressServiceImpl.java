@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.Address;
-import com.skilldistillery.stack.entities.City;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.repositories.AddressRepository;
-import com.skilldistillery.stack.repositories.CityRepository;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -21,17 +19,10 @@ public class AddressServiceImpl implements AddressService {
 	@Autowired
 	private AddressRepository addressRepo;
 
-	@Autowired
-	private CityRepository cityRepo;
-
 	@Override
 	public Address createAddress(Address address)
 			throws EntityDoesNotExistException, InvalidEntityException {
 
-		City city = cityRepo.findById(address.getCity().getId()).orElse(null);
-		if (city == null) {
-			throw new EntityDoesNotExistException("City does not exist.");
-		}
 
 		Map<String, String> errors = new HashMap<>();
 
@@ -47,7 +38,6 @@ public class AddressServiceImpl implements AddressService {
 			throw new InvalidEntityException(errors);
 		}
 
-		address.setCity(city);
 		return addressRepo.saveAndFlush(address);
 	}
 
