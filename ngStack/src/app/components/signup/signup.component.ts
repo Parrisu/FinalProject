@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
 import { Address } from '../../models/address';
 import { AddressService } from '../../services/address.service';
 

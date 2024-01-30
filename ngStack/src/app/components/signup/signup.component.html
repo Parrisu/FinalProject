@@ -12,14 +12,14 @@
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" autocomplete="username" name="username" class="form-control" id="username"
-            [(ngModel)]="username" (change)="validateUsername()" placeholder="JaneDoe11" required />
+            [(ngModel)]="user.username" (change)="validateUsername()" placeholder="JaneDoe11" required />
         </div>
         <br>
 
         <div class="error">{{emailErrorText}}</div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="text" autocomplete="email" name="email" class="form-control" id="email" [(ngModel)]="email"
+          <input type="text" autocomplete="email" name="email" class="form-control" id="email" [(ngModel)]="user.email"
             (change)="validateEmail()" placeholder="jane.doe@example.com" required />
         </div>
         <br>
@@ -28,7 +28,7 @@
         <div class="form-group">
           <label for="passwordOne">Password</label>
           <input [type]="showPassword? 'text' : 'password'" name="passwordOne" id="passwordOne" class="form-control"
-            [(ngModel)]="passwordOne" (change)="validatePassword1()" [(ngModel)]="passwordOne" required />
+            [(ngModel)]="user.password" (change)="validatePassword1()" [(ngModel)]="user.password" required />
         </div>
         <br>
 
@@ -60,7 +60,7 @@
         <div class="error">{{firstNameErrorText}}</div>
         <div class="form-group">
           <label for="firstName">First Name</label>
-          <input type="text" name="firstName" class="form-control" placeholder="Jane" [(ngModel)]="firstName"
+          <input type="text" name="firstName" class="form-control" placeholder="Jane" [(ngModel)]="user.firstName"
             (change)="validateFirstName()" />
         </div>
         <br>
@@ -68,7 +68,7 @@
         <div class="error">{{lastNameErrorText}}</div>
         <div class="form-group">
           <label for="lastName">Last Name</label>
-          <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Doe" [(ngModel)]="lastName"
+          <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Doe" [(ngModel)]="user.lastName"
             (change)="validateLastName()" />
         </div>
         <br>
@@ -76,13 +76,13 @@
         <div class="form-group">
           <label for="lastName">Profile Image Url</label>
           <input type="text" name="profileImageUrl" class="form-control" id="profileImageUrl"
-            [(ngModel)]="profileImageUrl" />
+            [(ngModel)]="user.profileImageUrl" />
         </div>
         <br>
 
         <div class="form-group">
           <label for="aboutMe">About Me (bio)</label>
-          <textarea type="text" name="aboutMe" class="form-control" [(ngModel)]="aboutMe"></textarea>
+          <textarea type="text" name="aboutMe" class="form-control" [(ngModel)]="user.aboutMe"></textarea>
         </div>
         <br>
 
