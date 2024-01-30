@@ -81,6 +81,7 @@ public class User {
 	private List<Notification> notifications;
 	@JsonIgnore
 	@OneToMany(mappedBy = "user" )
+	@JsonIgnore
 	private List<Node> nodes;
 	
 

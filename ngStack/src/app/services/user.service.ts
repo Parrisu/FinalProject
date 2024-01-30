@@ -64,6 +64,55 @@ export class UserService {
         })
       );
   }
+  destroy(id: number){
+    const endpoint = `${this.baseUrl}/account/${id}`;
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+    }
+
+    return this.http
+      .delete<User>(endpoint, httpOptions).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(`
+                UserService.Destroy(id: number);
+                Error while attempting Delete to ${endpoint}.
+              `)
+          );
+        })
+      );
+  }
+
+  reactivate(id: number){
+    const endpoint = `${this.baseUrl}/account/${id}`;
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+    }
+
+    return this.http
+      .get<User>(endpoint, httpOptions).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(`
+                UserService.reactivate(id: number);
+                Error while attempting GET to ${endpoint}.
+              `)
+          );
+        })
+      );
+  }
 
 
 }

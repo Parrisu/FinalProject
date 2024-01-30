@@ -55,8 +55,25 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean Destroy(int id) {
-		userRepo.deleteById(id);
-		return !userRepo.existsById(id);
+		User user = userRepo.findById(id).get();
+		if(user.isEnabled() == true) {
+			user.setEnabled(false);
+			userRepo.saveAndFlush(user);
+			return true;
+		}
+		return false;
 
+	}
+	
+	@Override
+	public boolean ReActivate(int id) {
+		User user = userRepo.findById(id).get();
+		if(user.isEnabled() == false) {
+			user.setEnabled(true);
+			userRepo.saveAndFlush(user);
+			return true;
+		}
+		return false;
+		
 	}
 }

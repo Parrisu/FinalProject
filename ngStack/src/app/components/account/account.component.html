@@ -12,6 +12,7 @@
         <input class="form-control" type="text" name="aboutMe" [(ngModel)]="editUser.aboutMe">
         <button type="button" class="btn btn-success my-2" (click)="updateUser(editUser)">Save Changes</button>
       </form>
+      <button class="btn btn-danger" (click)="deleteCycle(editUser.id)">Delete Account</button>
     </div>
   </div>
 </div>
