@@ -16,7 +16,7 @@ import { AddressService } from '../../services/address.service';
 export class SignupComponent {
   private navigateOnSubmission = '/login';
 
-  @ViewChild('errorField') errorField!: ElementRef<HTMLDivElement>;
+  errorFieldText = '';
 
   // --------------------------- Begin First Form Fields ---------------------------
   usernameErrorText = '';
@@ -132,7 +132,8 @@ export class SignupComponent {
   // ------------------------------ BEGIN SECOND FORM  ------------------------------
   validateFirstName(): boolean {
     const isValid =
-      this.user.firstName.replace(/\s/g, '') != '' && this.user.firstName.length < 50;
+      this.user.firstName.replace(/\s/g, '') != '' &&
+      this.user.firstName.length < 50;
     if (!isValid) {
       this.firstNameErrorText = `
       First name must not be blank.
@@ -145,7 +146,8 @@ export class SignupComponent {
 
   validateLastName(): boolean {
     const isValid =
-      this.user.lastName.replace(/\s/g, '') != '' && this.user.firstName.length < 50;
+      this.user.lastName.replace(/\s/g, '') != '' &&
+      this.user.firstName.length < 50;
     if (!isValid) {
       this.lastNameErrorText = `
     Last name must not be blank.
@@ -169,6 +171,7 @@ export class SignupComponent {
 
   // ------------------------------ BEGIN THIRD FORM  ------------------------------
   submitThirdForm(): void {
+    this.errorFieldText = '';
     this.addressService.validateAddress(this.address).subscribe({
       next: (address: Address | null) => {
         if (address) {
@@ -193,12 +196,16 @@ export class SignupComponent {
     console.log('in form submission');
     this.user.address = this.address;
     this.authService.register(this.user).subscribe({
-      next: () => this.router.navigateByUrl(this.navigateOnSubmission),
+      next: () => {
+        const msg = 'You have registered as a user, please log in now.'
+        localStorage.setItem('popup-message', msg);
+        this.router.navigateByUrl(this.navigateOnSubmission);
+      },
       error: this.onSubmissionError,
     });
   }
 
   onSubmissionError(err: any): void {
-    this.errorField.nativeElement.innerHTML = `Something went wrong...`;
+    this.errorFieldText = `Something went wrong...`;
   }
 }
