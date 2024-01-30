@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.services.FunctionService;
 import com.skilldistillery.stack.services.NodeService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +29,9 @@ public class NodeController {
 
 	@Autowired
 	private NodeService nodeService;
+	
+	@Autowired
+	private FunctionService funServ;
 
 	@GetMapping(path = { "nodes", "nodes/" })
 	public List<Node> showAllNodes(HttpServletRequest req, HttpServletResponse res, Principal principal) {
@@ -81,4 +87,32 @@ public class NodeController {
 
 	}
 
+	@GetMapping(path = { "nodes/{nodeId}/function" })
+	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int id,
+			Principal principal) {
+		return funServ.findByNode(id);
+		
+		
+	}
+
+	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
+	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
+			Principal principal) {
+		Node node = nodeService.getNodeById(nodeId);
+
+		if (node == null) {
+			res.setStatus(404);
+
+		} else {
+			boolean leftNode = nodeService.leaveNode(principal.getName(), node);
+			if(leftNode) {
+				res.setStatus(204);
+				
+			} else {
+				res.setStatus(404);
+			}
+			
+		}
+
+	}
 }

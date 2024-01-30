@@ -1,5 +1,6 @@
 package com.skilldistillery.stack.repositories;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -43,4 +44,8 @@ public interface FunctionRepository extends JpaRepository<Function, Integer> {
 			  )
 			""")
 	Set<Function> getAll(@Param("searchQuery") String searchQuery, @Param("username") String username);
+	
+	@Query("SELECT f from Function f WHERE f.node.id = :id")
+	  List<Function> findByNodeId(@Param("id") int id);
+
 }
