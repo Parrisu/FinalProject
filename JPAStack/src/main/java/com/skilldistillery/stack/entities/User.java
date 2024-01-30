@@ -64,7 +64,6 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_technology", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
 	private List<Technology> stack;

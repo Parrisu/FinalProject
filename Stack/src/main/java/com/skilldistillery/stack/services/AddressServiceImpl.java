@@ -32,6 +32,14 @@ public class AddressServiceImpl implements AddressService {
 			errors.put("city", "City must not be empty and must be under 200 characters in length.");
 		}
 
+		if (!fieldIsValid(address.getStateAbbreviation(), 3)) {
+			errors.put("stateAbbreviation", "State Abbreviation must not be empty and must be under 3 characters in length.");
+		}
+
+		if (!fieldIsValid(address.getCity(), 200)) {
+			errors.put("city", "City must not be empty and must be under 200 characters in length.");
+		}
+
 		if (!fieldIsValid(address.getStreet(), 300)) {
 			errors.put("street", "Street must not be empty and must be under 300 characters in length.");
 		}

@@ -49,7 +49,7 @@ class NodeTest {
 	@Test
 	void test_openToPublic_mapping() {
 		assertNotNull(node);
-		assertTrue(node.getOpenToPublic());
+		assertTrue(node.isOpenToPublic());
 	}
 
 	@Test

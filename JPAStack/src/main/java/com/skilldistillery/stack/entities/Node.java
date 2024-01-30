@@ -27,7 +27,7 @@ public class Node {
 	private String name;
 
 	@Column(name = "open_to_public")
-	private Boolean openToPublic;
+	private boolean openToPublic;
 
 	@Column(name = "created_on")
 	@CreationTimestamp
@@ -37,8 +37,11 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-
+	
 	private String city;
+	@Column(name = "state_abbreviation")
+	private String stateAbbreviation;
+	
 
 	private String description;
 
@@ -56,6 +59,8 @@ public class Node {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	private boolean enabled;
 
 	public Node() {
 		super();
@@ -77,13 +82,6 @@ public class Node {
 		this.name = name;
 	}
 
-	public Boolean getOpenToPublic() {
-		return openToPublic;
-	}
-
-	public void setOpenToPublic(Boolean openToPublic) {
-		this.openToPublic = openToPublic;
-	}
 
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
@@ -108,6 +106,14 @@ public class Node {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getStateAbbrev() {
+		return stateAbbreviation;
+	}
+
+	public void setStateAbbrev(String stateAbbrev) {
+		this.stateAbbreviation = stateAbbrev;
 	}
 
 	public String getDescription() {
@@ -142,12 +148,29 @@ public class Node {
 		this.user = user;
 	}
 
-	public String getStateAbbr() {
-		return stateAbbr;
+	public String getStateAbbreviation() {
+		return stateAbbreviation;
 	}
 
-	public void setStateAbbr(String stateAbbr) {
-		this.stateAbbr = stateAbbr;
+	public void setStateAbbreviation(String stateAbbreviation) {
+		this.stateAbbreviation = stateAbbreviation;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setOpenToPublic(boolean openToPublic) {
+		this.openToPublic = openToPublic;
+	}
+
+	public boolean isOpenToPublic() {
+		return openToPublic;
+
 	}
 
 	@Override
@@ -170,8 +193,10 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [id=" + id + ", name=" + name + ", openToPublic=" + openToPublic + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + ", city=" + city + ", description=" + description + ", imageUrl="
-				+ imageUrl + ", stateAbbr=" + stateAbbr + ", stack=" + stack + ", user=" + user + "]";
+
+				+ ", updatedOn=" + updatedOn + ", city=" + city + ", stateAbbreviation=" + stateAbbreviation
+				+ ", description=" + description + ", imageUrl=" + imageUrl + "]";
+
 	}
 
 }

@@ -1,8 +1,12 @@
 package com.skilldistillery.stack.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.skilldistillery.stack.entities.Address;
+import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 import com.skilldistillery.stack.exceptions.InvalidEntityException;
@@ -46,6 +50,22 @@ public class UserServiceImpl implements UserService {
 		update.setLastName(user.getLastName());
 		update.setProfileImageUrl(user.getProfileImageUrl());
 		return userRepo.saveAndFlush(update);
+	}
+	
+	@Override
+	public User updateUserTech(int id, Technology tech) {
+		User updateUser = userRepo.findById(id).get();
+		if(updateUser != null) {
+			List<Technology> stack = updateUser.getStack();
+			if(stack.contains(tech)) {
+				stack.remove(tech);
+			} else {
+				stack.add(tech);
+			}
+			updateUser.setStack(stack);
+			userRepo.saveAndFlush(updateUser);
+		}
+		return updateUser;
 	}
 	
 	@Override

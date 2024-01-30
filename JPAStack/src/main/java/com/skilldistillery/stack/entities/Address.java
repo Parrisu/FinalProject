@@ -32,6 +32,7 @@ public class Address {
 	@JsonIgnore
 	private List<User> users;
 
+
 	@OneToMany(mappedBy = "address")
 	@JsonIgnore
 	private List<Function> functions;
@@ -71,13 +72,14 @@ public class Address {
 		this.users = users;
 	}
 
-	public List<Function> getFunctions() {
-		return functions;
+	public String getCity() {
+		return city;
 	}
 
-	public void setFunctions(List<Function> functions) {
-		this.functions = functions;
+	public void setCity(String city) {
+		this.city = city;
 	}
+
 
 	public String getStateAbbreviation() {
 		return stateAbbreviation;
@@ -87,12 +89,13 @@ public class Address {
 		this.stateAbbreviation = stateAbbreviation;
 	}
 
-	public String getCity() {
-		return city;
+
+	public List<Function> getFunctions() {
+		return functions;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setFunctions(List<Function> functions) {
+		this.functions = functions;
 	}
 
 	@Override
@@ -114,8 +117,10 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", stateAbbreviation="
-				+ stateAbbreviation + ", city=" + city + ", users=" + users + ", functions=" + functions + "]";
+
+		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city
+				+ ", stateAbbreviation=" + stateAbbreviation + "]";
+
 	}
 
 }
