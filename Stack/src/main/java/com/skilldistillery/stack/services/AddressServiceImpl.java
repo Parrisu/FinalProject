@@ -52,11 +52,11 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	private boolean fieldIsValid(String field, int maxLength) {
-		return field != null && !field.isBlank() && field.length() < maxLength && !field.contains("\\s");
+		return field != null && !field.isBlank() && field.length() <= maxLength && !field.contains("\\s");
 	}
 
 	private boolean zipcodeIsValid(String zipCode) {
-		boolean isValid = fieldIsValid(zipCode, 8);
+		boolean isValid = fieldIsValid(zipCode, 11);
 		if (isValid) {
 			Pattern pattern = Pattern.compile("^\\d{5}(?:[-\\s]\\d{4})?$");
 			Matcher matcher = pattern.matcher(zipCode);

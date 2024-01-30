@@ -1,25 +1,24 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { City } from '../../models/city';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { CityService } from '../../services/city.service';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { FormatCityPipe } from '../../pipes/formatCity.pipe';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, FormatCityPipe],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   private navigateOnSubmission = '/login';
+
+  cities: City[] = [];
 
   @ViewChild('errorField') errorField!: ElementRef<HTMLDivElement>;
 
@@ -51,7 +50,7 @@ export class SignupComponent {
   @ViewChild('zipCodeError') zipCodeError!: ElementRef<HTMLDivElement>;
   public zipCode = '';
   @ViewChild('cityError') cityError!: ElementRef<HTMLDivElement>;
-  public city = '';
+  public city: City | null = null;
   // --------------------------- End Third Form Fields ---------------------------
 
   currentSlide = 1;
@@ -60,8 +59,17 @@ export class SignupComponent {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private cityService: CityService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.cityService.getAll().subscribe({
+      next: (cities: City[]) => {
+        this.cities = cities;
+      },
+    });
+  }
 
   previousSlide(): void {
     if (1 < this.currentSlide) this.currentSlide -= 1;
@@ -189,10 +197,18 @@ export class SignupComponent {
 
   // ------------------------------ BEGIN ADDRESS FORM  ------------------------------
   validateStreet(): void {}
-  validateZipCode(): void {} // TEMPORARY UNTIL CITY CONTROLLER
-  validateCity(): void {}
+  validateZipCode(): boolean {
+    return /^\\d{5}(?:[-\\s]\\d{4})?$/.test(this.zipCode);
+  } // TEMPORARY UNTIL CITY CONTROLLER
+  validateCity(): boolean {
+    let isValid = this.city !== null;
+    if (!isValid) {
+      this.cityError.nativeElement.innerHTML = 'City is a required field.';
+    }
+    return isValid;
+  }
   validateAddress(): boolean {
-    return true;
+    return this.validateCity();
   }
   // ------------------------------ END ADDRESS FORM  ------------------------------
 
