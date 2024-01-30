@@ -14,8 +14,6 @@ public class TechServiceImpl implements TechService {
 	@Autowired
 	private TechnologyRepository techRepo;
 	
-
-
 	@Override
 	public List<Technology> showAllTech() {
 		return techRepo.findAll();
