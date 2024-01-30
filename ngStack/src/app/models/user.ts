@@ -1,3 +1,5 @@
+import { Technology } from "./technology";
+
 export class User {
   id: number;
   username: string;
@@ -9,6 +11,7 @@ export class User {
   lastName: string;
   profileImageUrl: string | null;
   aboutMe: string | null;
+  stack: Technology[];
 
   constructor(
     id: number = 0,
@@ -20,7 +23,8 @@ export class User {
     firstName: string = '',
     lastName: string = '',
     profileImageUrl: string | null = null,
-    aboutMe: string | null = null
+    aboutMe: string | null = null,
+    stack: Technology[] = [],
   ) {
     this.id = id;
     this.username = username;
@@ -32,5 +36,6 @@ export class User {
     this.lastName = lastName;
     this.profileImageUrl = profileImageUrl;
     this.aboutMe = aboutMe;
+    this.stack = stack;
   }
 }
