@@ -16,19 +16,6 @@ CREATE SCHEMA IF NOT EXISTS `stackdb` DEFAULT CHARACTER SET utf8 ;
 USE `stackdb` ;
 
 -- -----------------------------------------------------
--- Table `city`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `city` ;
-
-CREATE TABLE IF NOT EXISTS `city` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `state` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `address`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `address` ;
@@ -37,14 +24,9 @@ CREATE TABLE IF NOT EXISTS `address` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `street` VARCHAR(300) NOT NULL,
   `zip_code` VARCHAR(45) NOT NULL,
-  `city_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_address_city1_idx` (`city_id` ASC),
-  CONSTRAINT `fk_address_city1`
-    FOREIGN KEY (`city_id`)
-    REFERENCES `city` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `state_abbreviation` VARCHAR(45) NULL,
+  `city` VARCHAR(200) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -147,21 +129,16 @@ CREATE TABLE IF NOT EXISTS `node` (
   `open_to_public` TINYINT NOT NULL,
   `created_on` DATETIME NOT NULL,
   `updated_on` DATETIME NOT NULL,
-  `city_id` INT NOT NULL,
+  `state_abbreviation` VARCHAR(50) NOT NULL,
   `description` TEXT NULL,
   `image_url` VARCHAR(2000) NULL,
   `enabled` TINYINT NOT NULL,
+  `city` VARCHAR(200) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_sub_stack_user_profile1_idx` (`user_id` ASC),
-  INDEX `fk_node_city1_idx` (`city_id` ASC),
   CONSTRAINT `fk_sub_stack_user_profile1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_node_city1`
-    FOREIGN KEY (`city_id`)
-    REFERENCES `city` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -519,26 +496,13 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `city`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `stackdb`;
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (1, 'Denver', 'Colorado');
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (2, 'Centennial', 'Colorado');
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (3, 'Aurora', 'Colorado');
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (4, 'Littleton', 'Colorado');
-INSERT INTO `city` (`id`, `name`, `state`) VALUES (5, 'Boulder', 'Colorado');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `address`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `address` (`id`, `street`, `zip_code`, `city_id`) VALUES (1, '7 havana St', '80112', 2);
-INSERT INTO `address` (`id`, `street`, `zip_code`, `city_id`) VALUES (2, 'dover st', '80123', 3);
+INSERT INTO `address` (`id`, `street`, `zip_code`, `state_abbreviation`, `city`) VALUES (1, '1922 13th St', '80302', 'CO', 'Boulder');
+INSERT INTO `address` (`id`, `street`, `zip_code`, `state_abbreviation`, `city`) VALUES (2, '1600 W. 12th Ave', '80204', 'CO', 'Denver');
+INSERT INTO `address` (`id`, `street`, `zip_code`, `state_abbreviation`, `city`) VALUES (3, '1730 Blake Street', '80202', 'CO', 'Denver');
 
 COMMIT;
 
@@ -559,7 +523,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (1, 'Java', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Angular-Dark.svg', 'Its java');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (1, 'Java', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Angular-Dark.svg', 'a multi-platform, object-oriented, and network-centric language that can be used as a platform in itself');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (2, 'Python', 'https://github.com/tandpfun/skill-icons/raw/main/icons/Python-Dark.svg', 'an interpreted, object-oriented, high-level programming language with dynamic semantics');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (3, 'JavaScript', 'https://github.com/tandpfun/skill-icons/raw/main/icons/JavaScript.svg', 'a multi-paradigm, dynamic language with types and operators, standard built-in objects, and methods. ');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (4, 'C++', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CPP.svg', 'a cross-platform language that can be used to create high-performance applications');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (5, 'C#', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CS.svg', 'a modern, object-oriented, and type-safe programming language');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (6, 'C', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CS.svg', 'an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (7, 'CSS', 'https://github.com/tandpfun/skill-icons/raw/main/icons/CSS.svg', 'a style sheet language used for specifying the presentation and styling of a document written in a markup language such as HTML or XML.');
+INSERT INTO `technology` (`id`, `name`, `badge_url`, `description`) VALUES (8, 'HTML', 'https://github.com/tandpfun/skill-icons/raw/main/icons/HTML.svg', 'the standard markup language for documents designed to be displayed in a web browser.');
 
 COMMIT;
 
@@ -589,7 +560,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stackdb`;
-INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `city_id`, `description`, `image_url`, `enabled`) VALUES (1, 'Super Java bros', 1, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 1, 'We love java', '123.image', 1);
+INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `state_abbreviation`, `description`, `image_url`, `enabled`, `city`) VALUES (1, 'Super Java bros', 1, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'CO', 'We love java', '123.image', 1, 'Denver');
 
 COMMIT;
 
