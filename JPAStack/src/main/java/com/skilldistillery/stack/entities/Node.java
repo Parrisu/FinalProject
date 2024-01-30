@@ -36,11 +36,15 @@ public class Node {
 	@Column(name = "updated_on")
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
+	
+	
 
-	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City city;
-
+	
+	@Column(name = "city_id")
+	private String city;
+	@Column(name = "state_abbreviation")
+	private String stateAbbrev;
+	
 	private String description;
 
 	@Column(name = "image_url")
@@ -99,12 +103,20 @@ public class Node {
 		this.updatedOn = updatedOn;
 	}
 
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getStateAbbrev() {
+		return stateAbbrev;
+	}
+
+	public void setStateAbbrev(String stateAbbrev) {
+		this.stateAbbrev = stateAbbrev;
 	}
 
 	public String getDescription() {
@@ -159,7 +171,8 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [id=" + id + ", name=" + name + ", openToPublic=" + openToPublic + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + "]";
+				+ ", updatedOn=" + updatedOn + ", city=" + city + ", stateAbbrev=" + stateAbbrev + ", description="
+				+ description + ", imageUrl=" + imageUrl + "]";
 	}
 
 }

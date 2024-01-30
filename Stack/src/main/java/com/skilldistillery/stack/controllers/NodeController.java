@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,22 +22,39 @@ import jakarta.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("api")
 public class NodeController {
-	
+
 	@Autowired
 	private NodeService nodeService;
-	
-	@GetMapping(path = {"nodes", "nodes/"} )
-	public List<Node> showAllNodes(HttpServletRequest req, HttpServletResponse res, Principal principal){
+
+	@GetMapping(path = { "nodes", "nodes/" })
+	public List<Node> showAllNodes(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		List<Node> nodes = nodeService.showAllNodes();
 		return nodes;
 	}
-	
-	@GetMapping(path = {"nodes/{name}"} )
-	public List<Node> findByName(HttpServletRequest req, HttpServletResponse res,  @PathVariable("name") String name, Principal principal){
+
+	@GetMapping(path = { "nodes/{name}" })
+	public List<Node> findByName(HttpServletRequest req, HttpServletResponse res, @PathVariable("name") String name,
+			Principal principal) {
 		List<Node> nodes = nodeService.findByNameContaining(name);
 		return nodes;
+
 	}
-	
-	
-	
+
+	@PostMapping(path = { "nodes" })
+	public Node addNode(HttpServletRequest req, HttpServletResponse res, @RequestBody Node node, Principal principal) {
+		try {
+			node = nodeService.create(principal.getName(), node);
+			if (node == null) {
+				res.setStatus(401);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			res.setStatus(400);
+			node = null;
+		}
+		return node;
+
+	}
+
 }
