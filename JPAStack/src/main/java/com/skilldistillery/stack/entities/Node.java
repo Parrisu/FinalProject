@@ -37,6 +37,7 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
+
 	private String city;
 
 	private String description;
