@@ -85,7 +85,7 @@ class FunctionTest {
 	@Test
 	void test_Function_address_mapping() {
 		assertNotNull(function);
-		assertEquals("7 havana St", function.getAddress().getStreet());
+		assertEquals("1922 13th St", function.getAddress().getStreet());
 	}
 
 }

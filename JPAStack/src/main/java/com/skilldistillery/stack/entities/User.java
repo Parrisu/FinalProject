@@ -61,7 +61,7 @@ public class User {
 	private String profileImageUrl;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-//	@JsonIgnore
+	@JsonIgnore
 	@JoinColumn(name = "address_id")
 	private Address address;
 
@@ -81,7 +81,6 @@ public class User {
 	private List<Notification> notifications;
 	@JsonIgnore
 	@OneToMany(mappedBy = "user" )
-	@JsonIgnore
 	private List<Node> nodes;
 	
 

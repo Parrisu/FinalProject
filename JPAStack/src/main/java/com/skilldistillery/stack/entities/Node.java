@@ -37,14 +37,16 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City city;
+
+	private String city;
 
 	private String description;
 
 	@Column(name = "image_url")
 	private String imageUrl;
+	
+	@Column(name = "state_abbreviation")
+	private String stateAbbr;
 
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
@@ -99,11 +101,12 @@ public class Node {
 		this.updatedOn = updatedOn;
 	}
 
-	public City getCity() {
+
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
@@ -139,6 +142,14 @@ public class Node {
 		this.user = user;
 	}
 
+	public String getStateAbbr() {
+		return stateAbbr;
+	}
+
+	public void setStateAbbr(String stateAbbr) {
+		this.stateAbbr = stateAbbr;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -159,7 +170,8 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [id=" + id + ", name=" + name + ", openToPublic=" + openToPublic + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + "]";
+				+ ", updatedOn=" + updatedOn + ", city=" + city + ", description=" + description + ", imageUrl="
+				+ imageUrl + ", stateAbbr=" + stateAbbr + ", stack=" + stack + ", user=" + user + "]";
 	}
 
 }
