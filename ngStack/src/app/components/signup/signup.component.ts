@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { CityService } from '../../services/city.service';
 import { UserService } from '../../services/user.service';
 import { FormatCityPipe } from '../../pipes/formatCity.pipe';
+import { Address } from '../../models/address';
 
 @Component({
   selector: 'app-signup',
@@ -228,30 +229,27 @@ export class SignupComponent implements OnInit {
     user.aboutMe = this.aboutMe;
 
     this.authService.register(user).subscribe({
+      next: this.createUserAddress,
+      error: this.onSubmissionError,
+    });
+  }
+
+  createUserAddress(user: User): void {
+    let address = new Address();
+    address.street = this.street;
+    address.zipCode = this.zipCode;
+
+    if (this.city) {
+      address.city = this.city;
+    }
+
+    this.userService.setUserAddress(user.id, address).subscribe({
       next: () => {
         this.router.navigateByUrl(this.navigateOnSubmission);
       },
       error: this.onSubmissionError,
     });
   }
-
-  // createUserAddress(user: User): void {
-  //   let address = new Address();
-  //   address.street = this.street;
-  //   address.zipCode = this.zipCode;
-
-  //   let city = new City();
-  //   city.id = 1; // MUST BE CHANGED LATER
-
-  //   address.city = city;
-
-  //   this.userService.setUserAddress(user.id, address).subscribe({
-  //     next: () => {
-  //       this.router.navigateByUrl('/home');
-  //     },
-  //     error: this.onSubmissionError,
-  //   });
-  // }
 
   onSubmissionError(err: any): void {
     this.errorField.nativeElement.innerHTML = `Something went wrong...`;
