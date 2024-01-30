@@ -38,10 +38,4 @@ export class User {
     this.aboutMe = aboutMe;
     this.address = address;
   }
-
-  intoJsObject(): any {
-    const body: any = {
-      id: this.id,
-    }
-  }
 }
