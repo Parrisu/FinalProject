@@ -102,4 +102,13 @@ public class NodeController {
 		}
 
 	}
+	@GetMapping(path = { "nodes/{nodeId}/members" })
+	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
+			Principal principal) {
+		Node node = nodeService.getNodeById(nodeId);
+		return nodeService.findUserInNodeGroup(node);
+		
+				
+		
+	}
 }
