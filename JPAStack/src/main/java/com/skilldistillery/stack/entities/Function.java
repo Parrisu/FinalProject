@@ -2,8 +2,11 @@ package com.skilldistillery.stack.entities;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,14 +39,16 @@ public class Function {
 	private String description;
 
 	@Column(name = "start_time")
-	private LocalDateTime start;
+	private LocalTime start;
 
 	@Column(name = "end_time")
-	private LocalDateTime end;
-
+	private LocalTime end;
+	
+	@CreationTimestamp
 	@Column(name = "created_on")
 	private LocalDateTime created;
 
+	@CreationTimestamp
 	@Column(name = "updated_on")
 	private LocalDateTime updated;
 
@@ -123,19 +128,19 @@ public class Function {
 		this.description = description;
 	}
 
-	public LocalDateTime getStart() {
+	public LocalTime getStart() {
 		return start;
 	}
 
-	public void setStart(LocalDateTime start) {
+	public void setStart(LocalTime start) {
 		this.start = start;
 	}
 
-	public LocalDateTime getEnd() {
+	public LocalTime getEnd() {
 		return end;
 	}
 
-	public void setEnd(LocalDateTime end) {
+	public void setEnd(LocalTime end) {
 		this.end = end;
 	}
 

@@ -32,9 +32,9 @@ export const routes: Routes = [
     title: 'Search Page',
     component: SearchComponent,
   },
-  { path: 'function', title: 'Account', component: FunctionComponent },
+  { path: 'nodes/:id/function', title: 'Function', component: FunctionComponent },
+  { path: 'nodes/:id/function/create', title: 'Create Function', component: CreateFunctionFormComponent },
   { path: 'error', title: 'Error', component: ErrorPageComponent },
-  { path: 'function/create', title: 'Create Function', component: CreateFunctionFormComponent },
   { path: '404', title: 'not found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full' },
 ];
