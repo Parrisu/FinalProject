@@ -1,1 +1,16 @@
-<p>create-node-form works!</p>
+<div class="spacer"></div>
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <h4 class="title">Create new Node</h4>
+    <h5>Name:</h5><input [(ngModel)]="newNode.name" type="text" name="name" class="form-control" />
+    <h5>state Abbreviation:</h5><input [(ngModel)]="newNode.stateAbbreviation" type="text" name="stateAbbreviation"
+      class="form-control" />
+    <h5>City:</h5><input [(ngModel)]="newNode.city" type="text" name="city" class="form-control"/>
+    <h5>Description:</h5><input [(ngModel)]="newNode.description" type="text" name="description" class="form-control" />
+    <h5>imageurl:</h5><input [(ngModel)]="newNode.imageUrl" type="text" name="imageUrl" class="form-control" />
+    <div class="d-flex"><h5>Open to the public: &nbsp;</h5><input [(ngModel)]="newNode.openToPublic" type="checkbox" name="openToPublic" /></div>
+    <br><button (click)="addNewNode(newNode)" class="btn btn-primary form-control">Create new Node</button>
+  </div>
+  <div class="col-4"></div>
+</div>
