@@ -1,26 +1,43 @@
-
-
-<div *ngIf="selected">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>State</th>
-        <th>City</th>
-        <th>Description</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{selected.name}}</td>
-        <td>{{selected.stateAbbreviation}}</td>
-        <td>{{selected.city}}</td>
-        <td>{{selected.description}}</td>
-
-
-      </tr>
-
-    </tbody>
-  </table>
+<div id="node-page" class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="group-header">
+      <div class="row">
+        <h2>{{node.name}}</h2>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between">
+        <h3>{{node.city}}, {{node.stateAbbreviation}}</h3>
+        <h3>This is a {{node.openToPublic? 'public': 'private'}} group.</h3>
+      </div>
+      <div class="group-description">
+        {{node.description}}
+      </div>
+    </div>
+    <div class="group-body row">
+      <div class="col-8">
+        <div class="group-functions">
+          <div *ngFor="let function of functions" class="function">
+            <div class="function-header d-flex justify-content-between">
+              <h4>{{function.name}}</h4>
+              <h5>{{function.address.street}}</h5>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6>date: {{function.date|date}}</h6>
+              <div class="d-flex">
+                <h6>start: {{function.start|date :'h:mm a'}}</h6>
+                <div class="vertical-space"></div>
+                <h6>end: {{function.end|date :'h:mm a'}}</h6>
+              </div>
+            </div>
+            <div>
+              <h3 *ngIf="function.cancelled">This function is cancelled.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+  <div class="col-2"></div>
 </div>
