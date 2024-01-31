@@ -2,29 +2,35 @@
   <div class="row">
     <div class="col">
       <!--Card-->
-      <div class="shadow card my-3" *ngFor="let event of functions">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-8">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{event.name}}</li>
-                <li class="list-group-item">{{event.cap}}</li>
-                <li class="list-group-item">{{event.start}} - {{event.end}}</li>
-              </ul>
-            </div>
-            <div class="col-auto ">
-              <!-- <iframe src="https://storage.googleapis.com/maps-solutions-dpwsjnixw4/commutes/kjgx/commutes.html"
-                width="100px" height="100px"
-                style="border:0; overflow: hidden;"
-                loading="lazy">
-              </iframe> -->
-              <img height="100px" src="https://i.imgur.com/OGFGyD3g.jpg" alt="">
+      <div class="shadow card my-3">
+        <div class="card-header">
+          <h3 class="text-center">{{function.name}}</h3>
+        </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-8">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Stack Overflow: <strong>{{function.cap}}</strong></li>
+                  <li class="list-group-item">{{function.start}} - {{function.end}}</li>
+                  <li class="list-group-item">Created By: <strong>{{function.user.firstName}}</strong></li>
+                  <li class="list-group-item">Address: {{function.address.street}}</li>
+                  <li class="list-group-item"><button href=""> </button></li>
+
+                </ul>
+              </div>
+              <div class="col-auto ">
+                <!-- <iframe src="https://storage.googleapis.com/maps-solutions-dpwsjnixw4/commutes/kjgx/commutes.html"
+                  width="100px" height="100px"
+                  style="border:0; overflow: hidden;"
+                  loading="lazy">
+                </iframe> -->
+                <a href="https://www.google.com/maps/search/?api=1&query={{function.address.street}}+{{function.address.city}}+{{function.address.stateAbbreviation}}"><img height="100px" src="https://i.imgur.com/OGFGyD3g.jpg" alt=""></a>
+              </div>
             </div>
           </div>
-        </div>
       </div>
       <!--Card-->
-      <button class="btn btn-primary" (click)="createNew()">Create New Function</button>
+      <!-- <button class="btn btn-primary" (click)="createNew()">Create New Function</button> -->
     </div>
   </div>
 </div>

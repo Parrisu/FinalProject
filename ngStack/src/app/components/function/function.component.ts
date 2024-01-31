@@ -16,8 +16,9 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 export class FunctionComponent implements OnInit {
 
   function: Function = new Function();
-  functions: Function[] = [];
   nodeId: number = 0;
+  fId: number = 0;
+
 
 
   constructor(private auth: AuthService, private funServ: FunctionService, private router: Router, private route: ActivatedRoute){}
@@ -25,17 +26,17 @@ export class FunctionComponent implements OnInit {
   ngOnInit(){
     this.route.paramMap.subscribe(
       (params: ParamMap)=> {
-        this.nodeId = parseInt(params.get('id')!);
+        this.nodeId = parseInt(params.get('nId')!);
+        this.fId = parseInt(params.get("fId")!);
       });
-    this.loadData(this.nodeId);
+    this.loadData();
   }
 
-  loadData(nodeid: number){
-    this.funServ.getFunctions(nodeid).subscribe(
+  loadData(){
+    this.funServ.getFunctionDetails(this.nodeId, this.fId).subscribe(
       {
-        next: (functs)=>{
-          this.functions = functs;
-          // this.fixTimes();
+        next: (funct)=>{
+          this.function = funct;
         },
         error: (errors)=>{
           console.log(errors)

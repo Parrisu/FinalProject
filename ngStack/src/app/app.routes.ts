@@ -32,7 +32,7 @@ export const routes: Routes = [
     title: 'Search Page',
     component: SearchComponent,
   },
-  { path: 'nodes/:id/function', title: 'Function', component: FunctionComponent },
+  { path: 'nodes/:nId/function/:fId', title: 'Function', component: FunctionComponent },
   { path: 'nodes/:id/function/create', title: 'Create Function', component: CreateFunctionFormComponent },
   { path: 'error', title: 'Error', component: ErrorPageComponent },
   { path: '404', title: 'not found', component: NotFoundPageComponent },
