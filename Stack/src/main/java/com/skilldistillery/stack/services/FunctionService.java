@@ -20,6 +20,10 @@ public interface FunctionService {
 	
 	Function createFunction(int nodeId, Function function);
 	
+	Function updateFunction(int nodeId, Function function);
+	
+	Function destroyFunction(int nodeId, int fId);
+	
 //	List<Attendee> findAttendeeByFunctionId(int id);
 
 }

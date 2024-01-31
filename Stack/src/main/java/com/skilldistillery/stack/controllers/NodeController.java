@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @CrossOrigin({ "*", "http://localhost/" })
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/nodes")
 public class NodeController {
 
 	@Autowired
@@ -37,7 +38,9 @@ public class NodeController {
 	@Autowired
 	private FunctionService funServ;
 
-	@GetMapping(path = { "nodes", "nodes/" })
+	// Node Routing //////////////////////////////////////////////////
+
+	@GetMapping
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
 			@RequestParam(name = "cityName", required = false) String cityName,
 			@RequestParam(name = "stateAbbr", required = false) String stateAbbr,
@@ -45,7 +48,7 @@ public class NodeController {
 		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
-	@GetMapping(path = { "nodes/{id}" })
+	@GetMapping(path={"{id}"})
 	public Node findById(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
 			Principal principal) {
 		Node node = nodeService.findById(id).orElse(null);
@@ -56,7 +59,7 @@ public class NodeController {
 
 	}
 
-	@PostMapping(path = { "nodes" })
+	@PostMapping
 	public Node addNode(HttpServletRequest req, HttpServletResponse res, @RequestBody Node node, Principal principal) {
 		try {
 			node = nodeService.create(principal.getName(), node);
@@ -72,7 +75,8 @@ public class NodeController {
 
 	}
 
-	@PostMapping(path = { "nodes/{nodeId}/members" })
+
+	@PostMapping(path = { "{nodeId}/members" })
 	public List<User> joinNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
 		List<User> users = null;
@@ -93,22 +97,7 @@ public class NodeController {
 
 	}
 
-	@GetMapping(path = { "nodes/{nodeId}/function" })
-	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable("nodeId") int id, Principal principal) {
-		return funServ.findByNode(id);
-
-	}
-
-	@PostMapping(path = { "nodes/{nodeId}/function" })
-	public Function findFunctionById(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
-			HttpServletRequest req, HttpServletResponse res, Principal principal) {
-
-		return funServ.createFunction(nodeId, function);
-
-	}
-
-	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
+	@DeleteMapping(path = { "{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
 		Node node = nodeService.getNodeById(nodeId);
@@ -129,7 +118,7 @@ public class NodeController {
 
 	}
 
-	@GetMapping(path = { "nodes/{nodeId}/members" })
+	@GetMapping(path = { "{nodeId}/members" })
 	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable("nodeId") int nodeId, Principal principal) {
 		Node node = nodeService.getNodeById(nodeId);
@@ -137,4 +126,46 @@ public class NodeController {
 
 	}
 
+	// Function Routing //////////////////////////////////////////////////
+
+	@GetMapping(path = { "{nodeId}/function" })
+	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("nodeId") int id, Principal principal) {
+		return funServ.findByNode(id);
+
+	}
+
+	@PostMapping(path = { "{nodeId}/function" })
+	public Function findFunctionById(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+
+		return funServ.createFunction(nodeId, function);
+
+	}
+
+	@PutMapping(path = { "{nodeId}/function" })
+	public Function updateFunction(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		Function toUpdate = funServ.updateFunction(nodeId, function);
+		if (toUpdate != null) {
+			res.setStatus(201);
+		} else {
+			res.setStatus(404);
+		}
+		return toUpdate;
+
+	}
+
+	@PutMapping(path = { "{nodeId}/function/{fId}" })
+	public Function destroyFunction(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		Function toUpdate = funServ.destroyFunction(nodeId, fId);
+		if (toUpdate != null) {
+			res.setStatus(201);
+		} else {
+			res.setStatus(404);
+		}
+		return toUpdate;
+
+	}
 }

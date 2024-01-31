@@ -21,23 +21,19 @@ export class FunctionComponent implements OnInit {
   constructor(private auth: AuthService, private funServ: FunctionService){}
 
   ngOnInit(){
-    this.loadData();
+    this.loadData(1);
   }
 
   fixTimes(){
     // this.function.startTime = this.datePipe.transform(this.function.startTime, 'h:mm a')!
   }
 
-  loadData(){
-    this.funServ.getFunctions(1).subscribe(
+  loadData(nodeid: number){
+    this.funServ.getFunctions(nodeid).subscribe(
       {
         next: (functs)=>{
           this.functions = functs;
           // this.fixTimes();
-          console.log(this.functions)
-          for(let i of this.functions){
-            console.log(i)
-          }
         },
         error: (errors)=>{
           console.log(errors)

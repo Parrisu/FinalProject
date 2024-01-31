@@ -36,19 +36,6 @@ public class FunctionController {
 		return functionService.searchFunctions(searchQuery, cityName, stateAbbr, username, stack);
 	}
 
-//	@GetMapping({ "{id}/attendees" })
-//	public List<Attendee> getAttendees(@PathVariable("id") int id, 
-//			HttpServletRequest req, HttpServletResponse res,
-//			Principal principal) {
-//		
-//		return functionService.findAttendeeByFunctionId(id);
-//	}
 	
-	@GetMapping({"{fid}"})
-	public Function getFunction(@PathVariable("fid") int fid, HttpServletRequest req, HttpServletResponse res) {
-		
-		return functionService.findById(fid);
-		
-	}
 	
 }

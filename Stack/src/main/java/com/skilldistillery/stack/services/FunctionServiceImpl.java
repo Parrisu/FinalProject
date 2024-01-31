@@ -45,12 +45,12 @@ public class FunctionServiceImpl implements FunctionService {
 	public List<Function> findByNode(int id) {
 		return funRepo.findByNodeId(id);
 	}
-	
+
 	@Override
 	public Function findByFunctionIdAndNodeId(int id, int fid) {
 		return funRepo.findFunctionByIdAndNode(id, fid);
 	}
-	
+
 	@Override
 	public Function createFunction(int nodeId, Function function) {
 		Node node = nodeRepo.findById(nodeId).get();
@@ -58,7 +58,25 @@ public class FunctionServiceImpl implements FunctionService {
 		return funRepo.saveAndFlush(function);
 	}
 	
+	@Override
+	public Function updateFunction(int nodeId, Function function) {
+		Node node = nodeRepo.findById(nodeId).get();
+		function.setNode(node);
+		Function toUpdate = funRepo.findById(function.getId()).get();
+		if (toUpdate != null) {
+			toUpdate = funRepo.saveAndFlush(function);
+			return toUpdate;
+		}
+		return toUpdate;
+
+	}
 	
+	@Override
+	public Function destroyFunction(int nodeId, int fId) {
+		return null;
+		
+	}
+
 //	@Override
 //	public List<Attendee> findAttendeeByFunctionId(int id) {
 //		return attRepo.findByFunction(id);
