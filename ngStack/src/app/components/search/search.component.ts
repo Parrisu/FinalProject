@@ -9,6 +9,7 @@ import { TechnologyService } from '../../services/technology.service';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { FunctionService } from '../../services/function.service';
 import { SearchParams } from '../../models/search-params';
+import { Function } from '../../models/function';
 
 @Component({
   selector: 'app-search',
@@ -19,15 +20,12 @@ import { SearchParams } from '../../models/search-params';
 })
 export class SearchComponent implements OnInit {
   active = 1;
-  searchParams = new SearchParams();
   nodes: Nodes[] = [];
   users: User[] = [];
   technologies: Technology[] = [];
+  functions: Function[] = [];
 
-  query = '';
-  stack: Technology[] = [];
-  cityName = '';
-  stateAbbr = '';
+  searchParams = new SearchParams();
 
   constructor(
     private route: ActivatedRoute,
@@ -43,9 +41,7 @@ export class SearchComponent implements OnInit {
         const query = map.get('query');
         console.log(`Query: ${query}`);
         if (query && !/\s/.test(query)) {
-          this.refreshUsers();
-          this.refreshNodes();
-          this.refreshTech();
+          this.refreshAll();
         } else {
           throw new Error('must redirect to error page');
         }
@@ -53,8 +49,19 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  refreshAll() {
+    this.refreshUsers();
+    this.refreshNodes();
+    this.refreshTech();
+    this.refreshFunctions();
+  }
+
   refreshFunctions() {
-    this.funcService.searchFunctions
+    this.funcService.searchFunctions(this.searchParams).subscribe({
+      next: (funcs: Function[]) => {
+        this.functions = funcs;
+      },
+    });
   }
 
   refreshTech() {
@@ -74,7 +81,7 @@ export class SearchComponent implements OnInit {
   }
 
   refreshUsers() {
-    this.userService.searchUsers(this.query).subscribe({
+    this.userService.searchUsers(this.searchParams.searchQuery).subscribe({
       next: (users: User[]) => {
         this.users = users;
         console.log(JSON.stringify(users));

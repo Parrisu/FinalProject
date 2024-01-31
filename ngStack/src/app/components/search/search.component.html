@@ -10,25 +10,36 @@
         <li [ngbNavItem]="1">
           <button ngbNavLink>Nodes</button>
           <ng-template ngbNavContent>
-            @for (node of nodes; track $index) {
-            <div class="node entity">
-              <div class="d-flex justify-content-between">
-                <h3>{{node.name}}</h3>
-                <h3>{{node.city}}, {{node.stateAbbrev}}</h3>
+            <div class="result-set">
+              @for (node of nodes; track $index) {
+              <div class="node entity">
+                <div class="d-flex justify-content-between">
+                  <h3>{{node.name}}</h3>
+                  <h3>{{node.city}}, {{node.stateAbbrev}}</h3>
+                </div>
+                <div class="content">
+                  {{node.description}}
+                </div>
               </div>
-              <div class="content">
-                {{node.description}}
-              </div>
+              @if(node !== nodes[nodes.length-1]) {
+              <hr>
+              }
+              }
             </div>
-            @if(node !== nodes[nodes.length-1]) {
-            <hr>
-            }
-            }
           </ng-template>
         </li>
         <li [ngbNavItem]="2">
           <button ngbNavLink>Functions</button>
           <ng-template ngbNavContent>
+            <div class="result-set">
+              @for (func of functions; track $index) {
+                <div class="entity function">
+                  <div class="d-flex justify-content-between">
+                    <h3>&#64;{{func.name}}</h3>
+                  </div>
+                </div>
+              }
+            </div>
           </ng-template>
         </li>
         <li [ngbNavItem]="3">

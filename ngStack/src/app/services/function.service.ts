@@ -42,13 +42,20 @@ export class FunctionService {
     const endpoint = `${environment.baseUrl}api/functions`;
     const httpParams = new HttpParams({ fromObject: params.intoJsObject() });
     const credentials = this.auth.getCredentials();
-    const httpOptions = {
-      params: httpParams,
-      headers: new HttpHeaders({
-        Authorization: `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest',
-      }),
-    };
+    let httpOptions;
+    if (this.auth.checkLogin()) {
+      httpOptions = {
+        params: httpParams,
+        headers: new HttpHeaders({
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest',
+        }),
+      };
+    } else {
+      httpOptions = {
+        params: httpParams,
+      };
+    }
     return this.http.get<Function[]>(endpoint, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);

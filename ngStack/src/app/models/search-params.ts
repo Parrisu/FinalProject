@@ -1,15 +1,15 @@
 import { Technology } from './technology';
 
 export class SearchParams {
-  searchQuery: string | null;
-  cityName: string | null;
-  stateAbbr: string | null;
+  searchQuery: string;
+  cityName: string;
+  stateAbbr: string;
   stack: Technology[];
 
   constructor(
-    searchQuery: string | null = null,
-    cityName: string | null = null,
-    stateAbbr: string | null = null,
+    searchQuery: string = '',
+    cityName: string = '',
+    stateAbbr: string = '',
     stack: Technology[] = []
   ) {
     this.searchQuery = searchQuery;
@@ -20,22 +20,18 @@ export class SearchParams {
 
   intoJsObject(): any {
     const body: any = {};
-    if (this.isValidString(this.searchQuery)) {
+    if (!/\s*/.test(this.searchQuery)) {
       body.searchQuery = this.searchQuery;
     }
-    if (this.isValidString(this.cityName)) {
+    if (!/\s*/.test(this.cityName)) {
       body.cityName = this.cityName;
     }
-    if (this.isValidString(this.stateAbbr)) {
+    if (!/\s*/.test(this.stateAbbr)) {
       body.stateAbbr = this.stateAbbr;
     }
     if (0 < this.stack.length) {
       body.stack = this.stack.toString();
     }
     return body;
-  }
-
-  private isValidString(field: string | null): boolean {
-    return field !== null && !/\s*/.test(field);
   }
 }
