@@ -9,6 +9,7 @@ import { AccountComponent } from './components/account/account.component';
 import { SearchComponent } from './components/search/search.component';
 import { FunctionComponent } from './components/function/function.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreateFunctionFormComponent } from './components/create-function-form/create-function-form.component';
 
 export const routes: Routes = [
@@ -30,6 +31,7 @@ export const routes: Routes = [
     component: SearchComponent,
   },
   { path: 'function', title: 'Account', component: FunctionComponent },
+  { path: 'error', title: 'Error', component: ErrorPageComponent },
   { path: 'function/create', title: 'Create Function', component: CreateFunctionFormComponent },
   { path: '404', title: 'not found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full' },
