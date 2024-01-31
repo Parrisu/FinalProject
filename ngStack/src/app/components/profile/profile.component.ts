@@ -13,80 +13,76 @@ import { TechnologyService } from '../../services/technology.service';
   standalone: true,
   imports: [FormsModule, RouterLink, CommonModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
 })
 export class ProfileComponent implements OnInit {
-
   user: User = new User();
   techAdd: Technology | null = null;
   theStack: Technology[] = [];
   showStack: boolean = false;
 
-  constructor(private auth: AuthService, private userServ: UserService, private techServ: TechnologyService){}
-
-
+  constructor(
+    private auth: AuthService,
+    private userServ: UserService,
+    private techServ: TechnologyService
+  ) {}
 
   ngOnInit(): void {
-    this.loadStackInfo();
     this.reloadPage();
-
   }
 
-  popOrPushTech(user: User, tech: Technology){
-    this.userServ.addOrRemoveTech(user.id, tech).subscribe(
-      {
-        next: (user) => {
-          console.log(user)
-          this.reloadPage();
-        },
-        error: (error) => {
-          console.log(error)
-        }
-      }
-    )}
-
-  loadUserInfo(){
-    this.auth.getLoggedInUser().subscribe(
-      {
-        next: (user) => {
-          this.user = user;
-        },
-        error: (err)=> {
-          console.log(err);
-        }
-      }
-     );
+  popOrPushTech(user: User, tech: Technology) {
+    this.userServ.addOrRemoveTech(user.id, tech).subscribe({
+      next: (user) => {
+        console.log(user);
+        this.reloadPage();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
-  loadStackInfo(){
-    this.techServ.showAll().subscribe(
-      {
-        next: (techs) => {
-          this.theStack = techs;
-        },
-        error: (errors) => {
-          console.log(errors)
-        }
-      }
-    )
+  loadUserInfo() {
+    this.auth.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.user = user;
+        console.log(this.user)
+        this.loadStackInfo();
+
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
-  show(){
-    this.showStack = !this.showStack
+  loadStackInfo() {
+    this.techServ.showAll().subscribe({
+      next: (techs) => {
+        this.theStack = techs;
+        this.stackCheck();
+      },
+      error: (errors) => {
+        console.log(errors);
+      },
+    });
   }
 
-  stackCheck(){
-    for(let i = 0; i < this.user.stack.length; i++){
-      for(let j= 0; j < this.theStack.length; j++){
-        if(this.user.stack[i].id == this.theStack[j].id)
+  show() {
+    this.showStack = !this.showStack;
+  }
+
+  stackCheck() {
+    for (let i = 0; i < this.user.stack.length; i++) {
+      for (let j = 0; j < this.theStack.length; j++) {
+        if (this.user.stack[i].id == this.theStack[j].id)
           this.theStack.splice(j--, 1);
-        }
-      };
+      }
     }
+  }
 
-    reloadPage(){
-      this.loadUserInfo();
-      this.stackCheck();
-    }
-
+  reloadPage() {
+    this.loadUserInfo();
+  }
 }
