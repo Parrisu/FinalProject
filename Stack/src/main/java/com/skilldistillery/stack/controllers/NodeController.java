@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
+import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
-import com.skilldistillery.stack.repositories.FunctionRepository;
 import com.skilldistillery.stack.services.FunctionService;
 import com.skilldistillery.stack.services.NodeService;
 
@@ -37,14 +37,12 @@ public class NodeController {
 	@Autowired
 	private FunctionService funServ;
 
-	@Autowired
-	private FunctionRepository funRepo;
-
 	@GetMapping(path = { "nodes", "nodes/" })
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
 			@RequestParam(name = "cityName", required = false) String cityName,
-			@RequestParam(name = "stateAbbr", required = false) String stateAbbr) {
-		return nodeService.searchNodes(searchQuery, cityName, stateAbbr);
+			@RequestParam(name = "stateAbbr", required = false) String stateAbbr,
+			@RequestParam(name = "stack", required = false) Set<Technology> stack) {
+		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
 	@GetMapping(path = { "nodes/{id}" })
@@ -99,6 +97,14 @@ public class NodeController {
 	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable("nodeId") int id, Principal principal) {
 		return funServ.findByNode(id);
+
+	}
+
+	@PostMapping(path = { "nodes/{nodeId}/function" })
+	public Function findFunctionById(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+
+		return funServ.createFunction(nodeId, function);
 
 	}
 

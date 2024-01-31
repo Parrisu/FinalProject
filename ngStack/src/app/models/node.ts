@@ -4,10 +4,8 @@ export class Nodes {
   openToPublic: boolean;
   description: string;
   imageUrl: string;
-
   city: string;
   stateAbbreviation: string;
-
 
   constructor(
     id: number = 0,
