@@ -39,6 +39,31 @@ export class FunctionService {
       })
     );
   }
+  disableFunction(nId: number, fid: number): Observable<Function> {
+    const endpoint = `${this.baseUrl}/${nId}/function/${fid}`;
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (this.auth.checkLogin()) {
+      httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest',
+        }),
+      };
+    }
+    return this.http.delete<Function>(endpoint, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+                FunctionService.getFunctions(id: number): Observable<Function[]>;
+                Error while attempting GET to ${endpoint}.
+              `)
+        );
+      })
+    );
+  }
   getFunctionDetails(nodeId: number, id: number): Observable<Function> {
     const endpoint = `${this.baseUrl}/${nodeId}/function/${id}`;
     const credentials = this.auth.getCredentials();

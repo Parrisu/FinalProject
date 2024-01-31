@@ -49,5 +49,18 @@ export class FunctionComponent implements OnInit {
     this.router.navigateByUrl("nodes/" + this.nodeId + "/function/create")
   }
 
+  disableFunction(){
+    this.funServ.disableFunction(this.nodeId, this.fId).subscribe(
+      {
+        next: (funct)=>{
+          this.router.navigateByUrl("nodes/"+this.nodeId)
+        },
+        error: (errors)=>{
+          console.log(errors)
+        }
+      }
+    )
+  }
+
 
 }

@@ -187,4 +187,20 @@ public class NodeController {
 		}
 		return toUpdate;
 	}
+	
+	// ATTENDEES MAPPING //////////////////////////////
+	
+	@GetMapping(path = { "{nodeId}/function/{fId}/attendees" })
+	public Function getFunctionAttendees(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		Function found = funServ.findByFunctionIdAndNodeId(nodeId, fId);
+		
+		if (found != null) {
+			res.setStatus(200);
+		} else {
+			res.setStatus(404);
+		}
+		return found;
+		
+	}
 }
