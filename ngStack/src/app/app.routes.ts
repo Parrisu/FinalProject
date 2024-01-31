@@ -6,6 +6,7 @@ import { NodeComponent } from './components/node/node.component';
 import { TechnologyComponent } from './components/technology/technology.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 export const routes: Routes = [
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'technologies', title: 'Technologies', component: TechnologyComponent },
   { path: 'profile', title: 'Profile', component: ProfileComponent },
   { path: 'account', title: 'Account', component: AccountComponent },
+  { path: 'search', title: 'Search Page', component: SearchComponent},
 ];

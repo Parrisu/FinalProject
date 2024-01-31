@@ -26,7 +26,7 @@ export class User {
     lastName: string = '',
     profileImageUrl: string | null = null,
     aboutMe: string | null = null,
-    address: Address | null = null
+    address: Address | null = null,
     stack: Technology[] = [],
   ) {
     this.id = id;
