@@ -1,6 +1,6 @@
 import { Technology } from './technology';
 
-export class FunctionSearchParams {
+export class SearchParams {
   searchQuery: string | null;
   cityName: string | null;
   stateAbbr: string | null;

@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Nodes } from '../models/node';
 import { AuthService } from './auth.service';
-import { NodeSearchParams } from '../models/node-search-params';
+import { SearchParams } from '../models/search-params';
 
 @Injectable({
   providedIn: 'root',
@@ -70,7 +70,7 @@ export class NodeService {
     );
   }
 
-  public searchNodes(params: NodeSearchParams): Observable<Nodes[]> {
+  public searchNodes(params: SearchParams): Observable<Nodes[]> {
     const endpoint = this.url;
     const httpParams = new HttpParams({ fromObject: params.intoJsObject() });
     return this.http.get<Nodes[]>(endpoint, { params: httpParams }).pipe(
