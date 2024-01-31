@@ -10,7 +10,6 @@ import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.NodeMember;
 import com.skilldistillery.stack.entities.NodeMemberId;
 import com.skilldistillery.stack.entities.NodeRole;
-import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.repositories.NodeMemberRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
@@ -21,8 +20,10 @@ public class NodeServiceImpl implements NodeService {
 
 	@Autowired
 	private NodeRepository nodeRepo;
+	
 	@Autowired
 	private NodeMemberRepository nodeMemberRepo;
+	
 	@Autowired
 	private UserRepository userRepo;
 
