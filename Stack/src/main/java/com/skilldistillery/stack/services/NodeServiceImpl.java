@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +103,12 @@ public class NodeServiceImpl implements NodeService {
 			return null;
 		}
 		return users;
+	}
+
+	@Override
+	public Optional<Node> findById(int id) {
+		Optional<Node> node = nodeRepo.findById(id);
+		return node;
 	}
 
 }

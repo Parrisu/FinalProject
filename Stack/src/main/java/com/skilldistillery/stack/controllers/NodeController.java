@@ -2,6 +2,7 @@ package com.skilldistillery.stack.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
-import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.repositories.FunctionRepository;
 import com.skilldistillery.stack.services.FunctionService;
 import com.skilldistillery.stack.services.NodeService;
 
@@ -35,6 +36,9 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
+	
+	@Autowired
+	private FunctionRepository funRepo;
 
 	@GetMapping(path = { "nodes", "nodes/" })
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
@@ -44,12 +48,12 @@ public class NodeController {
 		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
-	@GetMapping(path = { "nodes/{name}" })
-	public List<Node> findByName(HttpServletRequest req, HttpServletResponse res, @PathVariable("name") String name,
+	@GetMapping(path = { "nodes/{id}" })
+	public Optional<Node> findByName(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
 			Principal principal) {
 
-		List<Node> nodes = nodeService.findByNameContaining(name);
-		return nodes;
+		Optional<Node> node = nodeService.findById(id);
+		return node;
 
 	}
 
