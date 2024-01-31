@@ -1,12 +1,16 @@
 package com.skilldistillery.stack.entities;
 
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -19,8 +23,20 @@ public class Address {
 	@Column(name = "zip_code")
 	private String zipCode;
 
+	@Column(name = "state_abbreviation")
+	private String stateAbbreviation;
+
+	private String city;
+
+	@OneToMany(mappedBy = "address")
+	@JsonIgnore
+	private List<User> users;
+
+	@OneToMany(mappedBy = "address")
+	@JsonIgnore
+	private List<Function> functions;
+
 	public Address() {
-		super();
 	}
 
 	public int getId() {
@@ -47,6 +63,40 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public List<Function> getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(List<Function> functions) {
+		this.functions = functions;
+	}
+
+	public String getStateAbbreviation() {
+		return stateAbbreviation;
+	}
+
+	public void setStateAbbreviation(String stateAbbreviation) {
+		this.stateAbbreviation = stateAbbreviation;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -66,7 +116,10 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + "]";
+
+		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city
+				+ ", stateAbbreviation=" + stateAbbreviation + "]";
+
 	}
 
 }

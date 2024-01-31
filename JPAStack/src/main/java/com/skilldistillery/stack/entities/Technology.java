@@ -3,6 +3,8 @@ package com.skilldistillery.stack.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class Technology {
 	private String description;
 
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "technology_id"), inverseJoinColumns = @JoinColumn(name = "node_id"))
 	private List<Node> nodes;
 

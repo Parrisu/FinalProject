@@ -4,6 +4,22 @@
 	
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
+	<class>com.skilldistillery.stack.entities.Address</class>
+	<class>com.skilldistillery.stack.entities.Article</class>
+	<class>com.skilldistillery.stack.entities.ArticleComment</class>
+	<class>com.skilldistillery.stack.entities.City</class>
+	<class>com.skilldistillery.stack.entities.Message</class>
+	<class>com.skilldistillery.stack.entities.Function</class>
+	<class>com.skilldistillery.stack.entities.FunctionComment</class>
+	<class>com.skilldistillery.stack.entities.FunctionImage</class>
+	<class>com.skilldistillery.stack.entities.Node</class>
+	<class>com.skilldistillery.stack.entities.NodeMember</class>
+	<class>com.skilldistillery.stack.entities.NodeMemberId</class>
+	<class>com.skilldistillery.stack.entities.NodeResource</class>
+	<class>com.skilldistillery.stack.entities.NodeRole</class>
+	<class>com.skilldistillery.stack.entities.Notification</class>
+	<class>com.skilldistillery.stack.entities.ProfileLink</class>
+	<class>com.skilldistillery.stack.entities.Technology</class>
 	<class>com.skilldistillery.stack.entities.User</class>
 
     <properties>

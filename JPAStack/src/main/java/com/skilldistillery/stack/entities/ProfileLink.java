@@ -2,6 +2,8 @@ package com.skilldistillery.stack.entities;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class ProfileLink {
 	private String name;
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -62,10 +65,6 @@ public class ProfileLink {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "ProfileLink [id=" + id + ", url=" + url + ", name=" + name + "]";
-	}
 
 	@Override
 	public int hashCode() {
@@ -82,6 +81,11 @@ public class ProfileLink {
 			return false;
 		ProfileLink other = (ProfileLink) obj;
 		return id == other.id;
+	}
+
+	@Override
+	public String toString() {
+		return "ProfileLink [id=" + id + ", url=" + url + ", name=" + name + "]";
 	}
 
 }

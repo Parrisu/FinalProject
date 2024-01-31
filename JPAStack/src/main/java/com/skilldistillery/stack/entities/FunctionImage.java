@@ -2,24 +2,31 @@ package com.skilldistillery.stack.entities;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
-public class City {
+@Table(name = "function_image")
+public class FunctionImage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String name;
+	@Column(name = "image_url")
+	private String imgUrl;
 
-	private String state;
+	@ManyToOne
+	@JoinColumn(name = "function_id")
+	private Function function;
 
-	public City() {
-		super();
+	public FunctionImage() {
 	}
 
 	public int getId() {
@@ -30,20 +37,20 @@ public class City {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
-	public String getState() {
-		return state;
+	public Function getFunction() {
+		return function;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setFunction(Function function) {
+		this.function = function;
 	}
 
 	@Override
@@ -59,13 +66,13 @@ public class City {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		City other = (City) obj;
+		FunctionImage other = (FunctionImage) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", name=" + name + ", state=" + state + "]";
+		return "FunctionImage [id=" + id + ", imgUrl=" + imgUrl + "]";
 	}
 
 }

@@ -43,11 +43,6 @@ public class NodeMemberId implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "NodeMemberId [nodeId=" + nodeId + ", userId=" + userId + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		return Objects.hash(nodeId, userId);
 	}
@@ -63,7 +58,10 @@ public class NodeMemberId implements Serializable {
 		NodeMemberId other = (NodeMemberId) obj;
 		return nodeId == other.nodeId && userId == other.userId;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "NodeMemberId [nodeId=" + nodeId + ", userId=" + userId + "]";
+	}
 
 }

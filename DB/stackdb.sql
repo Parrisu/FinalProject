@@ -134,7 +134,6 @@ CREATE TABLE IF NOT EXISTS `node` (
   `image_url` VARCHAR(2000) NULL,
   `enabled` TINYINT NOT NULL,
   `city` VARCHAR(200) NULL,
-  `nodecol` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_sub_stack_user_profile1_idx` (`user_id` ASC),
   CONSTRAINT `fk_sub_stack_user_profile1`

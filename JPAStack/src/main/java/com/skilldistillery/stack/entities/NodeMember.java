@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,15 +20,25 @@ public class NodeMember {
 	@EmbeddedId
 	private NodeMemberId id;
 
-	private Boolean approved;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@MapsId(value = "userId")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "node_id")
+	@MapsId(value = "nodeId")
+	private Node node;
+
+	private boolean approved;
 
 	@Column(name = "date_joined")
 	@CreationTimestamp
 	private LocalDateTime dateJoined;
 
-	@Column(name = "date_approved")
-	@UpdateTimestamp
-	private LocalDateTime dateApproved;
+	@ManyToOne
+	@JoinColumn(name = "node_role_id")
+	private NodeRole nodeRole;
 
 	public NodeMember() {
 		super();
@@ -40,11 +52,11 @@ public class NodeMember {
 		this.id = id;
 	}
 
-	public Boolean getApproved() {
+	public boolean isApproved() {
 		return approved;
 	}
 
-	public void setApproved(Boolean approved) {
+	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
 
@@ -56,12 +68,28 @@ public class NodeMember {
 		this.dateJoined = dateJoined;
 	}
 
-	public LocalDateTime getDateApproved() {
-		return dateApproved;
+	public User getUser() {
+		return user;
 	}
 
-	public void setDateApproved(LocalDateTime dateApproved) {
-		this.dateApproved = dateApproved;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Node getNode() {
+		return node;
+	}
+
+	public void setNode(Node node) {
+		this.node = node;
+	}
+
+	public NodeRole getNodeRole() {
+		return nodeRole;
+	}
+
+	public void setNodeRole(NodeRole nodeRole) {
+		this.nodeRole = nodeRole;
 	}
 
 	@Override
@@ -79,6 +107,11 @@ public class NodeMember {
 			return false;
 		NodeMember other = (NodeMember) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "NodeMember [id=" + id + ", approved=" + approved + ", dateJoined=" + dateJoined + "]";
 	}
 
 }
