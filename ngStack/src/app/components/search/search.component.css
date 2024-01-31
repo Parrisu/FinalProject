@@ -1,0 +1,26 @@
+#search-wrap {
+  margin: 0;
+  margin-top: 5vh;
+  width: 100%;
+}
+
+.results {
+  padding: 1rem;
+  box-shadow: 0 0.1rem 0.2rem 0.1rem rgba(1, 1, 1, 0.2);
+  border-radius: 0.2rem;
+  min-height: 60vh;
+}
+
+.entity {
+  padding: 1rem;
+  padding-inline: 1.5rem;
+}
+.entity * {
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  margin: 0.2rem !important;
+  margin-inline: 1rem !important;
+}
