@@ -4,7 +4,7 @@
 }
 
 .group-body {
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .function {
@@ -17,4 +17,16 @@
 
 .vertical-space {
   width: 1rem;
+}
+
+.node-members {
+  padding: 1rem;
+  background-color: rgba(1, 1, 1, 0.02);
+  box-shadow: 0 0 0.2rem 0.1rem rgba(1, 1, 1, 0.2);
+}
+
+.group-header {
+  padding: 1.3rem;
+  background-color: rgba(1, 1, 1, 0.02);
+  box-shadow: 0 0 0.2rem 0.1rem rgba(1, 1, 1, 0.2);
 }

@@ -88,6 +88,7 @@ export class UserService {
       })
     );
   }
+
   destroy(id: number) {
     const endpoint = `${this.baseUrl}/account/${id}`;
     const credentials = this.auth.getCredentials();
