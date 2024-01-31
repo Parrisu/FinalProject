@@ -21,6 +21,6 @@ public interface NodeService {
 
 	public boolean leaveNode(String username, Node node);
 
-	Set<Node> searchNodes(String searchQuery, String city, String stateAbbr, Set<Technology> stack);
+	Set<Node> searchNodes(String searchQuery, String city, String stateAbbr);
 
 }

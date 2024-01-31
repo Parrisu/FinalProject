@@ -88,9 +88,8 @@ public class NodeServiceImpl implements NodeService {
 	}
 
 	@Override
-	public Set<Node> searchNodes(String searchQuery, String city, String stateAbbr, Set<Technology> stack) {
-		stack = (stack != null && stack.isEmpty()) ? null : stack;
-		return nodeRepo.searchNodes(searchQuery, city, stateAbbr, stack);
+	public Set<Node> searchNodes(String searchQuery, String city, String stateAbbr) {
+		return nodeRepo.searchNodes(searchQuery, city, stateAbbr);
 	}
 
 }

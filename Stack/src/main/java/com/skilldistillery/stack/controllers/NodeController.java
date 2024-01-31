@@ -38,10 +38,9 @@ public class NodeController {
 
 	@GetMapping(path = { "nodes", "nodes/" })
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
-			@RequestParam(name = "city", required = false) String city,
-			@RequestParam(name = "stateAbbr", required = false) String stateAbbr,
-			@RequestParam(name = "stack", required = false) Set<Technology> stack) {
-		return nodeService.searchNodes(null, null, null, null);
+			@RequestParam(name = "cityName", required = false) String cityName,
+			@RequestParam(name = "stateAbbr", required = false) String stateAbbr) {
+		return nodeService.searchNodes(searchQuery, cityName, stateAbbr);
 	}
 
 	@GetMapping(path = { "nodes/{name}" })

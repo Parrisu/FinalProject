@@ -32,19 +32,7 @@ public interface NodeRepository extends JpaRepository<Node, Integer> {
 			    :stateAbbr IS NULL
 			    OR node.stateAbbreviation LIKE %:stateAbbr%
 			  )
-			  AND (
-			    :stack IS NULL
-			    OR EXISTS (
-			      SELECT
-			        t
-			      FROM
-			        Technology t
-			      WHERE
-			        t MEMBER OF node.stack
-			        AND t IN (:stack)
-			    )
-			  )
 			""")
 	Set<Node> searchNodes(@Param("searchQuery") String searchQuery, @Param("city") String city,
-			@Param("stateAbbr") String stateAbbr, @Param("stack") Set<Technology> stack);
+			@Param("stateAbbr") String stateAbbr);
 }
