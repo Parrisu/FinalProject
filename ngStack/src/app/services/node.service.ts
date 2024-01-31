@@ -26,6 +26,22 @@ export class NodeService {
     return options;
   }
 
+  public getAllUsersInNode(nodeId: number): Observable<User[]> {
+    const endpoint = `${this.url}/${nodeId}/members`;
+    return this.http.get<User[]>(endpoint).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+            NodeService.getAllUsersInNode(nodeId: number): Observable<User[]>;
+            Error while getting users in a node ${err}
+            `)
+        );
+      })
+    );
+  }
+
   public showAll(): Observable<Nodes[]> {
     return this.http.get<Nodes[]>(this.url).pipe(
       catchError((err: any) => {
