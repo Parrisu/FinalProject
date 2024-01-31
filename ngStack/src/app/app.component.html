@@ -32,18 +32,21 @@
               Up</a>
           </li>
           } @else {
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="'profile'" (click)="isMenuCollapsed = true">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="'home'" (click)="auth.logout()" (click)="isMenuCollapsed = true">Log
-                Out</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'profile'" (click)="isMenuCollapsed = true">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'home'" (click)="auth.logout()" (click)="isMenuCollapsed = true">Log
+              Out</a>
+          </li>
           }
         </ul>
       </div>
     </div>
   </nav>
-  <div id="content-wrap"> <router-outlet></router-outlet></div>
+  <div id="content-wrap">
+    <app-popup-display></app-popup-display>
+    <router-outlet></router-outlet>
+  </div>
   <footer id="footer"></footer>
 </div>

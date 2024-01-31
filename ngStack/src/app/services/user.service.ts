@@ -14,8 +14,8 @@ export class UserService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  setUserAddress(userId: number, address: Address): Observable<Address> {
-    const endpoint = `${this.baseUrl}/${userId}/address`;
+  setUserAddress(address: Address): Observable<Address> {
+    const endpoint = `${this.baseUrl}/address`;
     const credentials = this.auth.getCredentials();
     const body = address.intoJsObject();
     return this.http

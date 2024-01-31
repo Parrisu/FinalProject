@@ -17,16 +17,19 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler({ InvalidEntityException.class })
 	public Map<String, String> handleInvalidEntityException(HttpServletResponse res, InvalidEntityException ex) {
 		res.setStatus(400);
+		ex.printStackTrace();
 		return ex.getErrors();
 	}
 
 	@ExceptionHandler({ AuthException.class })
 	public void handleAuthException(HttpServletResponse res, AuthException ex) {
+		ex.printStackTrace();
 		res.setStatus(401);
 	}
 
-	@ExceptionHandler({EntityDoesNotExistException.class})
+	@ExceptionHandler({ EntityDoesNotExistException.class })
 	public String handleAuthException(HttpServletResponse res, EntityDoesNotExistException ex) {
+		ex.printStackTrace();
 		res.setStatus(404);
 		return ex.getLocalizedMessage();
 	}
