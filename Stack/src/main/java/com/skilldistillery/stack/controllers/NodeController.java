@@ -36,7 +36,7 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
-	
+
 	@Autowired
 	private FunctionRepository funRepo;
 
@@ -135,5 +135,12 @@ public class NodeController {
 		return nodeService.findUserInNodeGroup(node);
 
 	}
+
+//	@GetMapping(path = { "nodes/{nodeId}" })
+//	public Optional<Node> findNodeById(HttpServletRequest req, HttpServletResponse res,
+//			@PathVariable("nodeId") int nodeId, Principal principal){
+//		Optional<Node> node = Optional.of(nodeService.getNodeById(nodeId));
+//			return node;
+//	}
 
 }

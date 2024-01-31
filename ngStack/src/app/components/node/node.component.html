@@ -1,7 +1,9 @@
+
+<div *ngIf="!selected">
 <p>Current Nodes</p>
 <form name="SelectedNode">
-
 </form>
+</div>
 
 <form name="Display all nodes" *ngIf="!selected">
   <div *ngFor="let node of nodes">
