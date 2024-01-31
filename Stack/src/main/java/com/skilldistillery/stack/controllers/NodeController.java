@@ -37,8 +37,7 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
-	
-	
+
 	// Node Routing //////////////////////////////////////////////////
 
 	@GetMapping
@@ -115,7 +114,15 @@ public class NodeController {
 		}
 
 	}
-	
+
+	@GetMapping(path = { "{nodeId}/members" })
+	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("nodeId") int nodeId, Principal principal) {
+		Node node = nodeService.getNodeById(nodeId);
+		return nodeService.findUserInNodeGroup(node);
+
+	}
+
 	// Function Routing //////////////////////////////////////////////////
 
 	@GetMapping(path = { "{nodeId}/function" })
@@ -132,27 +139,31 @@ public class NodeController {
 		return funServ.createFunction(nodeId, function);
 
 	}
-	
+
 	@PutMapping(path = { "{nodeId}/function" })
 	public Function updateFunction(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		Function toUpdate = funServ.updateFunction(nodeId, function);
-		if(toUpdate != null) {
+		if (toUpdate != null) {
+			res.setStatus(201);
+		} else {
+			res.setStatus(404);
+		}
+		return toUpdate;
+
+	}
+	
+	@PutMapping(path = { "{nodeId}/function/{fId}" })
+	public Function destroyFunction(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		Function toUpdate = funServ.destroyFunction(nodeId, fId);
+		if (toUpdate != null) {
 			res.setStatus(201);
 		} else {
 			res.setStatus(404);
 		}
 		return toUpdate;
 		
-	}
-
-
-	@GetMapping(path = { "{nodeId}/members" })
-	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable("nodeId") int nodeId, Principal principal) {
-		Node node = nodeService.getNodeById(nodeId);
-		return nodeService.findUserInNodeGroup(node);
-
 	}
 
 }

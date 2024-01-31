@@ -22,6 +22,8 @@ public interface FunctionService {
 	
 	Function updateFunction(int nodeId, Function function);
 	
+	Function destroyFunction(int nodeId, int fId);
+	
 //	List<Attendee> findAttendeeByFunctionId(int id);
 
 }

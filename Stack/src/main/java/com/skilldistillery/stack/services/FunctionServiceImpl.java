@@ -70,6 +70,12 @@ public class FunctionServiceImpl implements FunctionService {
 		return toUpdate;
 
 	}
+	
+	@Override
+	public Function destroyFunction(int nodeId, int fId) {
+		return null;
+		
+	}
 
 //	@Override
 //	public List<Attendee> findAttendeeByFunctionId(int id) {
