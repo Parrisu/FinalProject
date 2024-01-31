@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.Function;
-<<<<<<< HEAD
 import com.skilldistillery.stack.entities.Node;
-=======
 import com.skilldistillery.stack.entities.Technology;
->>>>>>> 9b47cece3f5225f0229f08ed36c09532aadfba9e
 import com.skilldistillery.stack.repositories.FunctionRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
 
