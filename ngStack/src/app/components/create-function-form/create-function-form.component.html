@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-8">
+      <div class="shadow card my-5">
+        <div class="card-header">
+          New Function
+        </div>
+        <div class="card-body">
+          <form name="createNewFunction">
+            <input type="hidden" name="user" [(ngModel)]="function.user" value="{{currentUser}}">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" name="name" [(ngModel)]="function.name" placeholder="Library Meet">
+            <label for="date">Date</label>
+            <input class="form-control" type="date" name="date" [(ngModel)]="function.date">
+            <label for="start">Start Time</label>
+            <input class="form-control" type="time" name="start" [(ngModel)]="function.start">
+            <label for="end">End Time</label>
+            <input class="form-control" type="time" name="end" [(ngModel)]="function.end">
+            <label for="cap">Max Attendees</label>
+            <input class="form-control" type="number" name="cap" [(ngModel)]="function.cap">
+            <br>
+            <p class="text-center">Location</p>
+            <label for="address">Street</label>
+            <input class="form-control" type="text" name="street" [(ngModel)]="function.address.street" placeholder="123 Street">
+            <label for="city">City</label>
+            <input class="form-control" type="text" name="city" [(ngModel)]="function.address.city" placeholder="Denver">
+            <label for="stateAbbreviation">State</label>
+            <input class="form-control" type="text" name="stateAbbreviation" [(ngModel)]="function.address.stateAbbreviation" placeholder="CO">
+            <button class="btn btn-primary my-2" (click)="addEvent(function)">Add Function</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

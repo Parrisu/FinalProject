@@ -71,4 +71,33 @@ export class FunctionService {
       })
     );
   }
+
+  createFunction(id:number, newFunction: Function): Observable<Function> {
+    const endpoint = `${environment.baseUrl}api/nodes/${id}functions`;
+    const credentials = this.auth.getCredentials();
+    let httpOptions;
+    if (this.auth.checkLogin()) {
+      httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest',
+        }),
+      };
+    } else {
+      httpOptions = {
+      };
+    }
+    return this.http.post<Function>(endpoint, newFunction, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+                FunctionService.searchFunctions(params: FunctionSearchParams): Observable<Function[]>;
+                Error while attempting GET to ${endpoint}.
+              `)
+        );
+      })
+    );
+  }
 }
