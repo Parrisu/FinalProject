@@ -47,7 +47,7 @@ class FunctionImageTest {
 	@Test
 	void test_FunctionImage_entity_mapping() {
 		assertNotNull(functionImage);
-		assertEquals("123.image", functionImage.getImgUrl());
+		assertEquals("https://res.cloudinary.com/practicaldev/image/fetch/s--X9Y_p5lV--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/ums3t6d9mjrwdau8zr2i.png", functionImage.getImgUrl());
 		
 	}
 	

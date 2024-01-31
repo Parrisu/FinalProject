@@ -11,5 +11,11 @@ public interface FunctionService {
 	Function findById(int functionId);
 
 	List<Function> findByNode(int id);
+	
+	Function findByFunctionIdAndNodeId(int id, int fid);
+	
+	Function createFunction(int nodeId, Function function);
+	
+//	List<Attendee> findAttendeeByFunctionId(int id);
 
 }

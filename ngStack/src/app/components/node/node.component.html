@@ -1,7 +1,7 @@
 <p>node works! </p>
 <form name="SelectedNode">
   <input [(ngModel)]="nodeName" type="text" name="search"/>
-  <button (click)="findNodesByName(nodeName)" >Search for Node</button>
+  <button >Search for Node</button>
 </form>
 
 <form name="Display all nodes" *ngIf="!searching">
@@ -9,3 +9,4 @@
 <h2>{{node.name}}</h2>
 </div>
 </form>
+
