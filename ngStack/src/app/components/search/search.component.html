@@ -1,8 +1,53 @@
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <h3>Search results for: '{{searchParams.searchQuery}}'</h3>
+  </div>
+  <div class="col-3"></div>
+</div>
 <div id="search-wrap" class="row">
   <div class="col-2"></div>
   <div class="col-3">
     <div class="controls">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">City</div>
+        </div>
+        <input type="text" class="form-control" name="cityNameControl" id="cityNameControl" placeholder="All"
+          [(ngModel)]="searchParams.cityName" (ngModelChange)="refreshAll()">
+      </div>
+      <br>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">State</div>
+        </div>
+        <input type="text" class="form-control" name="cityNameControl" id="cityNameControl" placeholder="All"
+          [(ngModel)]="searchParams.stateAbbr" (ngModelChange)="refreshAll()">
+      </div>
+      @if (0 < searchParams.stack.length) { <hr>
+        <h5 class="stack-header">Filtering Stack: </h5>
+        <div class="stack d-inline-block">
+          @for (tech of searchParams.stack; track $index) {
+          <div class="tech" (click)="popFromStack(tech)">
+            <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+            <div class="tech-name">{{tech.name}}</div>
+          </div>
+          }
+        </div>
+        }
+        @if (0 < technologies.length) { <hr>
+          <h5 class="stack-header">Technologies: </h5>
+          <div class="stack d-inline-block">
+            @for (tech of technologies; track $index) {
+            <div class="tech" (click)="pushToStack(tech)">
+              <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+              <div class="tech-name">{{tech.name}}</div>
+            </div>
+            }
+          </div>
+          }
     </div>
+
   </div>
   <div class="col-5">
     <div class="results">
