@@ -14,14 +14,13 @@ import com.skilldistillery.stack.repositories.NodeRepository;
 public class FunctionServiceImpl implements FunctionService {
 
 	@Autowired
-	private FunctionRepository funcRepo;
+	private FunctionRepository funRepo;
 
 	@Override
 	public Set<Function> getAll(String searchQuery, String username) {
-		return funcRepo.getAll(searchQuery, username);
+		return funRepo.getAll(searchQuery, username);
 	}
-
-	FunctionRepository funRepo;
+	
 
 	@Autowired
 	NodeRepository nodeRepo;

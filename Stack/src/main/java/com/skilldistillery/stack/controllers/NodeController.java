@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
-import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.repositories.FunctionRepository;
 import com.skilldistillery.stack.services.FunctionService;
 import com.skilldistillery.stack.services.NodeService;
 
@@ -35,6 +35,9 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
+	
+	@Autowired
+	private FunctionRepository funRepo;
 
 	@GetMapping(path = { "nodes", "nodes/" })
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
