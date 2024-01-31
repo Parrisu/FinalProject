@@ -58,12 +58,12 @@ export class SearchComponent implements OnInit {
   }
 
   test() {
-
+    console.log('change made to params');
   }
 
   refreshAll() {
-    this.refreshUsers();
     this.refreshNodes();
+    this.refreshUsers();
     this.refreshFunctions();
   }
 

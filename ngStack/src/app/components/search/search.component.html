@@ -14,7 +14,7 @@
           <div class="input-group-text">City</div>
         </div>
         <input type="text" class="form-control" name="cityNameControl" id="cityNameControl" placeholder="All"
-          [(ngModel)]="searchParams.cityName" (ngModelChange)="refreshAll()">
+          [(ngModel)]="searchParams.cityName" (ngModelChange)="refreshAll()" (ngModelChange)="test()">
       </div>
       <br>
       <div class="input-group">
