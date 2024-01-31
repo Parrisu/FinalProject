@@ -73,7 +73,7 @@ export class NodeService {
 
   public joinNode(nodeId: number): Observable<User[]> {
     const endpoint = this.url + '/' + nodeId + '/members';
-    return this.http.post<User[]>(this.url, {}, this.getHttpOptions()).pipe(
+    return this.http.post<User[]>(endpoint, {}, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

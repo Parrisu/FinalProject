@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 import { User } from '../../models/user';
 import { Nodes } from '../../models/node';
 import { UserService } from '../../services/user.service';
@@ -16,7 +16,7 @@ import { NotInPipe } from '../../pipes/not-in.pipe';
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [NgbNavModule, FormsModule, NotInPipe],
+  imports: [NgbNavModule, FormsModule, NotInPipe, RouterLink],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
 })
@@ -57,13 +57,9 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  test() {
-
-  }
-
   refreshAll() {
-    this.refreshUsers();
     this.refreshNodes();
+    this.refreshUsers();
     this.refreshFunctions();
   }
 
