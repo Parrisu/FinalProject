@@ -38,11 +38,9 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-	
 	private String city;
 	@Column(name = "state_abbreviation")
 	private String stateAbbreviation;
-	
 
 	private String description;
 
@@ -57,12 +55,11 @@ public class Node {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	private boolean enabled;
-	
+
 	@OneToMany(mappedBy = "node")
 	private List<NodeMember> nodeMembers;
-	 
 
 	public Node() {
 		super();
@@ -84,7 +81,6 @@ public class Node {
 		this.name = name;
 	}
 
-
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
@@ -100,7 +96,6 @@ public class Node {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
-
 
 	public String getCity() {
 		return city;
