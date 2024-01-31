@@ -21,6 +21,8 @@ public interface NodeService {
 
 	public boolean leaveNode(String username, Node node);
 
+	public List<User> findUserInNodeGroup(Node node);
+
 	Set<Node> searchNodes(String searchQuery, String city, String stateAbbr);
 
 }

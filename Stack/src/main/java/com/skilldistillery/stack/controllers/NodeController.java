@@ -97,6 +97,13 @@ public class NodeController {
 		return funServ.findByNode(id);
 
 	}
+//	@GetMapping(path = { "nodes/{nodeId}/function/{Id}" })
+//	public Function findFunctionById(HttpServletRequest req, HttpServletResponse res, @PathVariable("Id") int id,
+//			Principal principal) {
+//		
+//		return funServ.findById(id);
+//		
+//	}
 
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
@@ -116,6 +123,14 @@ public class NodeController {
 			}
 
 		}
+
+	}
+
+	@GetMapping(path = { "nodes/{nodeId}/members" })
+	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("nodeId") int nodeId, Principal principal) {
+		Node node = nodeService.getNodeById(nodeId);
+		return nodeService.findUserInNodeGroup(node);
 
 	}
 }
