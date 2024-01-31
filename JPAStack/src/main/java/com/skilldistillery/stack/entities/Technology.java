@@ -1,5 +1,6 @@
 package com.skilldistillery.stack.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,10 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Technology {
+public class Technology implements Serializable {
+
+	private static final long serialVersionUID = 3257183536121644219L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

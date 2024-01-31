@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Function;
+import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.services.FunctionService;
 
 @RestController
@@ -23,9 +24,11 @@ public class FunctionController {
 
 	@GetMapping
 	public Set<Function> getAll(@RequestParam(name = "searchQuery", required = false) String searchQuery,
-			Principal principal) {
+			@RequestParam(name = "cityName", required = false) String cityName,
+			@RequestParam(name = "stateAbbr", required = false) String stateAbbr,
+			@RequestParam(name = "stack", required = false) Set<Technology> stack, Principal principal) {
 		String username = (principal == null) ? null : principal.getName();
-		return functionService.getAll(searchQuery, username);
+		return functionService.searchFunctions(searchQuery, cityName, stateAbbr, username, stack);
 	}
 
 }

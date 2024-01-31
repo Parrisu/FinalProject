@@ -15,24 +15,36 @@ public interface NodeRepository extends JpaRepository<Node, Integer> {
 
 	@Query("""
 			SELECT
-			  DISTINCT node
+			    DISTINCT node
 			FROM
-			  Node node
+			    Node node
 			WHERE
-			  node.enabled = true
-			  AND (
-			    :searchQuery IS NULL
-			    OR node.name LIKE %:searchQuery%
-			  )
-			  AND (
-			    :city IS NULL
-			    OR node.city LIKE %:city%
-			  )
-			  AND (
-			    :stateAbbr IS NULL
-			    OR node.stateAbbreviation LIKE %:stateAbbr%
-			  )
+			    node.enabled = true
+			    AND (
+			        :searchQuery IS NULL
+			        OR node.name LIKE %:searchQuery%
+			    )
+			    AND (
+			        :city IS NULL
+			        OR node.city LIKE %:city%
+			    )
+			    AND (
+			        :stateAbbr IS NULL
+			        OR node.stateAbbreviation LIKE %:stateAbbr%
+			    )
+			    AND (
+			        :stack IS NULL
+			        OR EXISTS (
+			            SELECT
+			                t
+			            FROM
+			                Technology t
+			            WHERE
+			                t MEMBER OF node.stack
+			                AND t IN :stack
+			        )
+			    )
 			""")
 	Set<Node> searchNodes(@Param("searchQuery") String searchQuery, @Param("city") String city,
-			@Param("stateAbbr") String stateAbbr);
+			@Param("stateAbbr") String stateAbbr, @Param("stack") Set<Technology> stack);
 }

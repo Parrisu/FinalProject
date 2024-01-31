@@ -4,10 +4,8 @@ export class Nodes {
   openToPublic: boolean;
   description: string;
   imageUrl: string;
-
   city: string;
   stateAbbrev: string;
-
 
   constructor(
     id: number = 0,
@@ -16,8 +14,7 @@ export class Nodes {
     description: string = '',
     imageUrl: string = '',
     city: string = '',
-  stateAbbrev: string = ''
-
+    stateAbbrev: string = ''
   ) {
     this.id = id;
     this.name = name;
@@ -26,7 +23,5 @@ export class Nodes {
     this.imageUrl = imageUrl;
     this.city = city;
     this.stateAbbrev = stateAbbrev;
-
-
   }
 }

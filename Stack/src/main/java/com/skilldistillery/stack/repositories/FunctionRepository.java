@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.skilldistillery.stack.entities.Function;
+import com.skilldistillery.stack.entities.Technology;
 
 public interface FunctionRepository extends JpaRepository<Function, Integer> {
 
@@ -22,10 +23,28 @@ public interface FunctionRepository extends JpaRepository<Function, Integer> {
 			      (:searchQuery IS NULL)
 			      OR f.name LIKE %:searchQuery%
 			    )
-			    AND 
-			      f.enabled = true
-			    AND 
-			      f.cancelled = false
+			    AND (
+			      :cityName IS NULL
+			      OR f.node.city LIKE %:cityName%
+			    )
+			    AND (
+			      :stateAbbr IS NULL
+			      OR f.node.stateAbbreviation LIKE %:stateAbbr%
+			    )
+			    AND (
+			      :stack IS NULL
+			      OR EXISTS (
+			        SELECT
+			          t
+			        FROM
+			          Technology t
+			        WHERE
+			          t MEMBER OF f.node.stack
+			          AND t IN :stack
+			      )
+			    )
+			    AND f.enabled = true
+			    AND f.cancelled = false
 			  )
 			  AND (
 			    f.node.openToPublic = true
@@ -42,10 +61,13 @@ public interface FunctionRepository extends JpaRepository<Function, Integer> {
 			      )
 			    )
 			  )
+
 			""")
-	Set<Function> getAll(@Param("searchQuery") String searchQuery, @Param("username") String username);
-	
+	Set<Function> searchFunctions(@Param("searchQuery") String searchQuery, @Param("cityName") String cityName,
+			@Param("stateAbbr") String stateAbbr, @Param("username") String username,
+			@Param("stack") Set<Technology> stack);
+
 	@Query("SELECT f from Function f WHERE f.node.id = :id")
-	  List<Function> findByNodeId(@Param("id") int id);
+	List<Function> findByNodeId(@Param("id") int id);
 
 }

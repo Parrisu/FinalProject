@@ -18,7 +18,7 @@ class FunctionRepositoryTest {
 
 	@Test
 	void test_filtering_none_returns_non_empty_list() {
-		Set<Function> functions = funcRepo.getAll(null, null);
+		Set<Function> functions = funcRepo.searchFunctions(null, null, null, null, null);
 		assertFalse(functions.isEmpty());
 	}
 
