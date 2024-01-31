@@ -29,7 +29,7 @@ public class NodeController {
 
 	@Autowired
 	private NodeService nodeService;
-	
+
 	@Autowired
 	private FunctionService funServ;
 
@@ -88,12 +88,18 @@ public class NodeController {
 	}
 
 	@GetMapping(path = { "nodes/{nodeId}/function" })
-	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int id,
-			Principal principal) {
+	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("nodeId") int id, Principal principal) {
 		return funServ.findByNode(id);
-		
-		
+
 	}
+//	@GetMapping(path = { "nodes/{nodeId}/function/{Id}" })
+//	public Function findFunctionById(HttpServletRequest req, HttpServletResponse res, @PathVariable("Id") int id,
+//			Principal principal) {
+//		
+//		return funServ.findById(id);
+//		
+//	}
 
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
@@ -105,14 +111,22 @@ public class NodeController {
 
 		} else {
 			boolean leftNode = nodeService.leaveNode(principal.getName(), node);
-			if(leftNode) {
+			if (leftNode) {
 				res.setStatus(204);
-				
+
 			} else {
 				res.setStatus(404);
 			}
-			
+
 		}
+
+	}
+
+	@GetMapping(path = { "nodes/{nodeId}/members" })
+	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("nodeId") int nodeId, Principal principal) {
+		Node node = nodeService.getNodeById(nodeId);
+		return nodeService.findUserInNodeGroup(node);
 
 	}
 }
