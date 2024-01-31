@@ -41,8 +41,8 @@ export class NodeComponent implements OnInit {
       )
     }
 
-    findNodesByName(name: string){
-      this.nodeService.findByName(name).subscribe(
+    findNodesByName(id: number){
+      this.nodeService.findById(id).subscribe(
         {
           next: (nodes) => {
             this.nodes = nodes;
