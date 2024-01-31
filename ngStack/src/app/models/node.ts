@@ -6,7 +6,6 @@ export class Nodes {
   imageUrl: string;
   city: string;
   stateAbbreviation: string;
-
   constructor(
     id: number = 0,
     name: string = '',
