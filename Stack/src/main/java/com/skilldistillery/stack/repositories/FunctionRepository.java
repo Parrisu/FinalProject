@@ -68,6 +68,9 @@ public interface FunctionRepository extends JpaRepository<Function, Integer> {
 			@Param("stack") Set<Technology> stack);
 
 	@Query("SELECT f from Function f WHERE f.node.id = :id")
-	List<Function> findByNodeId(@Param("id") int id);
+	  List<Function> findByNodeId(@Param("id") int id);
+	
+	@Query("SELECT f from Function f WHERE f.node.id = :id AND f.id = :fId")
+	Function findFunctionByIdAndNode(@Param("id") int id, @Param("fId") int fId);
 
 }

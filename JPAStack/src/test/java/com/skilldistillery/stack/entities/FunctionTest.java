@@ -73,7 +73,7 @@ class FunctionTest {
 	@Test
 	void test_Function_image_mapping() {
 		assertNotNull(function);
-		assertEquals("123.image", function.getImages().get(0).getImgUrl());
+		assertEquals("https://res.cloudinary.com/practicaldev/image/fetch/s--X9Y_p5lV--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/ums3t6d9mjrwdau8zr2i.png", function.getImages().get(0).getImgUrl());
 	}
 	
 	@Test
