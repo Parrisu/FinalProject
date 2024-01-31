@@ -1,5 +1,7 @@
 package com.skilldistillery.stack.services;
 
+import java.util.Set;
+
 import com.skilldistillery.stack.entities.Address;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
@@ -19,7 +21,9 @@ public interface UserService {
 	Address getUserAddress(int userId) throws EntityDoesNotExistException;
 
 	public boolean ReActivate(int id);
-	
+
 	User updateUserTech(int userId, Technology tech);
+
+	Set<User> getAll(String searchQuery);
 
 }

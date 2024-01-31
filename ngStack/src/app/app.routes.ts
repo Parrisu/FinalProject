@@ -6,6 +6,8 @@ import { NodeComponent } from './components/node/node.component';
 import { TechnologyComponent } from './components/technology/technology.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
+import { SearchComponent } from './components/search/search.component';
+import { FunctionComponent } from './components/function/function.component';
 
 
 export const routes: Routes = [
@@ -15,7 +17,17 @@ export const routes: Routes = [
   { path: 'signup', title: 'Sign Up Page', component: SignupComponent },
   { path: 'nodes', title: 'Nodes', component: NodeComponent },
   { path: 'nodes/:name', title: 'Sign Up Page', component: NodeComponent },
-  { path: 'technologies', title: 'Technologies', component: TechnologyComponent },
+  {
+    path: 'technologies',
+    title: 'Technologies',
+    component: TechnologyComponent,
+  },
   { path: 'profile', title: 'Profile', component: ProfileComponent },
   { path: 'account', title: 'Account', component: AccountComponent },
+  {
+    path: 'search/:query',
+    title: 'Search Page',
+    component: SearchComponent,
+  },
+  { path: 'function', title: 'Account', component: FunctionComponent },
 ];

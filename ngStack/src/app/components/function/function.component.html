@@ -1,1 +1,22 @@
-<p>function works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8">
+              <ul class="list-group list-group-flush" *ngFor="let event of functions">
+                <li class="list-group-item">{{event.name}}</li>
+                <li class="list-group-item">{{event.cap}}</li>
+                <li class="list-group-item">{{event.date | date:'shortTime'}}</li>
+              </ul>
+            </div>
+            <div class="col-auto ">
+              <img height="100px" src="https://i.imgur.com/OGFGyD3g.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
