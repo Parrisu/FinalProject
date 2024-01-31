@@ -73,7 +73,9 @@ public class FunctionServiceImpl implements FunctionService {
 	
 	@Override
 	public Function destroyFunction(int nodeId, int fId) {
-		return null;
+		Function function = funRepo.findById(fId).get();
+		function.setEnabled(!function.isEnabled());
+		return funRepo.saveAndFlush(function);
 		
 	}
 
