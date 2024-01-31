@@ -85,4 +85,14 @@ public class NodeServiceImpl implements NodeService {
 		return false;
 	}
 
+	@Override
+	public List<User> findUserInNodeGroup(Node node) {
+		List<User> users = null;
+		users = userRepo.getMembersByNodeId(node.getId());
+		if (users == null) {
+			return null;
+		}
+		return users;
+	}
+
 }
