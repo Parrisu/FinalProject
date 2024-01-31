@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-between">
         <h2>{{node.name}}</h2>
         @if (userIsMember) {
-        <button class="btn btn-primary">Create A Function</button>
+        <button class="btn btn-primary" [routerLink]="'function/create'">Create A Function</button>
         }
       </div>
       <hr>
@@ -28,9 +28,9 @@
             <div class="d-flex justify-content-between">
               <h6>date: {{function.date|date}}</h6>
               <div class="d-flex">
-                <h6>start: {{function.start|date :'h:mm a'}}</h6>
+                <h6>start: {{function.start}}</h6>
                 <div class="vertical-space"></div>
-                <h6>end: {{function.end|date :'h:mm a'}}</h6>
+                <h6>end: {{function.end}}</h6>
               </div>
             </div>
             <div>
