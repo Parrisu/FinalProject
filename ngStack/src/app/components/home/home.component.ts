@@ -17,10 +17,10 @@ export class HomeComponent implements OnInit{
 
   constructor(private nodeService: NodeService, private router: Router) {}
   ngOnInit(): void {
-    this.showAllNodes
+    this.showAllNodes();
   }
 
-  showAllNodes(nodes: Nodes[]) {
+  showAllNodes() {
     this.nodeService.showAll().subscribe({
       next: (nodeList) => {
         this.nodeList = nodeList;
