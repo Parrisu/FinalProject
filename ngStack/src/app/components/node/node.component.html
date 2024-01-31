@@ -2,8 +2,11 @@
   <div class="col-2"></div>
   <div class="col-8">
     <div class="group-header">
-      <div class="row">
+      <div class="d-flex justify-content-between">
         <h2>{{node.name}}</h2>
+        @if (userIsMember) {
+        <button class="btn btn-primary">Create A Function</button>
+        }
       </div>
       <hr>
       <div class="d-flex justify-content-between">
@@ -15,7 +18,7 @@
       </div>
     </div>
     <div class="group-body row">
-      <div class="col-8">
+      <div class="col-9">
         <div class="group-functions">
           <div *ngFor="let function of functions" class="function">
             <div class="function-header d-flex justify-content-between">
@@ -36,7 +39,19 @@
           </div>
         </div>
       </div>
-      <div class="col-4"></div>
+      <div class="col-3">
+        <div class="node-members">
+          @for(user of members; track $index){
+          <div class="member d-flex justify-content-center">
+            <i class="fa-regular fa-user mb-1 me-2"></i>
+            <h4>{{user.username}}</h4>
+          </div>
+          @if (user !== members[members.length-1]) {
+          <br>
+          }
+          }
+        </div>
+      </div>
     </div>
   </div>
   <div class="col-2"></div>

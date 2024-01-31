@@ -133,6 +133,19 @@ public class NodeController {
 	}
 
 	// Function Routing //////////////////////////////////////////////////
+	
+	@GetMapping(path = { "{nodeId}/function/{fId}" })
+	public Function getFunctionDetails(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		Function found = funServ.findByFunctionIdAndNodeId(nodeId, fId);
+		if (found != null) {
+			res.setStatus(200);
+		} else {
+			res.setStatus(404);
+		}
+		return found;
+		
+	}
 
 	@GetMapping(path = { "{nodeId}/function" })
 	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res,
