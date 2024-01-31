@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
+import { PopupDisplayComponent } from './components/popup-display/popup-display.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { AuthService } from './services/auth.service';
     NgbCollapseModule,
     RouterLink,
     FormsModule,
+    PopupDisplayComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -25,15 +27,4 @@ export class AppComponent {
 
   constructor(public auth: AuthService) {}
 
-  // tempTestDeleteMeLater(): void {
-  //   this.auth.login('admin', 'password123').subscribe({
-  //     next: (data) => {
-  //       console.log('Logged In:');
-  //       console.log(JSON.stringify(data));
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
 }

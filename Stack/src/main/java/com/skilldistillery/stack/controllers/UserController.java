@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Address;
+import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.AuthException;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
@@ -56,6 +57,24 @@ public class UserController {
 		if(user != null) {
 			try {
 				updated = userService.Update(user);
+				res.setStatus(201);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				res.setStatus(400);
+			}
+			
+		}
+		return updated;
+		
+	}
+	
+	@PostMapping(path = "account/{Id}" )
+	public User UpdateStack(@PathVariable("Id")int userId, @RequestBody Technology tech, HttpServletRequest req, HttpServletResponse res, Principal principal){
+		User updated = null;
+		if(tech != null) {
+			try {
+				updated = userService.updateUserTech(userId, tech);
 				res.setStatus(201);
 				
 			} catch (Exception e) {

@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Node {
@@ -27,7 +28,7 @@ public class Node {
 	private String name;
 
 	@Column(name = "open_to_public")
-	private Boolean openToPublic;
+	private boolean openToPublic;
 
 	@Column(name = "created_on")
 	@CreationTimestamp
@@ -37,16 +38,14 @@ public class Node {
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-
 	private String city;
+	@Column(name = "state_abbreviation")
+	private String stateAbbreviation;
 
 	private String description;
 
 	@Column(name = "image_url")
 	private String imageUrl;
-	
-	@Column(name = "state_abbreviation")
-	private String stateAbbr;
 
 	@ManyToMany
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
@@ -56,6 +55,11 @@ public class Node {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	private boolean enabled;
+
+	@OneToMany(mappedBy = "node")
+	private List<NodeMember> nodeMembers;
 
 	public Node() {
 		super();
@@ -77,14 +81,6 @@ public class Node {
 		this.name = name;
 	}
 
-	public Boolean getOpenToPublic() {
-		return openToPublic;
-	}
-
-	public void setOpenToPublic(Boolean openToPublic) {
-		this.openToPublic = openToPublic;
-	}
-
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
@@ -100,7 +96,6 @@ public class Node {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
-
 
 	public String getCity() {
 		return city;
@@ -142,12 +137,37 @@ public class Node {
 		this.user = user;
 	}
 
-	public String getStateAbbr() {
-		return stateAbbr;
+	public String getStateAbbreviation() {
+		return stateAbbreviation;
 	}
 
-	public void setStateAbbr(String stateAbbr) {
-		this.stateAbbr = stateAbbr;
+	public void setStateAbbreviation(String stateAbbreviation) {
+		this.stateAbbreviation = stateAbbreviation;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setOpenToPublic(boolean openToPublic) {
+		this.openToPublic = openToPublic;
+	}
+
+	public boolean isOpenToPublic() {
+		return openToPublic;
+
+	}
+
+	public List<NodeMember> getNodeMembers() {
+		return nodeMembers;
+	}
+
+	public void setNodeMembers(List<NodeMember> nodeMembers) {
+		this.nodeMembers = nodeMembers;
 	}
 
 	@Override
@@ -170,8 +190,10 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node [id=" + id + ", name=" + name + ", openToPublic=" + openToPublic + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + ", city=" + city + ", description=" + description + ", imageUrl="
-				+ imageUrl + ", stateAbbr=" + stateAbbr + ", stack=" + stack + ", user=" + user + "]";
+
+				+ ", updatedOn=" + updatedOn + ", city=" + city + ", stateAbbreviation=" + stateAbbreviation
+				+ ", description=" + description + ", imageUrl=" + imageUrl + "]";
+
 	}
 
 }

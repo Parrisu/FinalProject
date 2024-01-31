@@ -71,6 +71,15 @@ public class Address {
 		this.users = users;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
 	public List<Function> getFunctions() {
 		return functions;
 	}
@@ -87,13 +96,6 @@ public class Address {
 		this.stateAbbreviation = stateAbbreviation;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	@Override
 	public int hashCode() {
@@ -114,8 +116,10 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", stateAbbreviation="
-				+ stateAbbreviation + ", city=" + city + ", users=" + users + ", functions=" + functions + "]";
+
+		return "Address [id=" + id + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city
+				+ ", stateAbbreviation=" + stateAbbreviation + "]";
+
 	}
 
 }

@@ -49,7 +49,7 @@ class NodeTest {
 	@Test
 	void test_openToPublic_mapping() {
 		assertNotNull(node);
-		assertTrue(node.getOpenToPublic());
+		assertTrue(node.isOpenToPublic());
 	}
 
 	@Test
@@ -93,4 +93,10 @@ class NodeTest {
 		assertEquals(1, node.getUser().getId());
 	}
 
+	@Test
+	void test_Node_Member_mapping() {
+		assertNotNull(node);
+		assertNotNull(node.getNodeMembers());
+		assertTrue(node.getNodeMembers().size() > 0);
+	}
 }

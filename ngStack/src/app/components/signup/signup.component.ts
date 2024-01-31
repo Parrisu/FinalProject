@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
 import { Address } from '../../models/address';
 import { AddressService } from '../../services/address.service';
 
@@ -17,28 +16,19 @@ import { AddressService } from '../../services/address.service';
 export class SignupComponent {
   private navigateOnSubmission = '/login';
 
-  @ViewChild('errorField') errorField!: ElementRef<HTMLDivElement>;
+  errorFieldText = '';
 
   // --------------------------- Begin First Form Fields ---------------------------
-  @ViewChild('formError') formError!: ElementRef<HTMLDivElement>;
-  @ViewChild('usernameError') usernameError!: ElementRef<HTMLDivElement>;
-  @ViewChild('emailError') emailError!: ElementRef<HTMLDivElement>;
-  @ViewChild('passwordOneError') passwordOneError!: ElementRef<HTMLDivElement>;
-  @ViewChild('passwordTwoError') passwordTwoError!: ElementRef<HTMLDivElement>;
-  @ViewChild('firstNameError') firstNameError!: ElementRef<HTMLDivElement>;
-  @ViewChild('lastNameError') lastNameError!: ElementRef<HTMLDivElement>;
+  usernameErrorText = '';
+  emailErrorText = '';
+  passwordOneErrorText = '';
+  passwordTwoErrorText = '';
+  firstNameErrorText = '';
+  lastNameErrorText = '';
 
-  username = '';
-  email = '';
-  passwordOne = '';
   passwordTwo = '';
-  firstName = '';
-  lastName = '';
-  profileImageUrl = '';
-  aboutMe: string = '';
-  street = '';
-  zipCode = '';
   showPassword = false;
+  user = new User();
 
   // --------------------------- Begin Third Form Fields ---------------------------
   addressFormErrorText = '';
@@ -51,7 +41,6 @@ export class SignupComponent {
   constructor(
     private addressService: AddressService,
     private authService: AuthService,
-    private userService: UserService,
     private router: Router
   ) {}
 
@@ -61,7 +50,6 @@ export class SignupComponent {
 
   nextSlide(): void {
     if (this.currentSlide < this.maxSlides) this.currentSlide += 1;
-    console.log(this.username);
   }
 
   // ------------------------------ BEGIN FIRST SLIDE ------------------------------
@@ -87,54 +75,54 @@ export class SignupComponent {
   }
 
   validateUsername(): boolean {
-    let strippedUsername = this.username.replace(/\s/g, '');
+    let strippedUsername = this.user.username.replace(/\s/g, '');
     let isValid =
       strippedUsername != '' &&
-      this.username.length === strippedUsername.length;
+      this.user.username.length === strippedUsername.length;
     if (!isValid) {
-      this.usernameError.nativeElement.innerHTML = `
+      this.usernameErrorText = `
       Username must not be blank and must contain no spaces.
       `;
     } else {
-      this.usernameError.nativeElement.innerHTML = ``;
+      this.usernameErrorText = ``;
     }
     return isValid;
   }
 
   validateEmail(): boolean {
-    let isValid = /.+@.+\..+/.test(this.email.toLowerCase());
+    let isValid = /.+@.+\..+/.test(this.user.email.toLowerCase());
     if (!isValid) {
-      this.emailError.nativeElement.innerHTML = `
+      this.emailErrorText = `
       Email is not valid.
       `;
     } else {
-      this.emailError.nativeElement.innerHTML = ``;
+      this.emailErrorText = ``;
     }
     return isValid;
   }
 
   validatePassword1(): boolean {
     let isValid = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(
-      this.passwordOne
+      this.user.password
     );
     if (!isValid) {
-      this.passwordOneError.nativeElement.innerHTML = `
+      this.passwordOneErrorText = `
       Password must have no spaces, a minimum of eight characters, and have at least one letter and one number.
       `;
     } else {
-      this.passwordOneError.nativeElement.innerHTML = ``;
+      this.passwordOneErrorText = ``;
     }
     return isValid;
   }
 
   validatePassword2(): boolean {
-    let isValid = this.passwordOne === this.passwordTwo;
+    let isValid = this.user.password === this.passwordTwo;
     if (!isValid) {
-      this.passwordTwoError.nativeElement.innerHTML = `
+      this.passwordTwoErrorText = `
       Passwords must match.
       `;
     } else {
-      this.passwordTwoError.nativeElement.innerHTML = ``;
+      this.passwordTwoErrorText = ``;
     }
     return isValid;
   }
@@ -144,32 +132,30 @@ export class SignupComponent {
   // ------------------------------ BEGIN SECOND FORM  ------------------------------
   validateFirstName(): boolean {
     const isValid =
-      this.firstName.replace(/\s/g, '') != '' && this.firstName.length < 50;
+      this.user.firstName.replace(/\s/g, '') != '' &&
+      this.user.firstName.length < 50;
     if (!isValid) {
-      this.firstNameError.nativeElement.innerHTML = `
+      this.firstNameErrorText = `
       First name must not be blank.
       `;
     } else {
-      this.firstNameError.nativeElement.innerHTML = ``;
+      this.firstNameErrorText = ``;
     }
     return isValid;
   }
 
   validateLastName(): boolean {
     const isValid =
-      this.lastName.replace(/\s/g, '') != '' && this.firstName.length < 50;
+      this.user.lastName.replace(/\s/g, '') != '' &&
+      this.user.firstName.length < 50;
     if (!isValid) {
-      this.lastNameError.nativeElement.innerHTML = `
+      this.lastNameErrorText = `
     Last name must not be blank.
     `;
     } else {
-      this.lastNameError.nativeElement.innerHTML = ``;
+      this.lastNameErrorText = ``;
     }
     return isValid;
-  }
-
-  validateAddress(): boolean {
-    return true; // TEMP
   }
 
   validateSecondForm(): boolean {
@@ -185,6 +171,7 @@ export class SignupComponent {
 
   // ------------------------------ BEGIN THIRD FORM  ------------------------------
   submitThirdForm(): void {
+    this.errorFieldText = '';
     this.addressService.validateAddress(this.address).subscribe({
       next: (address: Address | null) => {
         if (address) {
@@ -206,29 +193,19 @@ export class SignupComponent {
   // ------------------------------ BEGIN GLOBAL SUBMISSION  ------------------------------
 
   submitForm(): void {
-    let user = new User();
-    user.username = this.username;
-    user.password = this.passwordOne;
-    user.email = this.email;
-    user.firstName = this.firstName;
-    user.lastName = this.lastName;
-    user.profileImageUrl = this.profileImageUrl;
-    user.aboutMe = this.aboutMe;
-
-    this.authService.register(user).subscribe({
-      next: (returnedUser: User) => this.submitAddress(user.id),
-      error: this.onSubmissionError,
-    });
-  }
-
-  submitAddress(userId: number): void {
-    this.userService.setUserAddress(userId, this.address).subscribe({
-      next: () => this.router.navigateByUrl(this.navigateOnSubmission),
+    console.log('in form submission');
+    this.user.address = this.address;
+    this.authService.register(this.user).subscribe({
+      next: () => {
+        const msg = 'You have registered as a user, please log in now.'
+        localStorage.setItem('popup-message', msg);
+        this.router.navigateByUrl(this.navigateOnSubmission);
+      },
       error: this.onSubmissionError,
     });
   }
 
   onSubmissionError(err: any): void {
-    this.errorField.nativeElement.innerHTML = `Something went wrong...`;
+    this.errorFieldText = `Something went wrong...`;
   }
 }
