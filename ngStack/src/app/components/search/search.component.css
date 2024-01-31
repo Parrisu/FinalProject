@@ -78,3 +78,7 @@
   display: flex;
   position: absolute;
 }
+
+.entity:hover {
+  cursor: pointer;
+}
