@@ -10,6 +10,7 @@ import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.NodeMember;
 import com.skilldistillery.stack.entities.NodeMemberId;
 import com.skilldistillery.stack.entities.NodeRole;
+import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.repositories.NodeMemberRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
@@ -89,8 +90,9 @@ public class NodeServiceImpl implements NodeService {
 	}
 
 	@Override
-	public Set<Node> searchNodes(String searchQuery, String city, String stateAbbr) {
-		return nodeRepo.searchNodes(searchQuery, city, stateAbbr);
+	public Set<Node> searchNodes(String searchQuery, String city, String stateAbbr, Set<Technology> stack) {
+		Set<Node> nodes = nodeRepo.searchNodes(searchQuery, city, stateAbbr, stack);
+		return nodes;
 	}
 
 	public List<User> findUserInNodeGroup(Node node) {

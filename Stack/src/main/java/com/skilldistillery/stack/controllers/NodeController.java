@@ -39,8 +39,9 @@ public class NodeController {
 	@GetMapping(path = { "nodes", "nodes/" })
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
 			@RequestParam(name = "cityName", required = false) String cityName,
-			@RequestParam(name = "stateAbbr", required = false) String stateAbbr) {
-		return nodeService.searchNodes(searchQuery, cityName, stateAbbr);
+			@RequestParam(name = "stateAbbr", required = false) String stateAbbr,
+			@RequestParam(name="stack", required = false) Set<Technology> stack) {
+		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
 	@GetMapping(path = { "nodes/{name}" })
@@ -103,7 +104,6 @@ public class NodeController {
 //		
 //	}
 
-
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
@@ -124,7 +124,6 @@ public class NodeController {
 		}
 
 	}
-
 
 	@GetMapping(path = { "nodes/{nodeId}/members" })
 	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res,
