@@ -2,6 +2,7 @@ package com.skilldistillery.stack.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +47,12 @@ public class NodeController {
 		return nodeService.searchNodes(searchQuery, cityName, stateAbbr);
 	}
 
-	@GetMapping(path = { "nodes/{name}" })
-	public List<Node> findByName(HttpServletRequest req, HttpServletResponse res, @PathVariable("name") String name,
+	@GetMapping(path = { "nodes/{id}" })
+	public Optional<Node> findByName(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
 			Principal principal) {
 
-		List<Node> nodes = nodeService.findByNameContaining(name);
-		return nodes;
+		Optional<Node> node = nodeService.findById(id);
+		return node;
 
 	}
 

@@ -42,7 +42,7 @@ export class NodeService {
     );
   }
 
-  public findByName(name: string): Observable<Nodes[]> {
+  public findById(id: number): Observable<Nodes[]> {
     return this.http.get<Nodes[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
