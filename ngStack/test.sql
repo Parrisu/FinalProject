@@ -1,31 +1,30 @@
 SELECT
-  DISTINCT f
+  DISTINCT node
 FROM
-  Function f
+  Node node
 WHERE
-  (
-    (
-      (:searchQuery IS NULL)
-      OR f.name LIKE %:searchQuery%
-    )
-    AND (
-      :enabled IS NULL
-      OR :enabled = f.enabled
-    )
-    AND (
-      :cancelled IS NULL
-      OR :cancelled = f.cancelled
-    )
+  node.enabled = true
+  AND (
+    :searchQuery IS NULL
+    OR node.name LIKE % :searchQuery %
   )
   AND (
-    f.node.openToPublic = true
-    OR (
-      :userId IS NULL
-      OR :userId IN (
-        SELECT
-          nm.user.id
-        FROM
-          node.nodeMembers nm
-      )
+    :city IS NULL
+    OR node.city LIKE % :city %
+  )
+  AND (
+    :stateAbbr IS NULL
+    OR node.stateAbbreviation LIKE % :stateAbbr %
+  )
+  AND (
+    :stack IS NULL
+    OR EXISTS (
+      SELECT
+        t
+      FROM
+        Technology t
+      WHERE
+        t MEMBER OF node.stack
+        AND t IN (:stack)
     )
   )

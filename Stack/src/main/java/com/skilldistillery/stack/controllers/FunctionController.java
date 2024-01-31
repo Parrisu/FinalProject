@@ -24,7 +24,8 @@ public class FunctionController {
 	@GetMapping
 	public Set<Function> getAll(@RequestParam(name = "searchQuery", required = false) String searchQuery,
 			Principal principal) {
-		return functionService.getAll(searchQuery, principal.getName());
+		String username = (principal == null) ? null : principal.getName();
+		return functionService.getAll(searchQuery, username);
 	}
 
 }

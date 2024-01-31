@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.NodeMember;
 import com.skilldistillery.stack.entities.NodeMemberId;
 import com.skilldistillery.stack.entities.NodeRole;
+import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.repositories.NodeMemberRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
@@ -16,7 +18,7 @@ import com.skilldistillery.stack.repositories.UserRepository;
 
 @Service
 public class NodeServiceImpl implements NodeService {
-	
+
 	@Autowired
 	private NodeRepository nodeRepo;
 	@Autowired
@@ -83,6 +85,12 @@ public class NodeServiceImpl implements NodeService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Set<Node> searchNodes(String searchQuery, String city, String stateAbbr, Set<Technology> stack) {
+		stack = (stack != null && stack.isEmpty()) ? null : stack;
+		return nodeRepo.searchNodes(searchQuery, city, stateAbbr, stack);
 	}
 
 }
