@@ -17,13 +17,15 @@ export class FunctionService {
   getFunctions(id: number): Observable<Function[]> {
     const endpoint = `${this.baseUrl}/${id}/function`;
     const credentials = this.auth.getCredentials();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest',
-      }),
-    };
-
+    let httpOptions = {};
+    if (this.auth.checkLogin()) {
+      httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest',
+        }),
+      };
+    }
     return this.http.get<Function[]>(endpoint, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
