@@ -23,6 +23,15 @@ public interface NodeRepository extends JpaRepository<Node, Integer> {
 			    AND (
 			        :searchQuery IS NULL
 			        OR node.name LIKE %:searchQuery%
+			        OR EXISTS (
+			            SELECT
+			                t
+			            FROM
+			                Technology t
+			            WHERE
+			                t MEMBER OF node.stack
+			                AND t.name LIKE %:searchQuery%
+			        )
 			    )
 			    AND (
 			        :city IS NULL
@@ -43,8 +52,7 @@ public interface NodeRepository extends JpaRepository<Node, Integer> {
 			                t MEMBER OF node.stack
 			                AND t IN :stack
 			        )
-			    )
-			""")
+			    )""")
 	Set<Node> searchNodes(@Param("searchQuery") String searchQuery, @Param("city") String city,
 			@Param("stateAbbr") String stateAbbr, @Param("stack") Set<Technology> stack);
 }

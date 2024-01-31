@@ -1,18 +1,19 @@
 import { Nodes } from './../../models/node';
 import { NodeService } from '../../services/node.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FunctionService } from '../../services/function.service';
 import { Function } from '../../models/function';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-node',
   standalone: true,
-  imports: [CommonModule, FormsModule, DatePipe],
+  imports: [CommonModule, FormsModule, DatePipe, RouterLink],
   templateUrl: './node.component.html',
   styleUrl: './node.component.css',
 })
@@ -22,10 +23,13 @@ export class NodeComponent implements OnInit {
   functions: Function[] = [];
   members: User[] = [];
   userIsMember = false;
+  userIsOwner = false;
+  closeResult = '';
 
   //constructor
   constructor(
     private auth: AuthService,
+    private modalService: NgbModal,
     private nodeService: NodeService,
     private funcService: FunctionService,
     private route: ActivatedRoute,
@@ -46,13 +50,17 @@ export class NodeComponent implements OnInit {
   }
 
   //methods
-
   refreshNode(id: number) {
     this.nodeService.findById(id).subscribe({
       next: (node) => {
         this.node = node;
         this.refreshFunctions(id);
         this.refreshNodeMembers(id);
+        this.auth.getLoggedInUser().subscribe({
+          next: (currentUser) => {
+            this.userIsOwner = currentUser.id === this.node.user.id;
+          },
+        });
       },
       error: () => {
         this.router.navigateByUrl('/404');
@@ -84,4 +92,29 @@ export class NodeComponent implements OnInit {
       },
     });
   }
+
+  openEditModal(content: TemplateRef<any>) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    switch (reason) {
+      case ModalDismissReasons.ESC:
+        return 'by pressing ESC';
+      case ModalDismissReasons.BACKDROP_CLICK:
+        return 'by clicking on a backdrop';
+      default:
+        return `with: ${reason}`;
+    }
+  }
+
 }

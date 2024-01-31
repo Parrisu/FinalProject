@@ -61,7 +61,6 @@ public interface FunctionRepository extends JpaRepository<Function, Integer> {
 			      )
 			    )
 			  )
-
 			""")
 	Set<Function> searchFunctions(@Param("searchQuery") String searchQuery, @Param("cityName") String cityName,
 			@Param("stateAbbr") String stateAbbr, @Param("username") String username,

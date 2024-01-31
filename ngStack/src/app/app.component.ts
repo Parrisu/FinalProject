@@ -15,7 +15,7 @@ import { PopupDisplayComponent } from './components/popup-display/popup-display.
     NgbCollapseModule,
     RouterLink,
     FormsModule,
-    PopupDisplayComponent
+    PopupDisplayComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -28,7 +28,9 @@ export class AppComponent {
   constructor(public auth: AuthService, public route: Router) {}
 
   search(query: string) {
-    const url = `/search/${query}`;
-    this.route.navigateByUrl(url);
+    if (this.searchQuery.replace(/\s/, '') !== '') {
+      const url = `/search/${query}`;
+      this.route.navigateByUrl(url);
+    }
   }
 }

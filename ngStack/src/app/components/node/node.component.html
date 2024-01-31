@@ -1,24 +1,54 @@
 <div id="node-page" class="row">
   <div class="col-2"></div>
   <div class="col-8">
-    <div class="group-header">
-      <div class="d-flex justify-content-between">
-        <h2>{{node.name}}</h2>
-        @if (userIsMember) {
-        <button class="btn btn-primary">Create A Function</button>
-        }
+    <div class="group-header row">
+      <div class="col-3 node-image-col">
+        <img class="node-image" [src]="node.imageUrl" alt="the image for this group">
       </div>
-      <hr>
-      <div class="d-flex justify-content-between">
-        <h3>{{node.city}}, {{node.stateAbbreviation}}</h3>
-        <h3>This is a {{node.openToPublic? 'public': 'private'}} group.</h3>
-      </div>
-      <div class="group-description">
-        {{node.description}}
+      <div class="group-details col-9">
+        <div class="d-flex justify-content-between">
+          <h2>{{node.name}}</h2>
+
+          <div>
+            @if (userIsOwner) {
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                  (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="dateOfBirth">Date of birth</label>
+                    <div class="input-group">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+              </div>
+            </ng-template>
+            <button class="btn btn-outline-primary mx-3" (click)="openEditModal(content)">Edit Your Node</button>
+            }
+            @if (userIsMember) {
+            <button class="btn btn-outline-primary" [routerLink]="'create'">Create A Function</button>
+            }
+          </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <h3>{{node.city}}, {{node.stateAbbreviation}}</h3>
+          <h3>This is a {{node.openToPublic? 'public': 'private'}} group.</h3>
+        </div>
+        <div class="group-description">
+          {{node.description}}
+        </div>
       </div>
     </div>
     <div class="group-body row">
-      <div class="col-9">
+      <div class="col-9 p-0">
         <div class="group-functions">
           <div *ngFor="let function of functions" class="function">
             <div class="function-header d-flex justify-content-between">
@@ -28,9 +58,9 @@
             <div class="d-flex justify-content-between">
               <h6>date: {{function.date|date}}</h6>
               <div class="d-flex">
-                <h6>start: {{function.start|date :'h:mm a'}}</h6>
+                <h6>start: {{function.start}}</h6>
                 <div class="vertical-space"></div>
-                <h6>end: {{function.end|date :'h:mm a'}}</h6>
+                <h6>end: {{function.end}}</h6>
               </div>
             </div>
             <div>
