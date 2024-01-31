@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Address;
@@ -62,7 +63,6 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return node;
-
 	}
 
 	@PostMapping
@@ -78,7 +78,6 @@ public class NodeController {
 			node = null;
 		}
 		return node;
-
 	}
 
 
@@ -100,7 +99,6 @@ public class NodeController {
 			node = null;
 		}
 		return users;
-
 	}
 
 	@DeleteMapping(path = { "{nodeId}/leave" })
@@ -119,9 +117,7 @@ public class NodeController {
 			} else {
 				res.setStatus(404);
 			}
-
 		}
-
 	}
 
 	@GetMapping(path = { "{nodeId}/members" })
@@ -129,7 +125,11 @@ public class NodeController {
 			@PathVariable("nodeId") int nodeId, Principal principal) {
 		Node node = nodeService.getNodeById(nodeId);
 		return nodeService.findUserInNodeGroup(node);
-
+	}
+	
+	@PutMapping({"{nodeId}"})
+	public Node updateNode(@PathVariable("nodeId") int id, @RequestBody Node node, Principal principal) {
+		return null;
 	}
 
 	// Function Routing //////////////////////////////////////////////////
@@ -144,7 +144,6 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return found;
-		
 	}
 
 	@GetMapping(path = { "{nodeId}/function" })
@@ -174,7 +173,6 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return toUpdate;
-
 	}
 
 	@DeleteMapping(path = { "{nodeId}/function/{fId}" })
@@ -187,6 +185,5 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return toUpdate;
-
 	}
 }
