@@ -11,7 +11,6 @@ import { Nodes } from '../../models/node';
   styleUrl: './search.component.css',
 })
 export class SearchComponent implements OnInit {
-
   nodes: Nodes[] = [];
   users: User[] = [];
 
@@ -23,12 +22,14 @@ export class SearchComponent implements OnInit {
         const query = map.get('query');
         if (query && !/\s/.test(query)) {
           this.refresh(query);
+          this.refreshUsers(query);
         }
       },
     });
   }
 
-  refresh(query: string): void {
+  refresh(query: string): void {}
+  refreshUsers(query: string): void {}
 
-  }
+  refreshNodes(query: string): void {}
 }
