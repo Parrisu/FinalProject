@@ -15,9 +15,9 @@ export class NodeComponent implements OnInit {
 
   //Fields
   nodes: Nodes[] = [];
-  singleNode: Nodes | null = null;
+  singleNode: Nodes = new Nodes();
   nodeName: string = "";
-  searching: Nodes[] | null = null;
+  selected: Nodes | null = null;
   newNode: Nodes = new Nodes();
   //constructor
   constructor(private nodeService: NodeService) {}
@@ -41,11 +41,12 @@ export class NodeComponent implements OnInit {
       )
     }
 
-    findNodesByName(id: number){
+    findNodesById(id: number){
       this.nodeService.findById(id).subscribe(
         {
           next: (nodes) => {
-            this.nodes = nodes;
+            this.selected = nodes;
+            console.log(this.selected);
           },
           error: (problem) => {
             console.error('error: error loading technologies');

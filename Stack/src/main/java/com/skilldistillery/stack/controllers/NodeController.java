@@ -36,7 +36,7 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
-	
+  
 	@GetMapping(path = { "nodes", "nodes/" })
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
 			@RequestParam(name = "cityName", required = false) String cityName,
@@ -134,5 +134,12 @@ public class NodeController {
 		return nodeService.findUserInNodeGroup(node);
 
 	}
+
+//	@GetMapping(path = { "nodes/{nodeId}" })
+//	public Optional<Node> findNodeById(HttpServletRequest req, HttpServletResponse res,
+//			@PathVariable("nodeId") int nodeId, Principal principal){
+//		Optional<Node> node = Optional.of(nodeService.getNodeById(nodeId));
+//			return node;
+//	}
 
 }
