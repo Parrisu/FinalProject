@@ -22,7 +22,20 @@ export class UserService {
       .get<User[]>(endpoint, {
         params: params,
       })
-      .pipe();
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(
+                `
+            UserService.searchUsers(query: string): Observable<User[]>;
+            Error while attempting get to ${endpoint} with query ${query}.
+            `
+              )
+          );
+        })
+      );
   }
 
   setUserAddress(address: Address): Observable<Address> {

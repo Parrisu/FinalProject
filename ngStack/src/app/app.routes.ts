@@ -8,7 +8,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
 import { SearchComponent } from './components/search/search.component';
 
-
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home Page', component: HomeComponent },
@@ -16,8 +15,16 @@ export const routes: Routes = [
   { path: 'signup', title: 'Sign Up Page', component: SignupComponent },
   { path: 'nodes', title: 'Nodes', component: NodeComponent },
   { path: 'nodes/:name', title: 'Sign Up Page', component: NodeComponent },
-  { path: 'technologies', title: 'Technologies', component: TechnologyComponent },
+  {
+    path: 'technologies',
+    title: 'Technologies',
+    component: TechnologyComponent,
+  },
   { path: 'profile', title: 'Profile', component: ProfileComponent },
   { path: 'account', title: 'Account', component: AccountComponent },
-  { path: 'search', title: 'Search Page', component: SearchComponent},
+  {
+    path: 'search/:query',
+    title: 'Search Page',
+    component: SearchComponent,
+  },
 ];
