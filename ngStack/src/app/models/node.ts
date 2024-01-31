@@ -6,7 +6,7 @@ export class Nodes {
   imageUrl: string;
 
   city: string;
-  stateAbbrev: string;
+  stateAbbreviation: string;
 
 
   constructor(
@@ -16,7 +16,7 @@ export class Nodes {
     description: string = '',
     imageUrl: string = '',
     city: string = '',
-  stateAbbrev: string = ''
+    stateAbbreviation: string = ''
 
   ) {
     this.id = id;
@@ -25,7 +25,7 @@ export class Nodes {
     this.description = description;
     this.imageUrl = imageUrl;
     this.city = city;
-    this.stateAbbrev = stateAbbrev;
+    this.stateAbbreviation = stateAbbreviation;
 
 
   }

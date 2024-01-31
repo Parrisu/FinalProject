@@ -48,10 +48,12 @@ public class NodeController {
 	}
 
 	@GetMapping(path = { "nodes/{id}" })
-	public Optional<Node> findByName(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
+	public Node findById(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
 			Principal principal) {
-
-		Optional<Node> node = nodeService.findById(id);
+		Node node = nodeService.findById(id).orElse(null);
+		if (node == null) {
+			res.setStatus(404);
+		}
 		return node;
 
 	}
@@ -99,13 +101,6 @@ public class NodeController {
 		return funServ.findByNode(id);
 
 	}
-//	@GetMapping(path = { "nodes/{nodeId}/function/{Id}" })
-//	public Function findFunctionById(HttpServletRequest req, HttpServletResponse res, @PathVariable("Id") int id,
-//			Principal principal) {
-//		
-//		return funServ.findById(id);
-//		
-//	}
 
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
@@ -135,12 +130,5 @@ public class NodeController {
 		return nodeService.findUserInNodeGroup(node);
 
 	}
-
-//	@GetMapping(path = { "nodes/{nodeId}" })
-//	public Optional<Node> findNodeById(HttpServletRequest req, HttpServletResponse res,
-//			@PathVariable("nodeId") int nodeId, Principal principal){
-//		Optional<Node> node = Optional.of(nodeService.getNodeById(nodeId));
-//			return node;
-//	}
 
 }

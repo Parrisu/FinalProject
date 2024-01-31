@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Nodes } from '../models/node';
 import { AuthService } from './auth.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -60,7 +61,7 @@ export class NodeService {
   public create(newNode: Nodes): Observable<Nodes> {
     newNode.name = '';
     newNode.description = '';
-    newNode.stateAbbrev = '';
+    newNode.stateAbbreviation = '';
     newNode.city = '';
     newNode.imageUrl = '';
     newNode.openToPublic = true;
@@ -73,5 +74,18 @@ export class NodeService {
       })
     );
   }
+
+  public joinNode(nodeId: number):Observable<User[]>{
+    const endpoint = this.url + "/" + nodeId + "/members";
+    return this.http.post<User[]>(this.url, {},  this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('NodesService.join(): error joining node: ' + err)
+        );
+      })
+    );
+  }
+
 
 }

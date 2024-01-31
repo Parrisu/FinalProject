@@ -8,14 +8,13 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
 import { SearchComponent } from './components/search/search.component';
 import { FunctionComponent } from './components/function/function.component';
-
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home Page', component: HomeComponent },
   { path: 'login', title: 'Login Page', component: LoginComponent },
   { path: 'signup', title: 'Sign Up Page', component: SignupComponent },
-  { path: 'nodes', title: 'Nodes', component: NodeComponent },
   { path: 'nodes/:id', title: 'Show node', component: NodeComponent },
   {
     path: 'technologies',
@@ -30,4 +29,6 @@ export const routes: Routes = [
     component: SearchComponent,
   },
   { path: 'function', title: 'Account', component: FunctionComponent },
+  { path: '404', title: 'not found', component: NotFoundPageComponent },
+  { path: '**', redirectTo: '/404', pathMatch: 'full' },
 ];
