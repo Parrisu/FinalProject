@@ -33,7 +33,7 @@ export const routes: Routes = [
     component: SearchComponent,
   },
   { path: 'nodes/:nId/function/:fId', title: 'Function', component: FunctionComponent },
-  { path: 'nodes/:id/function/create', title: 'Create Function', component: CreateFunctionFormComponent },
+  { path: 'nodes/:id/create', title: 'Create Function', component: CreateFunctionFormComponent },
   { path: 'error', title: 'Error', component: ErrorPageComponent },
   { path: '404', title: 'not found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full' },

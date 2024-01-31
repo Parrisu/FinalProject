@@ -14,7 +14,9 @@
                   <li class="list-group-item">{{function.start}} - {{function.end}}</li>
                   <li class="list-group-item">Created By: <strong>{{function.user.firstName}}</strong></li>
                   <li class="list-group-item">Address: {{function.address.street}}</li>
-                  <li class="list-group-item"><button href=""> </button></li>
+                  <form method="get" action="https://www.google.com/maps/search/?api=1&query={{function.address.street}}+{{function.address.city}}+{{function.address.stateAbbreviation}}">
+                    <button type="submit" class="btn btn-primary my-2">Directions</button>
+                  </form>
 
                 </ul>
               </div>
