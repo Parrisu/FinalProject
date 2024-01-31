@@ -2,7 +2,6 @@ package com.skilldistillery.stack.controllers;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,7 +155,7 @@ public class NodeController {
 
 	}
 
-	@PutMapping(path = { "{nodeId}/function/{fId}" })
+	@DeleteMapping(path = { "{nodeId}/function/{fId}" })
 	public Function destroyFunction(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		Function toUpdate = funServ.destroyFunction(nodeId, fId);
