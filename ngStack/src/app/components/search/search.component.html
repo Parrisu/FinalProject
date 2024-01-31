@@ -22,7 +22,7 @@
           <div class="input-group-text">State</div>
         </div>
         <input type="text" class="form-control" name="cityNameControl" id="cityNameControl" placeholder="All"
-          [(ngModel)]="searchParams.stateAbbr" (ngModelChange)="refreshAll()">
+          [(ngModel)]="searchParams.stateAbbr">
       </div>
       @if (0 < searchParams.stack.length) { <hr>
         <h5 class="stack-header">Filtering Stack: </h5>
@@ -57,7 +57,7 @@
           <ng-template ngbNavContent>
             <div class="result-set">
               @for (node of nodes; track $index) {
-              <div class="node entity">
+              <div class="node entity" [routerLink]="'/nodes/'+node.id">
                 <div class="d-flex justify-content-between">
                   <h3>{{node.name}}</h3>
                   <h3>{{node.city}}, {{node.stateAbbreviation}}</h3>
@@ -78,7 +78,7 @@
           <ng-template ngbNavContent>
             <div class="result-set">
               @for (func of functions; track $index) {
-              <div class="entity function">
+              <div class="entity function" [routerLink]="'/nodes/'+func.nodeId">
                 <div class="d-flex justify-content-between">
                   <h3>&#64;{{func.name}}</h3>
                 </div>

@@ -20,13 +20,13 @@ export class SearchParams {
 
   intoJsObject(): any {
     const body: any = {};
-    if (!/\s*/.test(this.searchQuery)) {
+    if (this.searchQuery.replace(/\s/, '') != '') {
       body.searchQuery = this.searchQuery;
     }
-    if (!/\s*/.test(this.cityName)) {
+    if (this.cityName.replace(/\s/, '') != '') {
       body.cityName = this.cityName;
     }
-    if (!/\s*/.test(this.stateAbbr)) {
+    if (this.stateAbbr.replace(/\s/, '') != '') {
       body.stateAbbr = this.stateAbbr;
     }
     if (0 < this.stack.length) {
