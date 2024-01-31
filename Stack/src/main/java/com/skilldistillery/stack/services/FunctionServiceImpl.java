@@ -17,7 +17,7 @@ public class FunctionServiceImpl implements FunctionService {
 	private FunctionRepository funRepo;
 
 	@Override
-	public Set<Function> getAll(String searchQuery, String username) {
+	public Set<Function> searchFunctions(String searchQuery, String username) {
 		return funRepo.getAll(searchQuery, username);
 	}
 	

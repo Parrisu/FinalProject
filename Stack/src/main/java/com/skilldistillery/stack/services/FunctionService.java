@@ -6,7 +6,7 @@ import java.util.Set;
 import com.skilldistillery.stack.entities.Function;
 
 public interface FunctionService {
-	Set<Function> getAll(String searchQuery, String username);
+	Set<Function> searchFunctions(String searchQuery, String username);
 
 	Function findById(int functionId);
 
