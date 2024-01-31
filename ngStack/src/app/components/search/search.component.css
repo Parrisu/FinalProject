@@ -1,6 +1,8 @@
 #search-wrap {
   margin: 0;
-  margin-top: 5vh;
+  margin-top: 1.8vh;
+}
+.row {
   width: 100%;
 }
 
@@ -27,4 +29,52 @@
 
 .entity {
   box-shadow: 0 0.1rem 0.1rem 0.1rem rgba(1, 1, 1, 0.1);
+}
+
+.controls {
+  padding-inline: 1.6rem;
+}
+
+.input-group-text {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.stack {
+  padding-block: 0.5rem;
+  box-shadow: 0 0.05rem 0.3rem 0.2rem rgba(1, 1, 1, 0.1);
+  border-radius: 0.4rem;
+}
+.tech img {
+  width: 4rem;
+  height: auto;
+}
+
+.tech {
+  width: min-content;
+  display: inline-block;
+  box-shadow: 0 0 0.1rem 0.1rem rgba(1, 1, 1, 0.1);
+  border-radius: 1rem;
+  margin: 0.2rem;
+}
+
+.tech:hover {
+  cursor: pointer;
+}
+
+.tech-name {
+  display: none;
+  opacity: 100;
+}
+
+.tech:hover .tech-name {
+  transition: 0.9s;
+  opacity: 100%;
+  color: white;
+  text-align: center;
+  margin-top: 0.3rem;
+  background-color: grey;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  display: flex;
+  position: absolute;
 }

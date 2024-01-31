@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
 import { PopupDisplayComponent } from './components/popup-display/popup-display.component';
@@ -25,6 +25,10 @@ export class AppComponent {
   isMenuCollapsed = true;
   searchQuery = '';
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, public route: Router) {}
 
+  search(query: string) {
+    const url = `/search/${query}`;
+    this.route.navigateByUrl(url);
+  }
 }
