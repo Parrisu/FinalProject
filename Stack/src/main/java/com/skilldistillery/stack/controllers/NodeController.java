@@ -60,7 +60,6 @@ public class NodeController {
 				res.setStatus(401);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			res.setStatus(400);
 			node = null;
@@ -82,7 +81,6 @@ public class NodeController {
 				users = nodeService.joinNode(principal.getName(), node);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			res.setStatus(400);
 			node = null;
@@ -105,6 +103,7 @@ public class NodeController {
 //		
 //	}
 
+
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
@@ -126,6 +125,7 @@ public class NodeController {
 
 	}
 
+
 	@GetMapping(path = { "nodes/{nodeId}/members" })
 	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable("nodeId") int nodeId, Principal principal) {
@@ -133,4 +133,5 @@ public class NodeController {
 		return nodeService.findUserInNodeGroup(node);
 
 	}
+
 }

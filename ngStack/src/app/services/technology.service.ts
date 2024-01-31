@@ -1,8 +1,6 @@
-import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { AuthService } from './auth.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Technology } from '../models/technology';
 
@@ -21,7 +19,7 @@ export class TechnologyService {
     ) { }
 
 
-    public showAll(): Observable<Technology[]>{
+    showAll(): Observable<Technology[]>{
     return this.http.get<Technology[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);

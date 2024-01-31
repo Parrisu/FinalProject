@@ -7,6 +7,8 @@ import { TechnologyComponent } from './components/technology/technology.componen
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
 import { SearchComponent } from './components/search/search.component';
+import { FunctionComponent } from './components/function/function.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -27,4 +29,5 @@ export const routes: Routes = [
     title: 'Search Page',
     component: SearchComponent,
   },
+  { path: 'function', title: 'Account', component: FunctionComponent },
 ];
