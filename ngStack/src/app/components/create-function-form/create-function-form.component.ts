@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Function } from '../../models/function';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-create-function-form',
@@ -19,17 +20,30 @@ export class CreateFunctionFormComponent implements OnInit {
   function: Function = new Function();
   address: Address = new Address();
   currentUser: User = new User();
-  currentNode: number = 0;
+  nodeId: number = 0;
 
-  constructor(private funService: FunctionService, private auth: AuthService){}
+  constructor(private funService: FunctionService, private auth: AuthService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(
+      (params: ParamMap)=> {
+        this.nodeId = parseInt(params.get('id')!);
+      });
     this.getUser();
 
   }
 
   addEvent(newFunction: Function){
-    this.funService.createFunction(1, newFunction)
+    this.funService.createFunction(this.nodeId, newFunction).subscribe(
+      {
+        next: (something)=>{
+          console.log(something);
+        },
+        error: (errors)=>{
+          console.log(errors);
+        }
+      }
+    )
 
   }
 
@@ -39,6 +53,9 @@ export class CreateFunctionFormComponent implements OnInit {
       {
         next: (user)=>{
           this.currentUser = user;
+          console.log(this.currentUser)
+          this.currentUser.id = 2;
+          this.function.user = this.currentUser;
         },
         error: (errors)=>{
           console.log(errors);

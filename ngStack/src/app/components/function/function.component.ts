@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FunctionService } from '../../services/function.service';
 import { Function } from '../../models/function';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-function',
@@ -15,31 +16,37 @@ import { Function } from '../../models/function';
 export class FunctionComponent implements OnInit {
 
   function: Function = new Function();
-  functions: Function[] = [];
+  nodeId: number = 0;
+  fId: number = 0;
 
 
-  constructor(private auth: AuthService, private funServ: FunctionService){}
+
+  constructor(private auth: AuthService, private funServ: FunctionService, private router: Router, private route: ActivatedRoute){}
 
   ngOnInit(){
-    this.loadData(1);
+    this.route.paramMap.subscribe(
+      (params: ParamMap)=> {
+        this.nodeId = parseInt(params.get('nId')!);
+        this.fId = parseInt(params.get("fId")!);
+      });
+    this.loadData();
   }
 
-  fixTimes(){
-    // this.function.startTime = this.datePipe.transform(this.function.startTime, 'h:mm a')!
-  }
-
-  loadData(nodeid: number){
-    this.funServ.getFunctions(nodeid).subscribe(
+  loadData(){
+    this.funServ.getFunctionDetails(this.nodeId, this.fId).subscribe(
       {
-        next: (functs)=>{
-          this.functions = functs;
-          // this.fixTimes();
+        next: (funct)=>{
+          this.function = funct;
         },
         error: (errors)=>{
           console.log(errors)
         }
       }
     );
+  }
+
+  createNew(){
+    this.router.navigateByUrl("nodes/" + this.nodeId + "/function/create")
   }
 
 

@@ -11,12 +11,14 @@ import { FunctionComponent } from './components/function/function.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreateFunctionFormComponent } from './components/create-function-form/create-function-form.component';
+import { DirectoryComponent } from './components/directory/directory.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home Page', component: HomeComponent },
   { path: 'login', title: 'Login Page', component: LoginComponent },
   { path: 'signup', title: 'Sign Up Page', component: SignupComponent },
+  { path: 'directory', title: 'Directory', component: DirectoryComponent },
   { path: 'nodes/:id', title: 'Show node', component: NodeComponent },
   {
     path: 'technologies',
@@ -30,9 +32,9 @@ export const routes: Routes = [
     title: 'Search Page',
     component: SearchComponent,
   },
-  { path: 'function', title: 'Account', component: FunctionComponent },
+  { path: 'nodes/:nId/function/:fId', title: 'Function', component: FunctionComponent },
+  { path: 'nodes/:id/function/create', title: 'Create Function', component: CreateFunctionFormComponent },
   { path: 'error', title: 'Error', component: ErrorPageComponent },
-  { path: 'function/create', title: 'Create Function', component: CreateFunctionFormComponent },
   { path: '404', title: 'not found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full' },
 ];

@@ -39,6 +39,31 @@ export class FunctionService {
       })
     );
   }
+  getFunctionDetails(nodeId: number, id: number): Observable<Function> {
+    const endpoint = `${this.baseUrl}/${nodeId}/function/${id}`;
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (this.auth.checkLogin()) {
+      httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest',
+        }),
+      };
+    }
+    return this.http.get<Function>(endpoint, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+                FunctionService.getFunctions(id: number): Observable<Function[]>;
+                Error while attempting GET to ${endpoint}.
+              `)
+        );
+      })
+    );
+  }
 
   searchFunctions(params: SearchParams): Observable<Function[]> {
     const endpoint = `${environment.baseUrl}api/functions`;
@@ -73,7 +98,7 @@ export class FunctionService {
   }
 
   createFunction(id:number, newFunction: Function): Observable<Function> {
-    const endpoint = `${environment.baseUrl}api/nodes/${id}functions`;
+    const endpoint = `${this.baseUrl}/${id}/function`;
     const credentials = this.auth.getCredentials();
     let httpOptions;
     if (this.auth.checkLogin()) {
@@ -87,6 +112,7 @@ export class FunctionService {
       httpOptions = {
       };
     }
+    console.log('here!')
     return this.http.post<Function>(endpoint, newFunction, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
