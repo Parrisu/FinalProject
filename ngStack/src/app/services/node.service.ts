@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Nodes } from '../models/node';
 import { AuthService } from './auth.service';
+import { User } from '../models/user';
 import { SearchParams } from '../models/search-params';
 
 @Injectable({
@@ -40,7 +41,7 @@ export class NodeService {
   }
 
   public findById(id: number): Observable<Nodes> {
-    return this.http.get<Nodes>(this.url + "/" + id).pipe(
+    return this.http.get<Nodes>(this.url + '/' + id).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -65,6 +66,18 @@ export class NodeService {
         console.log(err);
         return throwError(
           () => new Error('Nodes.Create(): error creating new node: ' + err)
+        );
+      })
+    );
+  }
+
+  public joinNode(nodeId: number): Observable<User[]> {
+    const endpoint = this.url + '/' + nodeId + '/members';
+    return this.http.post<User[]>(this.url, {}, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('NodesService.join(): error joining node: ' + err)
         );
       })
     );

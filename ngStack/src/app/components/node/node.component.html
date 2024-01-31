@@ -1,11 +1,11 @@
 
 
 <div *ngIf="selected">
-  <button class="btn btn-primary" (click)="selected=null">Back</button>
   <table class="table table-hover">
     <thead>
       <tr>
         <th>Name</th>
+        <th>State</th>
         <th>City</th>
         <th>Description</th>
 
@@ -14,6 +14,7 @@
     <tbody>
       <tr>
         <td>{{selected.name}}</td>
+        <td>{{selected.stateAbbreviation}}</td>
         <td>{{selected.city}}</td>
         <td>{{selected.description}}</td>
 

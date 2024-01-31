@@ -48,6 +48,17 @@ public class NodeController {
 		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
+	@GetMapping(path={"{id}"})
+	public Node findById(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
+			Principal principal) {
+		Node node = nodeService.findById(id).orElse(null);
+		if (node == null) {
+			res.setStatus(404);
+		}
+		return node;
+
+	}
+
 	@PostMapping
 	public Node addNode(HttpServletRequest req, HttpServletResponse res, @RequestBody Node node, Principal principal) {
 		try {
@@ -64,14 +75,6 @@ public class NodeController {
 
 	}
 
-	@GetMapping(path = { "{id}" })
-	public Optional<Node> findByName(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
-			Principal principal) {
-
-		Optional<Node> node = nodeService.findById(id);
-		return node;
-
-	}
 
 	@PostMapping(path = { "{nodeId}/members" })
 	public List<User> joinNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
@@ -152,7 +155,7 @@ public class NodeController {
 		return toUpdate;
 
 	}
-	
+
 	@PutMapping(path = { "{nodeId}/function/{fId}" })
 	public Function destroyFunction(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
@@ -163,7 +166,6 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return toUpdate;
-		
-	}
 
+	}
 }

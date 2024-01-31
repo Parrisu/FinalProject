@@ -3,79 +3,47 @@ import { NodeService } from '../../services/node.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-node',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './node.component.html',
-  styleUrl: './node.component.css'
+  styleUrl: './node.component.css',
 })
 export class NodeComponent implements OnInit {
-
   //Fields
-  nodes: Nodes[] = [];
-  singleNode: Nodes = new Nodes();
-  nodeName: string = "";
+  nodeName: string = '';
   selected: Nodes | null = null;
-  newNode: Nodes = new Nodes();
   //constructor
-  constructor(private nodeService: NodeService) {}
+  constructor(
+    private nodeService: NodeService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   //lifecycle
   ngOnInit(): void {
-    this.showAllNodes();
+    this.route.paramMap.subscribe({
+      next: (map) => {
+        const id = map.get('id');
+        if (id) {
+          const parse = parseInt(id) | 0;
+          this.refresh(parse);
+        }
+      },
+    });
   }
 
   //methods
-  showAllNodes(){
-    this.nodeService.showAll().subscribe(
-      {
-        next: (nodes) => {
-          this.nodes = nodes;
-        },
-        error: (problem) => {
-          console.error('error: error loading technologies');
-          console.error(problem);
-        }
-      }
-      )
-    }
-
-    findNodesById(id: number){
-      this.nodeService.findById(id).subscribe(
-        {
-          next: (nodes) => {
-            this.selected = nodes;
-            console.log(this.selected);
-          },
-          error: (problem) => {
-            console.error('error: error loading technologies');
-            console.error(problem);
-          }
-        }
-        )
-      }
-      addNewNode(node: Nodes){
-        this.nodeService.create(node).subscribe({
-          next: (createNode) => {
-            this.newNode = new Nodes();
-            this.reload();
-          },
-          error: (oops) => {
-            console.error('NodesComponent.addNewNode: error creating new node');
-            console.error(oops);
-          },
-        });
-      }
-
-      reload() {
-        this.nodeService.showAll().subscribe({
-          next: (nodes) => {
-            this.nodes = nodes;
-          },
-          error: (fail) => {
-            console.error('Nodes.reload: error getting nodes');
-          },
-        });
-      }
+  refresh(id: number) {
+    this.nodeService.findById(id).subscribe({
+      next: (node) => {
+        this.selected = node;
+      },
+      error: () => {
+        this.router.navigateByUrl('/404');
+      },
+    });
+  }
 }
