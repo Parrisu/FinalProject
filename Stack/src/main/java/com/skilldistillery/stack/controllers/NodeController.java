@@ -36,7 +36,7 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
-
+	
 	@GetMapping(path = { "nodes", "nodes/" })
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
 			@RequestParam(name = "cityName", required = false) String cityName,
@@ -97,13 +97,14 @@ public class NodeController {
 		return funServ.findByNode(id);
 
 	}
-//	@GetMapping(path = { "nodes/{nodeId}/function/{Id}" })
-//	public Function findFunctionById(HttpServletRequest req, HttpServletResponse res, @PathVariable("Id") int id,
-//			Principal principal) {
-//		
-//		return funServ.findById(id);
-//		
-//	}
+	
+	@PostMapping(path = { "nodes/{nodeId}/function" })
+	public Function findFunctionById(@PathVariable("nodeId")int nodeId , @RequestBody Function function,HttpServletRequest req, HttpServletResponse res,
+			Principal principal) {
+		
+		return funServ.createFunction(nodeId, function);
+		
+	}
 
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
