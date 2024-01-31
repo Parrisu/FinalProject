@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Function;
-import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.services.FunctionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,9 +29,11 @@ public class FunctionController {
 
 	@GetMapping
 	public Set<Function> getAll(@RequestParam(name = "searchQuery", required = false) String searchQuery,
-			Principal principal) {
+			@RequestParam(name = "cityName", required = false) String cityName,
+			@RequestParam(name = "stateAbbr", required = false) String stateAbbr,
+			@RequestParam(name = "stack", required = false) Set<Technology> stack, Principal principal) {
 		String username = (principal == null) ? null : principal.getName();
-		return functionService.getAll(searchQuery, username);
+		return functionService.searchFunctions(searchQuery, cityName, stateAbbr, username, stack);
 	}
 
 //	@GetMapping({ "{id}/attendees" })
@@ -48,13 +48,6 @@ public class FunctionController {
 	public Function getFunction(@PathVariable("fid") int fid, HttpServletRequest req, HttpServletResponse res) {
 		
 		return functionService.findById(fid);
-		
-	}
-	
-	@PostMapping
-	public Function createFunction(@RequestBody Function function, HttpServletRequest req, HttpServletResponse res) {
-		
-		return functionService.createFunction(function);
 		
 	}
 	

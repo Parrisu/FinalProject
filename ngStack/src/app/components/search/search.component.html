@@ -1,1 +1,73 @@
-<p>search works!</p>
+<div id="search-wrap" class="row">
+  <div class="col-2"></div>
+  <div class="col-3">
+    <div class="controls">
+    </div>
+  </div>
+  <div class="col-5">
+    <div class="results">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <button ngbNavLink>Nodes</button>
+          <ng-template ngbNavContent>
+            <div class="result-set">
+              @for (node of nodes; track $index) {
+              <div class="node entity">
+                <div class="d-flex justify-content-between">
+                  <h3>{{node.name}}</h3>
+                  <h3>{{node.city}}, {{node.stateAbbrev}}</h3>
+                </div>
+                <div class="content">
+                  {{node.description}}
+                </div>
+              </div>
+              @if(node !== nodes[nodes.length-1]) {
+              <hr>
+              }
+              }
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <button ngbNavLink>Functions</button>
+          <ng-template ngbNavContent>
+            <div class="result-set">
+              @for (func of functions; track $index) {
+                <div class="entity function">
+                  <div class="d-flex justify-content-between">
+                    <h3>&#64;{{func.name}}</h3>
+                  </div>
+                </div>
+              }
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <button ngbNavLink>Users</button>
+          <ng-template ngbNavContent>
+            <div class="result-set">
+              @for (user of users; track $index) {
+              <div class="user entity">
+                <div class="d-flex justify-content-between">
+                  <h3>&#64;{{user.username}}</h3>
+                  <h3>{{user.address?.city}}, {{user.address?.stateAbbreviation}}</h3>
+                </div>
+                <div class="content">
+                  <blockquote class="elipsis-text">
+                    {{user.aboutMe}}
+                  </blockquote>
+                </div>
+              </div>
+              @if(user !== users[users.length-1]) {
+              <hr>
+              }
+              }
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+  </div>
+  <div class="col-2"></div>
+</div>

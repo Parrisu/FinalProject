@@ -18,7 +18,7 @@ class NodeRepositoryTest {
 
 	@Test
 	void test_search_all_with_no_filters_returns_non_empty_set() {
-		Set<Node> nodes = nodeRepo.searchNodes(null, null, null);
+		Set<Node> nodes = nodeRepo.searchNodes(null, null, null, null);
 		assertFalse(nodes.isEmpty());
 	}
 

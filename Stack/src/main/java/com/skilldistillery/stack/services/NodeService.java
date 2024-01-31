@@ -26,6 +26,6 @@ public interface NodeService {
 
 	public List<User> findUserInNodeGroup(Node node);
 
-	Set<Node> searchNodes(String searchQuery, String city, String stateAbbr);
+	Set<Node> searchNodes(String searchQuery, String city, String stateAbbr, Set<Technology> stack);
 
 }

@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.Function;
+<<<<<<< HEAD
 import com.skilldistillery.stack.entities.Node;
+=======
+import com.skilldistillery.stack.entities.Technology;
+>>>>>>> 9b47cece3f5225f0229f08ed36c09532aadfba9e
 import com.skilldistillery.stack.repositories.FunctionRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
 
@@ -24,8 +28,14 @@ public class FunctionServiceImpl implements FunctionService {
 	NodeRepository nodeRepo;
 
 	@Override
-	public Set<Function> getAll(String searchQuery, String username) {
-		return funRepo.getAll(searchQuery, username);
+	public Set<Function> searchFunctions(String searchQuery, String cityName, String stateAbbr, String username,
+			Set<Technology> stack) {
+		searchQuery = (searchQuery != null && searchQuery.isBlank()) ? null : searchQuery;
+		cityName = (cityName != null && cityName.isBlank()) ? null : cityName;
+		stateAbbr = (stateAbbr != null && stateAbbr.isBlank()) ? null : stateAbbr;
+		username = (username != null && username.isBlank()) ? null : username;
+		stack = (stack != null && stack.isEmpty()) ? null : stack;
+		return funRepo.searchFunctions(searchQuery, cityName, stateAbbr, username, stack);
 	}
 
 	@Override
