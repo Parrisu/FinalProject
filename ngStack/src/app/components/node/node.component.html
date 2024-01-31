@@ -1,11 +1,33 @@
-<p>node works! </p>
+<p>Current Nodes</p>
 <form name="SelectedNode">
-  <input [(ngModel)]="nodeName" type="text" name="search"/>
-  <button (click)="findNodesByName(nodeName)" >Search for Node</button>
+
 </form>
 
-<form name="Display all nodes" *ngIf="!searching">
-<div *ngFor="let node of nodes" >
-<h2>{{node.name}}</h2>
-</div>
+<form name="Display all nodes" *ngIf="!selected">
+  <div *ngFor="let node of nodes">
+    <h2 (click)="findNodesById(node.id)">{{node.name}}</h2>
+  </div>
 </form>
+<div *ngIf="selected">
+  <button class="btn btn-primary" (click)="selected=null">Back</button>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Description</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{selected.name}}</td>
+        <td>{{selected.city}}</td>
+        <td>{{selected.description}}</td>
+
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>

@@ -42,14 +42,14 @@ export class NodeService {
     );
   }
 
-  public findById(id: number): Observable<Nodes[]> {
-    return this.http.get<Nodes[]>(this.url).pipe(
+  public findById(id: number): Observable<Nodes> {
+    return this.http.get<Nodes>(this.url + "/" + id).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
           () =>
             new Error(
-              'NodesService.findByName(): error retrieving technologies: ' + err
+              'NodesService.findByName(): error retrieving nodes: ' + err
             )
         );
       })
