@@ -21,15 +21,11 @@ export class SearchComponent implements OnInit {
       next: (map: ParamMap) => {
         const query = map.get('query');
         if (query && !/\s/.test(query)) {
-          this.refresh(query);
           this.refreshUsers(query);
         }
       },
     });
   }
 
-  refresh(query: string): void {}
   refreshUsers(query: string): void {}
-
-  refreshNodes(query: string): void {}
 }

@@ -1,5 +1,5 @@
 import { Address } from './../models/address';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -15,6 +15,15 @@ export class UserService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
+  searchUsers(query: string): Observable<User[]> {
+    const endpoint = this.baseUrl;
+    const params = new HttpParams().set('query', query);
+    return this.http
+      .get<User[]>(endpoint, {
+        params: params,
+      })
+      .pipe();
+  }
 
   setUserAddress(address: Address): Observable<Address> {
     const endpoint = `${this.baseUrl}/address`;
@@ -114,7 +123,7 @@ export class UserService {
     );
   }
 
-  addOrRemoveTech(id: number, tech: Technology){
+  addOrRemoveTech(id: number, tech: Technology) {
     const endpoint = `${this.baseUrl}/account/${id}`;
     const credentials = this.auth.getCredentials();
     const httpOptions = {
@@ -138,11 +147,4 @@ export class UserService {
       })
     );
   }
-
-
-
-
-
-
-
 }
