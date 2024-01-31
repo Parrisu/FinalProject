@@ -56,7 +56,7 @@ export class NodeService {
   public create(newNode: Nodes): Observable<Nodes> {
     newNode.name = '';
     newNode.description = '';
-    newNode.stateAbbrev = '';
+    newNode.stateAbbreviation = '';
     newNode.city = '';
     newNode.imageUrl = '';
     newNode.openToPublic = true;
