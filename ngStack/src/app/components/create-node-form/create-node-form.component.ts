@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Nodes } from '../../models/node';
 import { NodeService } from '../../services/node.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-node-form',
@@ -14,12 +15,15 @@ import { NodeService } from '../../services/node.service';
 export class CreateNodeFormComponent {
   newNode = new Nodes();
 
-  constructor(private nodeService: NodeService) {}
+  constructor(private nodeService: NodeService, private router: Router) {}
 
   addNewNode(node: Nodes) {
     this.nodeService.create(node).subscribe({
       next: (createNode) => {
         this.newNode = new Nodes();
+        const id = createNode.id;
+        const url = `/nodes/${id}`;
+        this.router.navigateByUrl(url);
       },
       error: (oops) => {
         console.error('NodesComponent.addNewNode: error creating new node');

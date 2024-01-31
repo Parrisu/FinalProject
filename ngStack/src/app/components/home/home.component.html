@@ -8,5 +8,20 @@
   <a href="#/nodes">Nodes</a><br>
   <a href="#/technologies">Technologies</a><br>
 </div>
-
-
+<div class="container">
+  <div class="row">
+    <div *ngFor="let node of nodeList" class="card" style="width: 18rem;">
+      <img class="card-img-top img-fluid w-100" src="{{node.imageUrl}}"  alt="Card image cap" alt="Responsive image">
+      <div class="card-body">
+        <h4>Name:</h4>
+        <h4>{{node.name}}</h4>
+        <h4>State:</h4>
+        <h5>{{node.stateAbbreviation}}</h5>
+        <h4>City:</h4>
+        <h5>{{node.city}}</h5>
+        <h4>Description:</h4>
+        <p class="card-text">{{node.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

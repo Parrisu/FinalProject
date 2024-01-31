@@ -55,11 +55,11 @@ export class NodeService {
   }
 
   public create(newNode: Nodes): Observable<Nodes> {
-    newNode.name = '';
-    newNode.description = '';
-    newNode.stateAbbreviation = '';
-    newNode.city = '';
-    newNode.imageUrl = '';
+    newNode.name;
+    newNode.description;
+    newNode.stateAbbreviation;
+    newNode.city;
+    newNode.imageUrl;
     newNode.openToPublic = true;
     return this.http.post<Nodes>(this.url, newNode, this.getHttpOptions()).pipe(
       catchError((err: any) => {

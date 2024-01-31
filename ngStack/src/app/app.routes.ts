@@ -9,6 +9,7 @@ import { AccountComponent } from './components/account/account.component';
 import { SearchComponent } from './components/search/search.component';
 import { FunctionComponent } from './components/function/function.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { CreateNodeFormComponent } from './components/create-node-form/create-node-form.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,6 +30,7 @@ export const routes: Routes = [
     component: SearchComponent,
   },
   { path: 'function', title: 'Account', component: FunctionComponent },
+  { path: 'create-node', title: 'Create Node', component: CreateNodeFormComponent},
   { path: '404', title: 'not found', component: NotFoundPageComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full' },
 ];
