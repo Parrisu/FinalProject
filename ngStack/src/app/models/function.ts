@@ -7,8 +7,8 @@ export class Function {
   cancelled: boolean;
   enabled: boolean;
   date: string;
-  startTime: string;
-  endTime: string;
+  start: string;
+  end: string;
   cap: number;
   imgUrl: string;
   creator: User;
@@ -20,8 +20,8 @@ export class Function {
     cancelled: boolean = false,
     enabled: boolean = true,
     date: string = "",
-    startTime: string = "",
-    endTime: string = "",
+    start: string = "",
+    end: string = "",
     cap: number = 0,
     imgUrl: string = "",
     creator: User = new User(),
@@ -32,8 +32,8 @@ export class Function {
     this.cancelled = cancelled;
     this.enabled = enabled;
     this.date = date;
-    this.startTime = startTime;
-    this.endTime = endTime;
+    this.start = start;
+    this.end = end;
     this.cap = cap;
     this.imgUrl = imgUrl;
     this.creator = creator;
