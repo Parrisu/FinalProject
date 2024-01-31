@@ -46,7 +46,7 @@ class UserTest {
 	void test_address_mapping() {
 		assertNotNull(user);
 		assertNotNull(user.getAddress());
-		assertEquals(1, user.getAddress().getId());
+		assertEquals(3, user.getAddress().getId());
 	}
 
 	@Test

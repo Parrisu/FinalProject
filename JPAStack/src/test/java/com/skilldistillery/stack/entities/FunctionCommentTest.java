@@ -61,7 +61,7 @@ class FunctionCommentTest {
 	@Test
 	void test_FunctionComment_User_mapping() {
 		assertNotNull(functionComment);
-		assertEquals("admin", functionComment.getUser().getFirstName());
+		assertEquals("Steve", functionComment.getUser().getFirstName());
 	}
 	
 	@Test

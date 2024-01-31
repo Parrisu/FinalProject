@@ -17,6 +17,7 @@ export class FunctionComponent implements OnInit {
   function: Function = new Function();
   functions: Function[] = [];
 
+
   constructor(private auth: AuthService, private funServ: FunctionService){}
 
   ngOnInit(){

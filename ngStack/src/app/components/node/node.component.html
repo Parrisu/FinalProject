@@ -1,15 +1,5 @@
 
-<div *ngIf="!selected">
-<p>Current Nodes</p>
-<form name="SelectedNode">
-</form>
-</div>
 
-<form name="Display all nodes" *ngIf="!selected">
-  <div *ngFor="let node of nodes">
-    <h2 (click)="findNodesById(node.id)">{{node.name}}</h2>
-  </div>
-</form>
 <div *ngIf="selected">
   <button class="btn btn-primary" (click)="selected=null">Back</button>
   <table class="table table-hover">
