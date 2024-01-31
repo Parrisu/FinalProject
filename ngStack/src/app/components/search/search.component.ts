@@ -32,6 +32,10 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  refreshNodes(params: any): void {
+
+  }
+
   refreshUsers(query: string): void {
     this.userService.searchUsers(query).subscribe({
       next: (users: User[]) => {
