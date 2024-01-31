@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -23,11 +25,13 @@ public class NodeMember {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@MapsId(value = "userId")
+	@JsonIgnore
 	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "node_id")
 	@MapsId(value = "nodeId")
+	@JsonIgnore
 	private Node node;
 
 	private boolean approved;

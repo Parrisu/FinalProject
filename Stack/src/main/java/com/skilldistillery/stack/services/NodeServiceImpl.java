@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ import com.skilldistillery.stack.repositories.UserRepository;
 
 @Service
 public class NodeServiceImpl implements NodeService {
-	
+
 	@Autowired
 	private NodeRepository nodeRepo;
+
 	@Autowired
 	private NodeMemberRepository nodeMemberRepo;
+
 	@Autowired
 	private UserRepository userRepo;
 
@@ -86,6 +89,10 @@ public class NodeServiceImpl implements NodeService {
 	}
 
 	@Override
+	public Set<Node> searchNodes(String searchQuery, String city, String stateAbbr) {
+		return nodeRepo.searchNodes(searchQuery, city, stateAbbr);
+	}
+
 	public List<User> findUserInNodeGroup(Node node) {
 		List<User> users = null;
 		users = userRepo.getMembersByNodeId(node.getId());

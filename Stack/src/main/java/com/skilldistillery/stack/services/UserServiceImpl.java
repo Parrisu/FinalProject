@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import com.skilldistillery.stack.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	UserRepository userRepo;
 
@@ -22,7 +23,8 @@ public class UserServiceImpl implements UserService {
 	private AddressService addressService;
 
 	@Override
-	public Address updateUserAddress(int userId, Address address) throws EntityDoesNotExistException, InvalidEntityException {
+	public Address updateUserAddress(int userId, Address address)
+			throws EntityDoesNotExistException, InvalidEntityException {
 		User user = userRepo.findById(userId).orElse(null);
 		if (user == null) {
 			throw new EntityDoesNotExistException("User does not exist for id " + userId + ".");
@@ -42,6 +44,7 @@ public class UserServiceImpl implements UserService {
 		return user.getAddress();
 
 	}
+
 	@Override
 	public User Update(User user) {
 		User update = userRepo.findByUsername(user.getUsername());
@@ -51,13 +54,13 @@ public class UserServiceImpl implements UserService {
 		update.setProfileImageUrl(user.getProfileImageUrl());
 		return userRepo.saveAndFlush(update);
 	}
-	
+
 	@Override
 	public User updateUserTech(int id, Technology tech) {
 		User updateUser = userRepo.findById(id).get();
-		if(updateUser != null) {
+		if (updateUser != null) {
 			List<Technology> stack = updateUser.getStack();
-			if(stack.contains(tech)) {
+			if (stack.contains(tech)) {
 				stack.remove(tech);
 			} else {
 				stack.add(tech);
@@ -67,16 +70,16 @@ public class UserServiceImpl implements UserService {
 		}
 		return updateUser;
 	}
-	
+
 	@Override
 	public User getUserByUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
-	
+
 	@Override
 	public boolean Destroy(int id) {
 		User user = userRepo.findById(id).get();
-		if(user.isEnabled() == true) {
+		if (user.isEnabled() == true) {
 			user.setEnabled(false);
 			userRepo.saveAndFlush(user);
 			return true;
@@ -84,16 +87,21 @@ public class UserServiceImpl implements UserService {
 		return false;
 
 	}
-	
+
 	@Override
 	public boolean ReActivate(int id) {
 		User user = userRepo.findById(id).get();
-		if(user.isEnabled() == false) {
+		if (user.isEnabled() == false) {
 			user.setEnabled(true);
 			userRepo.saveAndFlush(user);
 			return true;
 		}
 		return false;
-		
+
+	}
+
+	@Override
+	public Set<User> getAll(String searchQuery) {
+		return userRepo.getAll(searchQuery);
 	}
 }
