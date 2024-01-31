@@ -56,7 +56,6 @@ public class NodeController {
 				res.setStatus(401);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			res.setStatus(400);
 			node = null;
@@ -78,7 +77,6 @@ public class NodeController {
 				users = nodeService.joinNode(principal.getName(), node);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			res.setStatus(400);
 			node = null;
@@ -87,7 +85,7 @@ public class NodeController {
 
 	}
 
-<<<<<<< HEAD
+
 	@GetMapping(path = { "nodes/{nodeId}/function" })
 	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int id,
 			Principal principal) {
@@ -95,14 +93,7 @@ public class NodeController {
 		
 		
 	}
-//	@GetMapping(path = { "nodes/{nodeId}/function/{Id}" })
-//	public Function findFunctionById(HttpServletRequest req, HttpServletResponse res, @PathVariable("Id") int id,
-//			Principal principal) {
-//		
-//		return funServ.findById(id);
-//		
-//	}
-=======
+
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
@@ -123,5 +114,5 @@ public class NodeController {
 		}
 
 	}
->>>>>>> a92ce35fb2218b81d5b13934e3c4c1c124a0752c
+
 }
