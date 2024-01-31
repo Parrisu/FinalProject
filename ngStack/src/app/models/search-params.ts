@@ -30,7 +30,8 @@ export class SearchParams {
       body.stateAbbr = this.stateAbbr;
     }
     if (0 < this.stack.length) {
-      body.stack = this.stack.toString();
+      const ids = this.stack.map((tech)=>tech.id);
+      body.stack = ids.toString();
     }
     return body;
   }

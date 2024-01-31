@@ -45,6 +45,7 @@ public class NodeController {
 			@RequestParam(name = "cityName", required = false) String cityName,
 			@RequestParam(name = "stateAbbr", required = false) String stateAbbr,
 			@RequestParam(name = "stack", required = false) Set<Technology> stack) {
+		stack = (stack != null && stack.isEmpty()) ? null : stack;
 		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
