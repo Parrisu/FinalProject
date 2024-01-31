@@ -13,6 +13,9 @@ import com.skilldistillery.stack.entities.NodeMemberId;
 import com.skilldistillery.stack.entities.NodeRole;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.exceptions.AuthException;
+import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
+import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.repositories.NodeMemberRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
 import com.skilldistillery.stack.repositories.UserRepository;
@@ -46,6 +49,7 @@ public class NodeServiceImpl implements NodeService {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			node.setUser(user);
+			node.getNodeMembers();
 			return nodeRepo.saveAndFlush(node);
 		}
 		node.setEnabled(true);
@@ -109,6 +113,34 @@ public class NodeServiceImpl implements NodeService {
 	public Optional<Node> findById(int id) {
 		Optional<Node> node = nodeRepo.findById(id);
 		return node;
+	}
+
+	@Override
+	public Node updateNode(int nodeId, Node node, String username)
+			throws InvalidEntityException, EntityDoesNotExistException, AuthException {
+		
+		Node m = nodeRepo.findById(nodeId).orElseThrow(EntityDoesNotExistException::new);
+		
+		User user = userRepo.findByUsername(username);
+		if (user == null) {
+			throw new EntityDoesNotExistException();
+		}
+		
+		if (!m.getUser().equals(user)) {
+			throw new AuthException();
+		}
+
+		m.setEnabled(node.isEnabled());
+		m.setCity(node.getCity());
+		m.setStateAbbreviation(node.getStateAbbreviation());
+		m.setDescription(node.getDescription());
+		m.setImageUrl(node.getImageUrl());
+	
+		if (node.getStack() != null) {
+			m.setStack(node.getStack());
+		}
+
+		return m;
 	}
 
 }

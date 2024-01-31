@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Address;
@@ -22,6 +21,8 @@ import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.exceptions.AuthException;
+import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.services.AddressService;
 import com.skilldistillery.stack.services.FunctionService;
@@ -40,11 +41,17 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
-	
+
 	@Autowired
 	private AddressService addService;
 
 	// Node Routing //////////////////////////////////////////////////
+
+	@PutMapping({ "{nodeId}" })
+	public Node updateNode(@PathVariable("nodeId") int nodeId, @RequestBody Node node, Principal principal)
+			throws AuthException, EntityDoesNotExistException, InvalidEntityException {
+		return nodeService.updateNode(nodeId, node, principal.getName());
+	}
 
 	@GetMapping
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
@@ -55,7 +62,7 @@ public class NodeController {
 		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
-	@GetMapping(path={"{id}"})
+	@GetMapping(path = { "{id}" })
 	public Node findById(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
 			Principal principal) {
 		Node node = nodeService.findById(id).orElse(null);
@@ -79,7 +86,6 @@ public class NodeController {
 		}
 		return node;
 	}
-
 
 	@PostMapping(path = { "{nodeId}/members" })
 	public List<User> joinNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
@@ -108,7 +114,6 @@ public class NodeController {
 
 		if (node == null) {
 			res.setStatus(404);
-
 		} else {
 			boolean leftNode = nodeService.leaveNode(principal.getName(), node);
 			if (leftNode) {
@@ -126,14 +131,10 @@ public class NodeController {
 		Node node = nodeService.getNodeById(nodeId);
 		return nodeService.findUserInNodeGroup(node);
 	}
-	
-	@PutMapping({"{nodeId}"})
-	public Node updateNode(@PathVariable("nodeId") int id, @RequestBody Node node, Principal principal) {
-		return null;
-	}
+
 
 	// Function Routing //////////////////////////////////////////////////
-	
+
 	@GetMapping(path = { "{nodeId}/function/{fId}" })
 	public Function getFunctionDetails(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
@@ -155,7 +156,7 @@ public class NodeController {
 
 	@PostMapping(path = { "{nodeId}/function" })
 	public Function findFunctionById(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
-			HttpServletRequest req, HttpServletResponse res, Principal principal) throws InvalidEntityException{
+			HttpServletRequest req, HttpServletResponse res, Principal principal) throws InvalidEntityException {
 		Address address = addService.createAddress(function.getAddress());
 		function.setAddress(address);
 
