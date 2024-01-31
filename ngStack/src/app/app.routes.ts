@@ -10,12 +10,14 @@ import { SearchComponent } from './components/search/search.component';
 import { FunctionComponent } from './components/function/function.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { CreateFunctionFormComponent } from './components/create-function-form/create-function-form.component';
+import { DirectoryComponent } from './components/directory/directory.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home Page', component: HomeComponent },
   { path: 'login', title: 'Login Page', component: LoginComponent },
   { path: 'signup', title: 'Sign Up Page', component: SignupComponent },
+  { path: 'directory', title: 'Directory', component: DirectoryComponent },
   { path: 'nodes/:id', title: 'Show node', component: NodeComponent },
   {
     path: 'technologies',
