@@ -2,6 +2,8 @@ package com.skilldistillery.stack.entities;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ public class FunctionImage {
 	@Column(name = "image_url")
 	private String imgUrl;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "function_id")
 	private Function function;

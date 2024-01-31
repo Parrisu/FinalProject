@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.services.FunctionService;
 import com.skilldistillery.stack.services.NodeService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +29,9 @@ public class NodeController {
 
 	@Autowired
 	private NodeService nodeService;
+	
+	@Autowired
+	private FunctionService funServ;
 
 	@GetMapping(path = { "nodes", "nodes/" })
 	public List<Node> showAllNodes(HttpServletRequest req, HttpServletResponse res, Principal principal) {
@@ -82,6 +87,22 @@ public class NodeController {
 
 	}
 
+
+	@GetMapping(path = { "nodes/{nodeId}/function" })
+	public List<Function> findFunctionsByNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int id,
+			Principal principal) {
+		return funServ.findByNode(id);
+		
+		
+	}
+//	@GetMapping(path = { "nodes/{nodeId}/function/{Id}" })
+//	public Function findFunctionById(HttpServletRequest req, HttpServletResponse res, @PathVariable("Id") int id,
+//			Principal principal) {
+//		
+//		return funServ.findById(id);
+//		
+//	}
+
 	@DeleteMapping(path = { "nodes/{nodeId}/leave" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
@@ -102,6 +123,7 @@ public class NodeController {
 		}
 
 	}
+
 	@GetMapping(path = { "nodes/{nodeId}/members" })
 	public List<User> searchForUserInNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
