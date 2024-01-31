@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.stack.entities.Address;
 import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.exceptions.InvalidEntityException;
+import com.skilldistillery.stack.services.AddressService;
 import com.skilldistillery.stack.services.FunctionService;
 import com.skilldistillery.stack.services.NodeService;
 
@@ -36,6 +39,9 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
+	
+	@Autowired
+	private AddressService addService;
 
 	// Node Routing //////////////////////////////////////////////////
 
@@ -136,7 +142,9 @@ public class NodeController {
 
 	@PostMapping(path = { "{nodeId}/function" })
 	public Function findFunctionById(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
-			HttpServletRequest req, HttpServletResponse res, Principal principal) {
+			HttpServletRequest req, HttpServletResponse res, Principal principal) throws InvalidEntityException{
+		Address address = addService.createAddress(function.getAddress());
+		function.setAddress(address);
 
 		return funServ.createFunction(nodeId, function);
 

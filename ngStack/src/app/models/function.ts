@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { Nodes } from "./node";
+import { Address } from "./address";
 
 export class Function {
   id: number;
@@ -11,8 +12,9 @@ export class Function {
   end: string;
   cap: number;
   imgUrl: string;
-  creator: User;
+  user: User;
   node: Nodes;
+  address: Address;
 
   constructor(
     id: number = 0,
@@ -24,8 +26,9 @@ export class Function {
     end: string = "",
     cap: number = 0,
     imgUrl: string = "",
-    creator: User = new User(),
+    user: User = new User(),
     node: Nodes = new Nodes(),
+    address: Address = new Address(),
   ) {
     this.id = id;
     this.name = name;
@@ -36,8 +39,9 @@ export class Function {
     this.end = end;
     this.cap = cap;
     this.imgUrl = imgUrl;
-    this.creator = creator;
+    this.user = user;
     this.node = node;
+    this.address = address;
   }
 
 }
