@@ -15,3 +15,8 @@
 .node:hover {
   cursor: pointer;
 }
+
+#cardbackground {
+  color: white;
+  background-color: #1c1c1c;
+}
