@@ -590,7 +590,7 @@ INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `up
 INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `state_abbreviation`, `description`, `image_url`, `enabled`, `city`, `nodecol`) VALUES (7, 'Sharpest C# Around ', 7, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'CO', 'Come Join us and learn all you could ever want to know about C#', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRZFPJ3NWeuA3GmxQMsS1yJr3p0uG5DKn34Q&usqp=CAU', 1, 'Parker', NULL);
 INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `state_abbreviation`, `description`, `image_url`, `enabled`, `city`, `nodecol`) VALUES (8, 'The Linux Lovers', 8, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'CO', 'We are a group dedicated to spreading the good word of linux to all who will listen', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMo5VzGVzK273cmG9zuXWToFVZZBpbUO7ojw&usqp=CAU', 1, 'Aurora', NULL);
 INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `state_abbreviation`, `description`, `image_url`, `enabled`, `city`, `nodecol`) VALUES (9, 'Sailors of the high C', 9, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'CO', 'Avast ye matey, join us and learn all about C so you too can stay afloat in this job market', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTmJ6mvly55YDW9tu91Ng4T4wtcECjFp67hw&usqp=CAU', 1, 'Colorado Springs', NULL);
-INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `state_abbreviation`, `description`, `image_url`, `enabled`, `city`, `nodecol`) VALUES (10, 'Rust Rangers', 10, 1, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'CO', 'We are the fastest Rust programmers in the west', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStPMZJJ-PJhSFuBO_F_WeZ9o0Y3tH1wuwtRw&usqp=CAU', 1, 'Centennial', NULL);
+INSERT INTO `node` (`id`, `name`, `user_id`, `open_to_public`, `created_on`, `updated_on`, `state_abbreviation`, `description`, `image_url`, `enabled`, `city`, `nodecol`) VALUES (10, 'Rust Rangers', 10, 0, '2001-01-01 01:01:01', '2001-01-01 01:01:01', 'CO', 'We are the fastest Rust programmers in the west', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStPMZJJ-PJhSFuBO_F_WeZ9o0Y3tH1wuwtRw&usqp=CAU', 1, 'Centennial', NULL);
 
 COMMIT;
 
@@ -733,10 +733,35 @@ COMMIT;
 START TRANSACTION;
 USE `stackdb`;
 INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (1, 1);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (1, 3);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (1, 5);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (2, 2);
 INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (2, 4);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (2, 6);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (3, 1);
 INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (3, 2);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (3, 4);
 INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (4, 7);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (4, 8);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (4, 9);
 INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (5, 3);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (5, 5);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (5, 7);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (6, 8);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (6, 9);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (6, 10);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (7, 1);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (7, 5);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (7, 6);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (8, 10);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (8, 2);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (8, 3);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (9, 4);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (9, 6);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (9, 9);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (10, 9);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (10, 10);
+INSERT INTO `node_technology` (`node_id`, `technology_id`) VALUES (10, 2);
 
 COMMIT;
 

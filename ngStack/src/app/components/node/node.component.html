@@ -116,7 +116,7 @@
           "{{node.description}}" - {{node.user.firstName}}
         </div>
         @if (0 < node.stack.length) { <hr>
-          <div class="stack node-display-stack d-inline-block">
+          <div class="display-stack node-display-stack d-inline-block">
             @for (tech of node.stack; track $index) {
             <div class="display-tech" (click)="popFromStack(tech)">
               <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
