@@ -47,8 +47,8 @@
     </div>
     <div class="col-6">
       <div class="text-center"><h2>Nodes</h2></div>
-      <div class="card" *ngFor="let group of groups">
-        <div class="card-header">{{group.name}}</div>
+      <div class="card my-4" *ngFor="let group of groups">
+        <div class="card-header" (click)="redirect(group.id)" id="groupName">{{group.name}} | {{group.description}}</div>
       </div>
     </div>
 </div>

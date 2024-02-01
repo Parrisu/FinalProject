@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { Technology } from '../../models/technology';
@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
     private auth: AuthService,
     private userServ: UserService,
     private techServ: TechnologyService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -98,6 +99,11 @@ export class ProfileComponent implements OnInit {
         }
       }
     )
+  }
+
+  redirect(id: number){
+    this.router.navigateByUrl('nodes/'+id)
+
   }
 
 
