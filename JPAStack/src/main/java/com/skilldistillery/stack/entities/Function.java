@@ -47,7 +47,7 @@ public class Function {
 
 	@Column(name = "end_time")
 	private LocalTime end;
-	
+
 	@CreationTimestamp
 	@Column(name = "created_on")
 	private LocalDateTime created;
@@ -231,12 +231,18 @@ public class Function {
 		return this.node.getId();
 	}
 
+<<<<<<< HEAD
+	@JsonProperty(value = "nodeName")
+	public String getNodeName() {
+		return this.node.getName();
+=======
 	public List<User> getAttendees() {
 		return attendees;
 	}
 
 	public void setAttendees(List<User> attendees) {
 		this.attendees = attendees;
+>>>>>>> 90b33649698f3ae82e765b1905a7f0962d63a6e7
 	}
 
 	@Override

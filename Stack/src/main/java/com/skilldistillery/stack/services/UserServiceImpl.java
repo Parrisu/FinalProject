@@ -1,5 +1,6 @@
 package com.skilldistillery.stack.services;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -103,7 +104,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<User> getAll(String searchQuery) {
-		return userRepo.getAll(searchQuery);
+		return new HashSet<>(userRepo.getAll(searchQuery).stream().filter(User::isEnabled).toList());
+	}
+
+	@Override
+	public User setUserStatus(int userId, boolean status) throws EntityDoesNotExistException {
+		User user = userRepo.findById(userId).orElseThrow(EntityDoesNotExistException::new);
+		user.setEnabled(status);
+		return userRepo.saveAndFlush(user);
 	}
 
 	@Override

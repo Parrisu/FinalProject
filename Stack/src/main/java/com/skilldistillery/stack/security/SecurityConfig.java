@@ -29,10 +29,10 @@ public class SecurityConfig {
     	http.csrf(csrf -> csrf.disable());
     	http.httpBasic(withDefaults());                           // Use HTTP Basic Authentication
         http.authorizeHttpRequests(authorize -> authorize
-            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // For CORS, the preflight request
+				.requestMatchers("/api/admin/**").hasAuthority("admin") // Requests for our REST API must be authorized.
+				.requestMatchers("/api/**").permitAll() // Requests for our REST API must be authorized.
+	            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // For CORS, the preflight request
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
-            .requestMatchers("/api/**").permitAll() // Requests for our REST API must be authorized.
-            .requestMatchers("/api/users/**").permitAll() // Requests for our REST API must be authorized.
             .requestMatchers("/authenticate").authenticated() // Requests for our REST API must be authorized.
             .anyRequest().permitAll());               // All other requests are allowed without authentication.
 

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
 import { PopupDisplayComponent } from './components/popup-display/popup-display.component';
 
@@ -16,6 +16,7 @@ import { PopupDisplayComponent } from './components/popup-display/popup-display.
     RouterLink,
     FormsModule,
     PopupDisplayComponent,
+    NgbDropdownModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

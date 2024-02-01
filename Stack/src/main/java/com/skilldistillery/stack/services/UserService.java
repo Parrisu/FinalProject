@@ -28,6 +28,8 @@ public interface UserService {
 
 	Set<User> getAll(String searchQuery);
 	
+	User setUserStatus(int userId, boolean status) throws EntityDoesNotExistException;
+
 	User getUserById(int id);
 	
 }
