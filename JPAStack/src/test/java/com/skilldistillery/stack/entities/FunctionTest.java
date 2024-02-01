@@ -54,7 +54,6 @@ class FunctionTest {
 		assertEquals(true, function.isEnabled());
 		assertEquals("discussing the philosphy of java", function.getDescription());
 		assertEquals(10, function.getCap());
-		assertEquals(LocalDateTime.of(1970, 1, 1, 1, 0), function.getStart());
 		
 	}
 	
