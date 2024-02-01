@@ -1,6 +1,7 @@
 package com.skilldistillery.stack.controllers;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stack.entities.Address;
+import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.AuthException;
@@ -127,5 +129,11 @@ public class UserController {
 	@GetMapping
 	public Set<User> getUsers(@RequestParam(name = "searchQuery", required = false) String searchQuery) {
 		return userService.getAll(searchQuery);
+	}
+	
+	@GetMapping(path = "{id}/nodes")
+	public List<Node> getNodes(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse res) {
+		User user = userService.getUserById(id);
+		return user.getNodes();
 	}
 }

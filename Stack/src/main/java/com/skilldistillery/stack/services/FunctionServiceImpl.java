@@ -79,9 +79,4 @@ public class FunctionServiceImpl implements FunctionService {
 		
 	}
 
-//	@Override
-//	public List<Attendee> findAttendeeByFunctionId(int id) {
-//		return attRepo.findByFunction(id);
-//	}
-
 }

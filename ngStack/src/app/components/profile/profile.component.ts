@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { Technology } from '../../models/technology';
 import { TechnologyService } from '../../services/technology.service';
+import { Nodes } from '../../models/node';
 
 @Component({
   selector: 'app-profile',
@@ -20,11 +21,12 @@ export class ProfileComponent implements OnInit {
   techAdd: Technology | null = null;
   theStack: Technology[] = [];
   showStack: boolean = false;
+  groups: Nodes[] = [];
 
   constructor(
     private auth: AuthService,
     private userServ: UserService,
-    private techServ: TechnologyService
+    private techServ: TechnologyService,
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class ProfileComponent implements OnInit {
         this.user = user;
         console.log(this.user)
         this.loadStackInfo();
+        this.getGroups();
 
       },
       error: (err) => {
@@ -82,7 +85,23 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  getGroups(){
+    this.userServ.getGroups(this.user.id).subscribe(
+      {
+        next: (nodes)=>{
+          this.groups = nodes;
+          console.log(this.groups)
+        },
+        error: (errors)=>{
+          console.log(errors);
+        }
+      }
+    )
+  }
+
+
   reloadPage() {
     this.loadUserInfo();
+
   }
 }
