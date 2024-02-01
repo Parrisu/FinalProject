@@ -2,20 +2,26 @@
 <div class="row">
   <div class="col-4"></div>
   <div class="col-4">
-    <div class="form">
-      <h4 class="title">Create new Node</h4>
-      <h5>Name:</h5><input [(ngModel)]="newNode.name" type="text" name="name" class="form-control" />
-      <h5>state Abbreviation:</h5><input [(ngModel)]="newNode.stateAbbreviation" type="text" name="stateAbbreviation"
-        class="form-control" />
-      <h5>City:</h5><input [(ngModel)]="newNode.city" type="text" name="city" class="form-control" />
-      <h5>Description:</h5><input [(ngModel)]="newNode.description" type="text" name="description"
-        class="form-control" />
-      <h5>imageurl:</h5><input [(ngModel)]="newNode.imageUrl" type="text" name="imageUrl" class="form-control" />
+    <div class="card p-3" id="cardbackground">
+      <h3 class="title">Create A New Node</h3>
+      <label for="name" class="mb-1">Name Of Function()</label>
+      <input [(ngModel)]="newNode.name" type="text" name="name" class="form-control" placeholder="Fun Party"/>
+      <label for="stateAbbreviation" class="my-1">State</label>
+      <input [(ngModel)]="newNode.stateAbbreviation" type="text" name="stateAbbreviation"
+      class="form-control" placeholder="CO"/>
+      <label for="city" class="my-1">City</label>
+      <input [(ngModel)]="newNode.city" type="text" name="city" class="form-control" placeholder="Denver"/>
+      <label for="description" class="my-1">Description</label>
+      <input [(ngModel)]="newNode.description" type="text" name="description"
+      class="form-control" placeholder="Say something..."/>
+      <label for="imageUrl" class="my-1">Image Url</label>
+      <input [(ngModel)]="newNode.imageUrl" type="text" name="imageUrl" class="form-control" placeholder="cats.png"/>
       <div class="d-flex">
-        <h5>Open to the public: &nbsp;</h5><input [(ngModel)]="newNode.openToPublic" type="checkbox"
+        <label for="openToPublic" class="my-1">Public Group</label>
+        <input [(ngModel)]="newNode.openToPublic" type="checkbox"
           name="openToPublic" />
       </div>
-      <br><button (click)="addNewNode(newNode)" class="btn btn-primary form-control">Create new Node</button>
+      <br><button (click)="addNewNode(newNode)" class="btn btn-outline-warning form-control">Create new Node</button>
     </div>
   </div>
   <div class="col-4"></div>

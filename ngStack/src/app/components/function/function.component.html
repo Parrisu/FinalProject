@@ -2,33 +2,36 @@
   <div class="row">
     <div class="col">
       <!--Card-->
-      <div class="shadow card my-3">
+      <div class="shadow card my-3" id="cardbackground">
         <div class="card-header" id="titlehead">
            <h3 class="">{{function.name}}</h3>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-6">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Max: <strong>{{attendees}}/{{function.cap}}</strong></li>
-                  <li class="list-group-item">{{function.start}} - {{function.end}}</li>
-                  <li class="list-group-item">Created By: <strong>{{function.user.firstName}}</strong></li>
-                  <li class="list-group-item">Address: {{function.address.street}}</li>
+                  Max: <strong>{{attendees}}/{{function.cap}}</strong><br>
+                  <hr>
+                  {{function.start}} - {{function.end}} <br>
+                  <hr>
+                  Created By: <strong>{{function.user.firstName}}</strong> <br>
+                  <hr>
+                  Address: {{function.address.street}} <br>
+                  <hr>
                   <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{function.address.street}}+{{function.address.city}}+{{function.address.stateAbbreviation}}" class="btn btn-primary my-2">Directions</a>
-                </ul>
-              </div>
-              <div class="col-auto ">
-                <!-- <iframe src="https://storage.googleapis.com/maps-solutions-dpwsjnixw4/commutes/kjgx/commutes.html"
-                  width="100px" height="100px"
-                  style="border:0; overflow: hidden;"
-                  loading="lazy">
-                </iframe> -->
-                <a><img class="mx-5 px-5" [src]="function.imgUrl" id="functionImg" alt=""></a><br>
-              </div>
+                  <i  class="fa fa-trash icon" aria-hidden="true" (click)="disableFunction()"></i>
+
+                </div>
+                <div class="col-auto ">
+                  <!-- <iframe src="https://storage.googleapis.com/maps-solutions-dpwsjnixw4/commutes/kjgx/commutes.html"
+                    width="100px" height="100px"
+                    style="border:0; overflow: hidden;"
+                    loading="lazy">
+                  </iframe> -->
+                  <a><img class="mx-5 px-5" [src]="function.imgUrl" id="functionImg" alt=""></a>
+                </div>
             </div>
           </div>
         </div>
-        <i id="icon" class="fa fa-trash" aria-hidden="true" (click)="disableFunction()"></i>
       <!--Card-->
     </div>
   </div>
