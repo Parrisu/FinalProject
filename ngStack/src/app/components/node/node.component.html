@@ -71,10 +71,17 @@
                 <button type="button" class="btn btn-outline-dark" (click)="submitNodeEdit()">Save</button>
               </div>
             </ng-template>
-            <button class="btn btn-outline-primary mx-3" (click)="openEditModal(content)">Edit Your Node</button>
+            <button class="btn btn-outline-danger me-3" (click)="submitNodeDelete()">Delete This Node</button>
+            <button class="btn btn-outline-primary me-3" (click)="openEditModal(content)">Edit Your Node</button>
             }
             @if (userIsMember) {
-            <button class="btn btn-outline-primary" [routerLink]="'create'">Create A Function</button>
+            <button class="btn btn-outline-primary me-3" [routerLink]="'create'">Create A Function</button>
+            @if (!userIsOwner) {
+              <button class="btn btn-outline-primary me-3" (click)="leaveGroup()">Leave Group</button>
+            }
+            }
+            @else {
+            <button class="btn btn-outline-primary me-3" (click)="joinGroup()">Join Group</button>
             }
           </div>
         </div>

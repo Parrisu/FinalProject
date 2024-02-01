@@ -129,7 +129,32 @@ export class NodeComponent implements OnInit {
       },
       error: (err: any) => {
         this.nodeEditErrorText = 'Your edit is invalid';
-      }
+      },
+    });
+  }
+
+  submitNodeDelete() {
+    this.nodeService.deleteNode(this.node.id).subscribe({
+      next: () => {
+        localStorage.setItem('popup-message', 'Your node has been deleted');
+        this.router.navigateByUrl('/home');
+      },
+    });
+  }
+
+  leaveGroup() {
+    this.nodeService.leaveNode(this.node.id).subscribe({
+      next: () => {
+        this.refreshNodeMembers(this.node.id);
+      },
+    });
+  }
+
+  joinGroup() {
+    this.nodeService.joinNode(this.node.id).subscribe({
+      next: () => {
+        this.refreshNodeMembers(this.node.id);
+      },
     });
   }
 }
