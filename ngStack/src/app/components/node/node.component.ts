@@ -20,11 +20,13 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class NodeComponent implements OnInit {
   //Fields
   node: Nodes = new Nodes();
+  editNode: Nodes = new Nodes();
   functions: Function[] = [];
   members: User[] = [];
   userIsMember = false;
   userIsOwner = false;
   closeResult = '';
+  nodeEditErrorText = '';
 
   //constructor
   constructor(
@@ -94,6 +96,7 @@ export class NodeComponent implements OnInit {
   }
 
   openEditModal(content: TemplateRef<any>) {
+    this.editNode = Object.assign({}, this.node);
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -117,4 +120,16 @@ export class NodeComponent implements OnInit {
     }
   }
 
+  submitNodeEdit() {
+    this.nodeService.updateNode(this.node.id, this.editNode).subscribe({
+      next: (node: Nodes) => {
+        this.modalService.dismissAll('Save click');
+        console.log(node);
+        this.refreshNode(node.id);
+      },
+      error: (err: any) => {
+        this.nodeEditErrorText = 'Your edit is invalid';
+      }
+    });
+  }
 }
