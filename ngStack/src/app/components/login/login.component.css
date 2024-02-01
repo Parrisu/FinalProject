@@ -5,6 +5,7 @@
 }
 
 .auth-form-container {
+  background-color: white;
   padding-top: 1rem;
   padding-bottom: 2rem;
   padding-inline: 3rem;

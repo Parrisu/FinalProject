@@ -142,3 +142,7 @@
   background-color: rgb(21, 21, 21);
   background-image: linear-gradient(rgba(8, 8, 8, 0.8), rgba(8, 8, 8, 0));
 }
+
+.node-image {
+  object-fit: cover;
+}
