@@ -104,4 +104,9 @@ public class UserServiceImpl implements UserService {
 	public Set<User> getAll(String searchQuery) {
 		return userRepo.getAll(searchQuery);
 	}
+
+	@Override
+	public User getUserById(int id) {
+		return userRepo.findById(id).get();
+	}
 }

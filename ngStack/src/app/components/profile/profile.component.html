@@ -45,7 +45,10 @@
 
     </div>
     <div class="col-6">
-      <h1>Nodes</h1>
+      <div class="text-center"><h2>Nodes</h2></div>
+      <div class="card" *ngFor="let group of groups">
+        <div class="card-header">{{group.name}}</div>
+      </div>
     </div>
 </div>
 </div>
