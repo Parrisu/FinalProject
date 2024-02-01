@@ -92,3 +92,10 @@
   background-color: #afafaf;
 }
 
+.dropdown-button {
+  bottom: -0.4rem;
+}
+
+.dropdown-menu {
+  left: -3rem;
+}

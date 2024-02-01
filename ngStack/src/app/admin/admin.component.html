@@ -1,1 +1,105 @@
-<p>admin works!</p>
+<div id="panel" class="row">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="row table-container">
+      <div class="col-4">
+        <div class="scroll-table">
+          <h3>Nodes</h3>
+          <hr>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Enabled</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (node of nodes; track node.id) {
+              <tr>
+                <th scope="row">{{ node.id}}</th>
+                <td>
+                  {{node.name}}
+                </td>
+                <td>{{ node.city}}</td>
+                <td>{{ node.stateAbbreviation}}</td>
+                <td class="text-center"><input type="checkbox" [(ngModel)]="node.enabled"
+                    (ngModelChange)="setNodeStatus(node)"></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="scroll-table">
+          <h3>Users</h3>
+          <hr>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+                <th scope="col">Name</th>
+                <th scope="col">Enabled</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of users; track user.id) {
+              <tr>
+                <th scope="row">{{ user.id}}</th>
+                <td>
+                  {{user.username}}
+                </td>
+                <td>{{ user.role}}</td>
+                <td>{{ user.firstName}} {{user.lastName}}</td>
+                <td class="text-center"><input type="checkbox" [(ngModel)]="user.enabled"
+                    (ngModelChange)="setUserStatus(user)"></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-4">
+
+        <div class="scroll-table">
+          <h3>Functions</h3>
+          <hr>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Cancelled</th>
+                <th scope="col">Node Id</th>
+                <th scope="col">Node Id</th>
+                <th scope="col">Enabled</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (function of functions; track function.id) {
+              <tr>
+                <th scope="row">{{ function.id}}</th>
+                <td>
+                  {{function.name}}
+                </td>
+                <td>{{ function.cancelled}}</td>
+                <td>{{ function.nodeId}}</td>
+                <td>{{ function.nodeName}}</td>
+                <td class="text-center"><input type="checkbox" [(ngModel)]="function.enabled"
+                    (ngModelChange)="setFunctionStatus(function)"></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>
