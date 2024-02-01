@@ -56,6 +56,7 @@ export class FunctionComponent implements OnInit {
         next: (users)=>{
           this.users = users;
           this.attendees = this.users.length;
+          console.log(this.attendees)
         },
         error: (errors)=>{
           console.log(errors)

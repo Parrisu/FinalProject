@@ -132,7 +132,7 @@
         <div class="group-functions">
           <div *ngFor="let function of functions" class="function">
             <div class="function-header d-flex justify-content-between">
-              <h4>{{function.name}}</h4>
+              <h4 (click)="redirect(function.id)" id="functionName">{{function.name}}</h4>
               <h5>{{function.address.street}}</h5>
             </div>
             <div class="d-flex justify-content-between">

@@ -41,7 +41,7 @@ export class FunctionService {
     );
   }
   getAttendees(nid: number, fId: number): Observable<User[]> {
-    const endpoint = `${this.baseUrl}/${nid}/function/${fId}`;
+    const endpoint = `${this.baseUrl}/${nid}/function/${fId}/attendees`;
     const credentials = this.auth.getCredentials();
     let httpOptions = {};
     if (this.auth.checkLogin()) {
