@@ -1,9 +1,11 @@
 <div id="page-container">
   <nav id="navbar" class="navbar navbar-expand-lg navbar-light mb-3">
-    <div class="container-fluid">
+    <div class="container-fluid" id="navigation">
       <img id="brand-logo" src="assets/img/logo-xs.png" alt="The stack brand logo extra small." [routerLink]="'home'">
       <div class="nav-item active">
-        <a class="nav-link brand" [routerLink]="'home'" (click)="isMenuCollapsed = true">The Stack</a>
+        <a class="nav-link brand" [routerLink]="'home'" (click)="isMenuCollapsed = true">
+         <span id="bracket">[</span> The Stack <span id="bracket">]</span>
+        </a>
       </div>
 
       <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
