@@ -9,6 +9,8 @@ import { Function } from '../../models/function';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Technology } from '../../models/technology';
+import { TechnologyService } from '../../services/technology.service';
 
 @Component({
   selector: 'app-node',
@@ -20,15 +22,19 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class NodeComponent implements OnInit {
   //Fields
   node: Nodes = new Nodes();
+  editNode: Nodes = new Nodes();
   functions: Function[] = [];
   members: User[] = [];
   userIsMember = false;
   userIsOwner = false;
   closeResult = '';
+  nodeEditErrorText = '';
+  technologies: Technology[] = [];
 
   //constructor
   constructor(
     private auth: AuthService,
+    private techService: TechnologyService,
     private modalService: NgbModal,
     private nodeService: NodeService,
     private funcService: FunctionService,
@@ -94,6 +100,17 @@ export class NodeComponent implements OnInit {
   }
 
   openEditModal(content: TemplateRef<any>) {
+    this.editNode = Object.assign({}, this.node);
+
+    this.techService.showAll().subscribe({
+      next: (technologies: Technology[]) => {
+        const stackIds = this.editNode.stack.map((item) => item.id);
+        this.technologies = technologies.filter(
+          (tech) => !stackIds.includes(tech.id)
+        );
+      },
+    });
+
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -117,4 +134,59 @@ export class NodeComponent implements OnInit {
     }
   }
 
+  submitNodeEdit() {
+    this.nodeService.updateNode(this.node.id, this.editNode).subscribe({
+      next: (node: Nodes) => {
+        this.modalService.dismissAll('Save click');
+        console.log(node);
+        this.refreshNode(node.id);
+      },
+      error: (err: any) => {
+        this.nodeEditErrorText = 'Your edit is invalid';
+      },
+    });
+  }
+
+  submitNodeDelete() {
+    this.nodeService.deleteNode(this.node.id).subscribe({
+      next: () => {
+        localStorage.setItem('popup-message', 'Your node has been deleted');
+        this.router.navigateByUrl('/home');
+      },
+    });
+  }
+
+  leaveGroup() {
+    this.nodeService.leaveNode(this.node.id).subscribe({
+      next: () => {
+        this.refreshNodeMembers(this.node.id);
+      },
+    });
+  }
+
+  joinGroup() {
+    this.nodeService.joinNode(this.node.id).subscribe({
+      next: () => {
+        this.refreshNodeMembers(this.node.id);
+      },
+    });
+  }
+
+  pushToStack(tech: Technology) {
+    if (!this.editNode.stack.includes(tech)) {
+      this.editNode.stack.push(tech);
+      this.technologies = this.technologies.filter(
+        (item: Technology) => item !== tech
+      );
+    }
+  }
+
+  popFromStack(tech: Technology) {
+    if (this.editNode.stack.includes(tech)) {
+      this.editNode.stack = this.editNode.stack.filter(
+        (item) => item !== tech
+      );
+      this.technologies.push(tech);
+    }
+  }
 }

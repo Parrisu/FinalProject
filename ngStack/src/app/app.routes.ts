@@ -21,6 +21,7 @@ export const routes: Routes = [
   { path: 'signup', title: 'Sign Up Page', component: SignupComponent },
   { path: 'directory', title: 'Directory', component: DirectoryComponent },
   { path: 'nodes/:id', title: 'Show node', component: NodeComponent },
+  { path: 'create-node', title: 'Create A Node', component: CreateNodeFormComponent },
   {
     path: 'technologies',
     title: 'Technologies',

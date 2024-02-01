@@ -47,6 +47,12 @@ public class NodeController {
 
 	// Node Routing //////////////////////////////////////////////////
 
+	@DeleteMapping("{nodeId}")
+	public void deleteNode(@PathVariable("nodeId") int nodeId, Principal principal)
+			throws EntityDoesNotExistException, AuthException {
+		nodeService.deleteNode(nodeId, principal.getName());
+	}
+
 	@PutMapping({ "{nodeId}" })
 	public Node updateNode(@PathVariable("nodeId") int nodeId, @RequestBody Node node, Principal principal)
 			throws AuthException, EntityDoesNotExistException, InvalidEntityException {
@@ -95,7 +101,6 @@ public class NodeController {
 		try {
 			if (node == null) {
 				res.setStatus(404);
-
 			} else {
 				users = nodeService.joinNode(principal.getName(), node);
 			}
@@ -107,7 +112,7 @@ public class NodeController {
 		return users;
 	}
 
-	@DeleteMapping(path = { "{nodeId}/leave" })
+	@DeleteMapping(path = { "{nodeId}/members" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
 		Node node = nodeService.getNodeById(nodeId);
@@ -131,7 +136,6 @@ public class NodeController {
 		Node node = nodeService.getNodeById(nodeId);
 		return nodeService.findUserInNodeGroup(node);
 	}
-
 
 	// Function Routing //////////////////////////////////////////////////
 
@@ -187,9 +191,9 @@ public class NodeController {
 		}
 		return toUpdate;
 	}
-	
+
 	// ATTENDEES MAPPING //////////////////////////////
-	
+
 	@GetMapping(path = { "{nodeId}/function/{fId}/attendees" })
 	public List<User> findAttendeesByNode(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId, Principal principal) {
