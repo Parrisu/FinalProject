@@ -21,6 +21,7 @@ export class FunctionComponent implements OnInit {
   fId: number = 0;
   attendees: number = 0;
   users: User[] = [];
+  check: Boolean = false;
 
 
 
@@ -40,6 +41,7 @@ export class FunctionComponent implements OnInit {
       {
         next: (funct)=>{
           this.function = funct;
+          console.log(this.function)
           this.getAttendees();
 
         },
@@ -57,6 +59,7 @@ export class FunctionComponent implements OnInit {
           this.users = users;
           this.attendees = this.users.length;
           console.log(this.attendees)
+          this.checkUser();
         },
         error: (errors)=>{
           console.log(errors)
@@ -76,6 +79,19 @@ export class FunctionComponent implements OnInit {
           this.router.navigateByUrl("nodes/"+this.nodeId)
         },
         error: (errors)=>{
+          console.log(errors)
+        }
+      }
+    )
+  }
+
+  checkUser(){
+    this.auth.getLoggedInUser().subscribe(
+      {
+        next: (user) => {
+            this.check = (this.function.user.id == user.id);
+        },
+        error: (errors) => {
           console.log(errors)
         }
       }

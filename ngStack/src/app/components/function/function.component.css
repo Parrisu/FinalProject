@@ -14,5 +14,6 @@
   margin-left: 20vw;
   opacity: 100%;
   transition: 0.3s;
+  cursor: pointer;
 }
 
