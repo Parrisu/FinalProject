@@ -1,4 +1,18 @@
 #functionImg {
-  max-width: 400px;
+  object-fit: cover;
+  width: 23vw;
+  padding-bottom: 2vw;
+}
+
+.icon {
+  margin-left: 20vw;
+  opacity: 90%;
+  transition: 0.3s;
+}
+
+.icon:hover {
+  margin-left: 20vw;
+  opacity: 100%;
+  transition: 0.3s;
 }
 

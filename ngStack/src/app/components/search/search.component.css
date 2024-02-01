@@ -49,13 +49,29 @@
   background-color: white;
 }
 
-.results * {
-  color: black;
-}
 
 .input-group-text {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  color: white;
+  background-color: rgb(21, 21, 21);
+  background-image: linear-gradient(rgba(8, 8, 8, 0.8), rgba(8, 8, 8, 0));
+}
+
+#text {
+  color: white;
+}
+
+#tabHeader {
+  color: white ;
+}
+
+#yellow {
+  color: #FFC200;
+}
+
+#searchBackground{
+  color: white;
+  background-color: rgb(21, 21, 21);
+  background-image: linear-gradient(rgba(8, 8, 8, 0.8), rgba(8, 8, 8, 0));
 }
 
 .stack {
@@ -99,4 +115,13 @@
 
 .entity:hover {
   cursor: pointer;
+}
+
+#cityNameControl {
+  color: black;
+}
+
+
+.nav-link:hover {
+  color: #FFC200;
 }

@@ -26,7 +26,7 @@ export class PopupDisplayComponent implements AfterViewInit {
       this.popupText = msg;
       setTimeout(() => {
         this.clearContent();
-      }, 5000);
+      }, 10000);
     }
   }
 

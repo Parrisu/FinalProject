@@ -8,7 +8,7 @@
 <div id="search-wrap" class="row">
   <div class="col-2"></div>
   <div class="col-3">
-    <div class="controls">
+    <div class="controls" id="cardbackground">
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text">City</div>
@@ -50,19 +50,19 @@
 
   </div>
   <div class="col-5">
-    <div class="results">
+    <div class="results" id="searchBackground">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
         <li [ngbNavItem]="1">
-          <button ngbNavLink>Nodes</button>
+          <button ngbNavLink id="tabHeader">Nodes</button>
           <ng-template ngbNavContent>
             <div class="result-set">
               @for (node of nodes; track $index) {
               <div class="node entity" [routerLink]="'/nodes/'+node.id">
                 <div class="d-flex justify-content-between">
-                  <h3>{{node.name}}</h3>
-                  <h3>{{node.city}}, {{node.stateAbbreviation}}</h3>
+                  <h3 id="text">{{node.name}}</h3>
+                  <h3 id="text">{{node.city}}, {{node.stateAbbreviation}}</h3>
                 </div>
-                <div class="content">
+                <div class="content" id="text">
                   {{node.description}}
                 </div>
               </div>
@@ -80,7 +80,7 @@
               @for (func of functions; track $index) {
               <div class="entity function" [routerLink]="'/nodes/'+func.nodeId">
                 <div class="d-flex justify-content-between">
-                  <h3>&#64;{{func.name}}</h3>
+                  <h3 id="text"><span id="yellow">&#64;</span>{{func.name}}</h3>
                 </div>
               </div>
               }
@@ -94,12 +94,12 @@
               @for (user of users; track $index) {
               <div class="user entity">
                 <div class="d-flex justify-content-between">
-                  <h3>&#64;{{user.username}}</h3>
-                  <h3>{{user.address?.city}}, {{user.address?.stateAbbreviation}}</h3>
+                  <h3 id="text"><span id="yellow">&#64;</span>{{user.username}}</h3>
+                  <h3 id="text">{{user.address?.city}}, {{user.address?.stateAbbreviation}}</h3>
                 </div>
                 <div class="content">
-                  <blockquote class="elipsis-text">
-                    {{user.aboutMe}}
+                  <blockquote class="elipsis-text" id="text">
+                    "{{user.aboutMe}}"
                   </blockquote>
                 </div>
               </div>
