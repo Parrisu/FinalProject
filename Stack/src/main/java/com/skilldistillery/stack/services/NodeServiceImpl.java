@@ -154,4 +154,11 @@ public class NodeServiceImpl implements NodeService {
 		nodeRepo.saveAndFlush(node);
 	}
 
+	@Override
+	public Node setEnabled(int nodeId, boolean status) throws EntityDoesNotExistException {
+		Node node = nodeRepo.findById(nodeId).orElseThrow(EntityDoesNotExistException::new);
+		node.setEnabled(status);
+		return nodeRepo.saveAndFlush(node);
+	}
+
 }

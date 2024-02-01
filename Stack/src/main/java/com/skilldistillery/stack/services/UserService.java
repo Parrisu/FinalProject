@@ -25,5 +25,7 @@ public interface UserService {
 	User updateUserTech(int userId, Technology tech);
 
 	Set<User> getAll(String searchQuery);
+	
+	User setUserStatus(int userId, boolean status) throws EntityDoesNotExistException;
 
 }
