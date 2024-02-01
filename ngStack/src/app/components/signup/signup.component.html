@@ -2,7 +2,7 @@
   <div class="col-sm-1 col-md-2 col-xl-3 col-xxl-4"></div>
   <div class="col-sm-10 col-md-8 col-xl-6 px-5 col-xxl-4">
     <div class="error">{{errorFieldText}}</div>
-    <div class="auth-form-container">
+    <div class="auth-form-container" id="cardbackground">
       @switch (currentSlide) {
       @case (1) {
       <h3 class="text-center">Create An Account</h3>
@@ -48,7 +48,7 @@
         <br>
 
         <div class="form-group d-flex">
-          <button type="button" name="submit" class="btn btn-primary form-control"
+          <button type="button" name="submit" class="btn btn-outline-warning form-control"
             (click)="submitFirstForm()">Next</button>
         </div>
       </form>
@@ -87,10 +87,10 @@
         <br>
 
         <div class="form-group d-flex">
-          <button type="submit" name="submit" class="btn btn-secondary form-control"
+          <button type="submit" name="submit" class="btn btn-outline-secondary form-control"
             (click)="previousSlide()">Back</button>
           <div class="btn-inline-spacer"></div>
-          <button type="button" name="submit" class="btn btn-primary form-control"
+          <button type="button" name="submit" class="btn btn-outline-warning form-control"
             (click)="submitSecondForm()">Next</button>
         </div>
       </form>
@@ -122,10 +122,10 @@
         <br>
 
         <div class="form-group d-flex">
-          <button type="submit" name="submit" class="btn btn-secondary form-control"
+          <button type="submit" name="submit" class="btn btn-outline-secondary form-control"
             (click)="previousSlide()">Back</button>
           <div class="btn-inline-spacer"></div>
-          <button type="button" name="submit" class="btn btn-primary form-control"
+          <button type="button" name="submit" class="btn btn-outline-warning form-control"
             (click)="submitThirdForm()">Submit</button>
         </div>
       </form>
