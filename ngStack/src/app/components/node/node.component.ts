@@ -141,4 +141,20 @@ export class NodeComponent implements OnInit {
       },
     });
   }
+
+  leaveGroup() {
+    this.nodeService.leaveNode(this.node.id).subscribe({
+      next: () => {
+        this.refreshNodeMembers(this.node.id);
+      },
+    });
+  }
+
+  joinGroup() {
+    this.nodeService.joinNode(this.node.id).subscribe({
+      next: () => {
+        this.refreshNodeMembers(this.node.id);
+      },
+    });
+  }
 }

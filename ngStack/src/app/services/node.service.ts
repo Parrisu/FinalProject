@@ -151,4 +151,20 @@ export class NodeService {
       })
     );
   }
+
+  public leaveNode(nodeId: number): Observable<void> {
+    const endpoint = `${this.url}/${nodeId}/members`;
+    const options = this.getHttpOptions();
+    return this.http.delete<void>(endpoint, options).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+              NodeService.leaveNode(nodeId: number): Observable<void>;
+              Error while attempting DELETE to endpoint ${endpoint}`)
+        );
+      })
+    );
+  }
 }

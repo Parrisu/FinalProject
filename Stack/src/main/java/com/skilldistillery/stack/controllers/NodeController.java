@@ -101,7 +101,6 @@ public class NodeController {
 		try {
 			if (node == null) {
 				res.setStatus(404);
-
 			} else {
 				users = nodeService.joinNode(principal.getName(), node);
 			}
@@ -113,7 +112,7 @@ public class NodeController {
 		return users;
 	}
 
-	@DeleteMapping(path = { "{nodeId}/leave" })
+	@DeleteMapping(path = { "{nodeId}/members" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
 		Node node = nodeService.getNodeById(nodeId);
