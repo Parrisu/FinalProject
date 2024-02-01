@@ -117,3 +117,9 @@
 #functionName:hover{
   opacity: 80%;
 }
+
+#iconpng{
+  position: absolute;
+  top: 40%;
+  left: 10%;
+}

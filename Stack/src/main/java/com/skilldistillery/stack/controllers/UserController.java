@@ -134,6 +134,6 @@ public class UserController {
 	@GetMapping(path = "{id}/nodes")
 	public List<Node> getNodes(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse res) {
 		User user = userService.getUserById(id);
-		return user.getNodes();
+		return user.getMemberOf();
 	}
 }

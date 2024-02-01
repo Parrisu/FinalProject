@@ -152,9 +152,11 @@
       <div class="col-3">
         <div class="node-members">
           @for(user of members; track $index){
-          <div class="member d-flex justify-content-center">
-            <i class="fa-regular fa-user mb-1 me-2"></i>
-            <h4>{{user.username}}</h4>
+          <div class="member">
+            <div class="shadow card py-3">
+            <i class="fa-regular fa-user mb-1 me-2" id="iconpng"></i>
+            <h4 class="text-center">{{user.username}}</h4>
+          </div>
           </div>
           @if (user !== members[members.length-1]) {
           <br>
