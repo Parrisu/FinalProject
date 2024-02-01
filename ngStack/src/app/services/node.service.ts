@@ -135,4 +135,20 @@ export class NodeService {
       })
     );
   }
+
+  public deleteNode(nodeId: number): Observable<void> {
+    const endpoint = `${this.url}/${nodeId}`;
+    const options = this.getHttpOptions();
+    return this.http.delete<void>(endpoint, options).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+              NodeService.deleteNode(nodeId: number): Observable<void>;
+              Error while attempting DELETE to endpoint ${endpoint}`)
+        );
+      })
+    );
+  }
 }
