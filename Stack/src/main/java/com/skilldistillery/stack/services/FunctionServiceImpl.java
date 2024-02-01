@@ -44,7 +44,7 @@ public class FunctionServiceImpl implements FunctionService {
 
 	@Override
 	public List<Function> findByNode(int id) {
-		return funRepo.findByNodeId(id);
+		return funRepo.findByNodeId(id).stream().filter(Function::isEnabled).toList();
 	}
 
 	@Override
