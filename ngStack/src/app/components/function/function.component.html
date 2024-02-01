@@ -17,8 +17,8 @@
                   <hr>
                   Address: {{function.address.street}} <br>
                   <hr>
-                  <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{function.address.street}}+{{function.address.city}}+{{function.address.stateAbbreviation}}" class="btn btn-primary my-2">Directions</a>
-                  <i  class="fa fa-trash icon" aria-hidden="true" (click)="disableFunction()"></i>
+                  <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{function.address.street}}+{{function.address.city}}+{{function.address.stateAbbreviation}}" class="btn btn-outline-warning my-2">Directions</a>
+                  <i  *ngIf="check" class="fa fa-trash icon" aria-hidden="true" (click)="disableFunction()"></i>
 
                 </div>
                 <div class="col-auto ">
