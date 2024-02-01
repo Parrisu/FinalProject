@@ -10,15 +10,37 @@ import { User } from '../models/user';
 })
 export class AuthService {
   public isLoggedIn = false;
+  public isAdmin = false;
 
   private url = environment.baseUrl;
 
   constructor(private http: HttpClient) {
     this.setAuthStatus();
+    this.setRoleStatus();
   }
 
   public setAuthStatus(): void {
     this.isLoggedIn = this.checkLogin();
+  }
+
+  public setRoleStatus(): void {
+    this.isAdmin = this.checkIsAdmin();
+  }
+
+  checkLogin(): boolean {
+    if (localStorage.getItem('credentials')) {
+      return true;
+    }
+    return false;
+  }
+
+  checkIsAdmin(): boolean {
+    const role = localStorage.getItem('role');
+    let verdict = false;
+    if (role && role === 'admin') {
+      verdict = true;
+    }
+    return verdict;
   }
 
   register(user: User): Observable<User> {
@@ -49,7 +71,9 @@ export class AuthService {
         // While credentials are stored in browser localStorage, we consider
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
+        localStorage.setItem('role', newUser.role);
         this.setAuthStatus();
+        this.setRoleStatus();
         return newUser;
       }),
       catchError((err: any) => {
@@ -63,7 +87,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
-    localStorage.clear;
+    localStorage.removeItem('role');
     this.setAuthStatus();
   }
 
@@ -90,13 +114,6 @@ export class AuthService {
         );
       })
     );
-  }
-
-  checkLogin(): boolean {
-    if (localStorage.getItem('credentials')) {
-      return true;
-    }
-    return false;
   }
 
   generateBasicAuthCredentials(username: string, password: string): string {

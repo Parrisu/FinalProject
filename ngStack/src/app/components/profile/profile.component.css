@@ -1,4 +1,13 @@
-#icon:hover {
-  background-color: gold;
-  opacity: 0.85;
-  }
+#groupName:hover{
+  opacity: 80%;
+}
+
+#groupName{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+p, h4, h2, button {
+  color: white;
+}

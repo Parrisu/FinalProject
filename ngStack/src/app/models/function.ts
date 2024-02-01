@@ -16,6 +16,7 @@ export class Function {
   node: Nodes;
   address: Address;
   nodeId: number;
+  nodeName: string;
 
   constructor(
     id: number = 0,
@@ -30,7 +31,8 @@ export class Function {
     user: User = new User(),
     node: Nodes = new Nodes(),
     address: Address = new Address(),
-    nodeId: number = 0
+    nodeId: number = 0,
+    nodeName: string = ''
   ) {
     this.id = id;
     this.name = name;
@@ -45,5 +47,6 @@ export class Function {
     this.node = node;
     this.address = address;
     this.nodeId = nodeId;
+    this.nodeName = nodeName;
   }
 }

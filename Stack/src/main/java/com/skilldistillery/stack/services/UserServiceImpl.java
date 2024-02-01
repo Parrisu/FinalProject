@@ -1,5 +1,6 @@
 package com.skilldistillery.stack.services;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.Address;
+import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
@@ -102,6 +104,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<User> getAll(String searchQuery) {
-		return userRepo.getAll(searchQuery);
+		return new HashSet<>(userRepo.getAll(searchQuery).stream().filter(User::isEnabled).toList());
 	}
+
+	@Override
+	public User setUserStatus(int userId, boolean status) throws EntityDoesNotExistException {
+		User user = userRepo.findById(userId).orElseThrow(EntityDoesNotExistException::new);
+		user.setEnabled(status);
+		return userRepo.saveAndFlush(user);
+	}
+
+	@Override
+	public User getUserById(int id) {
+		return userRepo.findById(id).get();
+	}
+	
 }

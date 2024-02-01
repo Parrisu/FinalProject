@@ -1,36 +1,146 @@
 <div id="node-page" class="row">
   <div class="col-2"></div>
   <div class="col-8">
-    <div class="group-header">
-      <div class="d-flex justify-content-between">
-        <h2>{{node.name}}</h2>
-        @if (userIsMember) {
-        <button class="btn btn-primary">Create A Function</button>
-        }
+    <div class="group-header row">
+      <div class="col-3 node-image-col">
+        <img class="node-image" [src]="node.imageUrl" alt="the image for this group">
       </div>
-      <hr>
-      <div class="d-flex justify-content-between">
-        <h3>{{node.city}}, {{node.stateAbbreviation}}</h3>
-        <h3>This is a {{node.openToPublic? 'public': 'private'}} group.</h3>
-      </div>
-      <div class="group-description">
-        {{node.description}}
+      <div class="group-details col-9">
+        <div class="d-flex justify-content-between">
+          <h2>{{node.name}}</h2>
+        </div>
+        <div>
+          <div>
+            @if (userIsOwner) {
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Update Node</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                  (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="error">{{nodeEditErrorText}}</div>
+              <div class="modal-body">
+
+                <form>
+                  <div class="mb-3">
+
+                    <div class="form-group">
+                      <label for="nodeName">Name</label>
+                      <input class="form-control" type="text" id="nodeName" name="nodeName" [(ngModel)]="editNode.name">
+                    </div>
+                    <br>
+
+                    <div class="form-group d-flex">
+                      <label for="openToPublicCheckbox">Open To Public: &nbsp;</label>
+                      <input type="checkbox" id="openToPublicCheckbox" name="openToPublicCheckbox"
+                        [(ngModel)]="editNode.openToPublic">
+                    </div>
+                    <br>
+
+                    <div class="form-group ">
+                      <label for="cityName">City</label>
+                      <input class="form-control" type="text" id="cityName" name="cityName" [(ngModel)]="editNode.city">
+                    </div>
+                    <br>
+
+                    <div class="form-group ">
+                      <label for="stateAbbreviation">State Abbreviation</label>
+                      <input class="form-control" type="text" id="stateAbbreviation" name="stateAbbreviation"
+                        [(ngModel)]="editNode.stateAbbreviation">
+                    </div>
+                    <br>
+
+                    <div class="form-group ">
+                      <label for="imageUrl">Image Url</label>
+                      <input class="form-control" type="text" id="imageUrl" name="imageUrl"
+                        [(ngModel)]="editNode.imageUrl">
+                    </div>
+                    <br>
+
+                    <div class="form-group ">
+                      <label for="description">Description</label>
+                      <textarea class="form-control" type="text" id="description" name="description"
+                        [(ngModel)]="editNode.description"></textarea>
+                    </div>
+                    <br>
+
+                    @if (0 < editNode.stack.length) { <hr>
+                      <h5 class="stack-header">This Nodes Stack: </h5>
+                      <div class="stack d-inline-block">
+                        @for (tech of editNode.stack; track $index) {
+                        <div class="tech" (click)="popFromStack(tech)">
+                          <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+                          <div class="tech-name">{{tech.name}}</div>
+                        </div>
+                        }
+                      </div>
+                      }
+                      @if (0 < technologies.length) { <hr>
+                        <h5 class="stack-header">Add To Stack: </h5>
+                        <div class="stack d-inline-block">
+                          @for (tech of technologies; track $index) {
+                          <div class="tech" (click)="pushToStack(tech)">
+                            <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+                            <div class="tech-name">{{tech.name}}</div>
+                          </div>
+                          }
+                        </div>
+                        }
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="submitNodeEdit()">Save</button>
+              </div>
+            </ng-template>
+            <button class="btn btn-outline-danger me-3" (click)="submitNodeDelete()">Delete This Node</button>
+            <button class="btn btn-outline-primary me-3" (click)="openEditModal(content)">Edit Your Node</button>
+            }
+            @if (userIsMember) {
+            <button class="btn btn-outline-primary me-3" [routerLink]="'create'">Create A Function</button>
+            @if (!userIsOwner) {
+            <button class="btn btn-outline-primary me-3" (click)="leaveGroup()">Leave Group</button>
+            }
+            }
+            @else {
+            <button class="btn btn-outline-primary me-3" (click)="joinGroup()">Join Group</button>
+            }
+          </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <h3>{{node.city}}, {{node.stateAbbreviation}}</h3>
+          <h3>This is a {{node.openToPublic? 'public': 'private'}} group.</h3>
+        </div>
+        <div class="group-description">
+          {{node.description}}
+        </div>
+        @if (0 < node.stack.length) { <hr>
+          <div class="stack node-display-stack d-inline-block">
+            @for (tech of node.stack; track $index) {
+            <div class="display-tech" (click)="popFromStack(tech)">
+              <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+              <div class="display-tech-name">{{tech.name}}</div>
+            </div>
+            }
+          </div>
+          }
       </div>
     </div>
     <div class="group-body row">
-      <div class="col-9">
+      <div class="col-9 p-0">
         <div class="group-functions">
           <div *ngFor="let function of functions" class="function">
             <div class="function-header d-flex justify-content-between">
-              <h4>{{function.name}}</h4>
+              <h4 (click)="redirect(function.id)" id="functionName">{{function.name}}</h4>
               <h5>{{function.address.street}}</h5>
             </div>
             <div class="d-flex justify-content-between">
               <h6>date: {{function.date|date}}</h6>
               <div class="d-flex">
-                <h6>start: {{function.start|date :'h:mm a'}}</h6>
+                <h6>start: {{function.start}}</h6>
                 <div class="vertical-space"></div>
-                <h6>end: {{function.end|date :'h:mm a'}}</h6>
+                <h6>end: {{function.end}}</h6>
               </div>
             </div>
             <div>
@@ -42,9 +152,11 @@
       <div class="col-3">
         <div class="node-members">
           @for(user of members; track $index){
-          <div class="member d-flex justify-content-center">
-            <i class="fa-regular fa-user mb-1 me-2"></i>
-            <h4>{{user.username}}</h4>
+          <div class="member">
+            <div class="shadow card py-3">
+            <i class="fa-regular fa-user mb-1 me-2" id="iconpng"></i>
+            <h4 class="text-center">{{user.username}}</h4>
+          </div>
           </div>
           @if (user !== members[members.length-1]) {
           <br>

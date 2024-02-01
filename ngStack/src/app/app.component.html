@@ -1,9 +1,11 @@
 <div id="page-container">
   <nav id="navbar" class="navbar navbar-expand-lg navbar-light mb-3">
-    <div class="container-fluid">
+    <div class="container-fluid" id="navigation">
       <img id="brand-logo" src="assets/img/logo-xs.png" alt="The stack brand logo extra small." [routerLink]="'home'">
       <div class="nav-item active">
-        <a class="nav-link brand" [routerLink]="'home'" (click)="isMenuCollapsed = true">The Stack</a>
+        <a class="nav-link brand" [routerLink]="'home'" (click)="isMenuCollapsed = true">
+         <span id="bracket">[</span> The Stack <span id="bracket">]</span>
+        </a>
       </div>
 
       <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
@@ -33,13 +35,29 @@
           </li>
           } @else {
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'profile'" (click)="isMenuCollapsed = true">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'home'" (click)="auth.logout()" (click)="isMenuCollapsed = true">Log
-              Out</a>
+            <div ngbDropdown class="d-inline-block dropdown-button">
+              <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                Places
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu">
+                @if (auth.isAdmin) {
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'admin'"
+                  (click)="isMenuCollapsed = true">Admin</button>
+                }
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'create-node'"
+                  (click)="isMenuCollapsed = true">Make A
+                  Node</button>
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'profile'"
+                  (click)="isMenuCollapsed = true">Profile</button>
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'home'" (click)="auth.logout()"
+                  (click)="isMenuCollapsed = true">Log
+                  Out</button>
+              </div>
+            </div>
           </li>
           }
+
+
         </ul>
       </div>
     </div>

@@ -13,14 +13,17 @@ import { CreateNodeFormComponent } from './components/create-node-form/create-no
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreateFunctionFormComponent } from './components/create-function-form/create-function-form.component';
 import { DirectoryComponent } from './components/directory/directory.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
+  { path: 'admin', title: 'Admin Backend', component: AdminComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home Page', component: HomeComponent },
   { path: 'login', title: 'Login Page', component: LoginComponent },
   { path: 'signup', title: 'Sign Up Page', component: SignupComponent },
   { path: 'directory', title: 'Directory', component: DirectoryComponent },
   { path: 'nodes/:id', title: 'Show node', component: NodeComponent },
+  { path: 'create-node', title: 'Create A Node', component: CreateNodeFormComponent },
   {
     path: 'technologies',
     title: 'Technologies',

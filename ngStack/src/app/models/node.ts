@@ -1,3 +1,6 @@
+import { Technology } from './technology';
+import { User } from './user';
+
 export class Nodes {
   id: number;
   name: string;
@@ -6,6 +9,9 @@ export class Nodes {
   imageUrl: string;
   city: string;
   stateAbbreviation: string;
+  user: User;
+  stack: Technology[];
+  enabled: boolean;
 
   constructor(
     id: number = 0,
@@ -14,8 +20,10 @@ export class Nodes {
     description: string = '',
     imageUrl: string = '',
     city: string = '',
-    stateAbbreviation: string = ''
-
+    stateAbbreviation: string = '',
+    user: User = new User(),
+    stack: Technology[] = [],
+    enabled: boolean = true,
   ) {
     this.id = id;
     this.name = name;
@@ -24,7 +32,8 @@ export class Nodes {
     this.imageUrl = imageUrl;
     this.city = city;
     this.stateAbbreviation = stateAbbreviation;
-
-
+    this.user = user;
+    this.stack = stack;
+    this.enabled = enabled;
   }
 }

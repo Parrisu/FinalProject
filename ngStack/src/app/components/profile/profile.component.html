@@ -1,10 +1,11 @@
-<div class="container">
+<div class="container" id="font">
+  <div id="spacer"></div>
   <div class="row">
     <div class="col-6">
-      <img [src]=user.profileImageUrl alt="profile pic for {{user.firstName}}">
+      <img id="profileimg" src="https://cdn.pixabay.com/photo/2023/08/10/07/06/ai-generated-8180969_1280.jpg" alt="profile pic for {{user.firstName}}">
       <button class="btn btn-outline-secondary btn-sm my-2" [routerLink]="['/account']" routerLinkActive="router-link-active" >Edit Profile</button>
-      <h4>{{user.firstName}}</h4>
-      <h4>{{user.lastName}}</h4>
+      <h4>{{user.firstName}} {{user.lastName}}</h4>
+      <p id="quote">"{{user.aboutMe}}"</p>
       <div *ngIf="showStack">
         <table class="table table-hover">
           <thead class="table-dark">
@@ -45,7 +46,10 @@
 
     </div>
     <div class="col-6">
-      <h1>Groups</h1>
+      <div class="text-center"><h2>Nodes</h2></div>
+      <div class="card my-4" *ngFor="let group of groups">
+        <div class="card-header" (click)="redirect(group.id)" id="groupName">{{group.name}} | {{group.description}}</div>
+      </div>
     </div>
 </div>
 </div>

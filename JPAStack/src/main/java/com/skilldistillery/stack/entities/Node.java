@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -48,12 +49,11 @@ public class Node {
 	@Column(name = "image_url")
 	private String imageUrl;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "node_technology", joinColumns = @JoinColumn(name = "node_id"), inverseJoinColumns = @JoinColumn(name = "technology_id"))
 	private List<Technology> stack;
 	
-	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 

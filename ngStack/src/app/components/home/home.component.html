@@ -1,24 +1,16 @@
-<div class="container text-center">
-
-  <p>Directory</p>
-
-  <a href="#/directory">directory</a><br>
-</div>
-<div class="container">
-  <div class="row">
-    <!-- add click event on image and title to redirect user to single node -->
-    <div *ngFor="let node of nodeList" class="card" style="width: 18rem;">
-      <img  class="card-img-top img-fluid w-100" src="{{node.imageUrl}}"  alt="Card image cap" alt="Responsive image">
-      <div class="card-body">
-        <h4>Name:</h4>
-        <h4>{{node.name}}</h4>
-        <h4>State:</h4>
-        <h5>{{node.stateAbbreviation}}</h5>
-        <h4>City:</h4>
-        <h5>{{node.city}}</h5>
-        <h4>Description:</h4>
-        <p class="card-text">{{node.description}}</p>
-      </div>
+<div class="container d-flex-block blocks">
+  <!-- add click event on image and title to redirect user to single node -->
+  <div *ngFor="let node of nodeList" class="card d-inline-block node" [routerLink]="'/nodes/'+node.id">
+    <img class="card-img-top img-fluid w-100" src="{{node.imageUrl}}" alt="Card image cap" alt="Responsive image">
+    <div class="card-body">
+      <h4>Name:</h4>
+      <h4>{{node.name}}</h4>
+      <h4>State:</h4>
+      <h5>{{node.stateAbbreviation}}</h5>
+      <h4>City:</h4>
+      <h5>{{node.city}}</h5>
+      <h4>Description:</h4>
+      <p class="card-text">{{node.description}}</p>
     </div>
   </div>
 </div>

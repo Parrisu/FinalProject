@@ -21,6 +21,8 @@ import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
+import com.skilldistillery.stack.exceptions.AuthException;
+import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 import com.skilldistillery.stack.exceptions.InvalidEntityException;
 import com.skilldistillery.stack.services.AddressService;
 import com.skilldistillery.stack.services.FunctionService;
@@ -39,11 +41,23 @@ public class NodeController {
 
 	@Autowired
 	private FunctionService funServ;
-	
+
 	@Autowired
 	private AddressService addService;
 
 	// Node Routing //////////////////////////////////////////////////
+
+	@DeleteMapping("{nodeId}")
+	public void deleteNode(@PathVariable("nodeId") int nodeId, Principal principal)
+			throws EntityDoesNotExistException, AuthException {
+		nodeService.deleteNode(nodeId, principal.getName());
+	}
+
+	@PutMapping({ "{nodeId}" })
+	public Node updateNode(@PathVariable("nodeId") int nodeId, @RequestBody Node node, Principal principal)
+			throws AuthException, EntityDoesNotExistException, InvalidEntityException {
+		return nodeService.updateNode(nodeId, node, principal.getName());
+	}
 
 	@GetMapping
 	public Set<Node> showAllNodes(@RequestParam(name = "searchQuery", required = false) String searchQuery,
@@ -54,7 +68,7 @@ public class NodeController {
 		return nodeService.searchNodes(searchQuery, cityName, stateAbbr, stack);
 	}
 
-	@GetMapping(path={"{id}"})
+	@GetMapping(path = { "{id}" })
 	public Node findById(HttpServletRequest req, HttpServletResponse res, @PathVariable("id") int id,
 			Principal principal) {
 		Node node = nodeService.findById(id).orElse(null);
@@ -62,7 +76,6 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return node;
-
 	}
 
 	@PostMapping
@@ -78,9 +91,7 @@ public class NodeController {
 			node = null;
 		}
 		return node;
-
 	}
-
 
 	@PostMapping(path = { "{nodeId}/members" })
 	public List<User> joinNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
@@ -90,7 +101,6 @@ public class NodeController {
 		try {
 			if (node == null) {
 				res.setStatus(404);
-
 			} else {
 				users = nodeService.joinNode(principal.getName(), node);
 			}
@@ -100,17 +110,15 @@ public class NodeController {
 			node = null;
 		}
 		return users;
-
 	}
 
-	@DeleteMapping(path = { "{nodeId}/leave" })
+	@DeleteMapping(path = { "{nodeId}/members" })
 	public void leaveNode(HttpServletRequest req, HttpServletResponse res, @PathVariable("nodeId") int nodeId,
 			Principal principal) {
 		Node node = nodeService.getNodeById(nodeId);
 
 		if (node == null) {
 			res.setStatus(404);
-
 		} else {
 			boolean leftNode = nodeService.leaveNode(principal.getName(), node);
 			if (leftNode) {
@@ -119,9 +127,7 @@ public class NodeController {
 			} else {
 				res.setStatus(404);
 			}
-
 		}
-
 	}
 
 	@GetMapping(path = { "{nodeId}/members" })
@@ -129,11 +135,10 @@ public class NodeController {
 			@PathVariable("nodeId") int nodeId, Principal principal) {
 		Node node = nodeService.getNodeById(nodeId);
 		return nodeService.findUserInNodeGroup(node);
-
 	}
 
 	// Function Routing //////////////////////////////////////////////////
-	
+
 	@GetMapping(path = { "{nodeId}/function/{fId}" })
 	public Function getFunctionDetails(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
@@ -144,7 +149,6 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return found;
-		
 	}
 
 	@GetMapping(path = { "{nodeId}/function" })
@@ -156,7 +160,7 @@ public class NodeController {
 
 	@PostMapping(path = { "{nodeId}/function" })
 	public Function findFunctionById(@PathVariable("nodeId") int nodeId, @RequestBody Function function,
-			HttpServletRequest req, HttpServletResponse res, Principal principal) throws InvalidEntityException{
+			HttpServletRequest req, HttpServletResponse res, Principal principal) throws InvalidEntityException {
 		Address address = addService.createAddress(function.getAddress());
 		function.setAddress(address);
 
@@ -174,7 +178,6 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return toUpdate;
-
 	}
 
 	@DeleteMapping(path = { "{nodeId}/function/{fId}" })
@@ -187,6 +190,17 @@ public class NodeController {
 			res.setStatus(404);
 		}
 		return toUpdate;
+	}
+
+	// ATTENDEES MAPPING //////////////////////////////
+
+	@GetMapping(path = { "{nodeId}/function/{fId}/attendees" })
+	public List<User> findAttendeesByNode(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId, Principal principal) {
+		Function function = funServ.findByFunctionIdAndNodeId(nodeId, fId);
+		List<User> attendees = function.getAttendees();
+		return attendees;
 
 	}
+	
 }

@@ -1,8 +1,10 @@
 package com.skilldistillery.stack.services;
 
+import java.util.List;
 import java.util.Set;
 
 import com.skilldistillery.stack.entities.Address;
+import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
@@ -25,5 +27,9 @@ public interface UserService {
 	User updateUserTech(int userId, Technology tech);
 
 	Set<User> getAll(String searchQuery);
+	
+	User setUserStatus(int userId, boolean status) throws EntityDoesNotExistException;
 
+	User getUserById(int id);
+	
 }

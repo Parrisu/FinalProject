@@ -28,6 +28,7 @@ export class AccountComponent implements OnInit {
       {
         next: (user) => {
           this.user, this.editUser = user;
+          this.router.navigateByUrl('profile')
         },
         error: (err) => {
           console.log(err)

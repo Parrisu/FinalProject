@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { FunctionService } from '../../services/function.service';
 import { Function } from '../../models/function';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-function',
@@ -18,6 +19,8 @@ export class FunctionComponent implements OnInit {
   function: Function = new Function();
   nodeId: number = 0;
   fId: number = 0;
+  attendees: number = 0;
+  users: User[] = [];
 
 
 
@@ -37,6 +40,8 @@ export class FunctionComponent implements OnInit {
       {
         next: (funct)=>{
           this.function = funct;
+          this.getAttendees();
+
         },
         error: (errors)=>{
           console.log(errors)
@@ -45,8 +50,36 @@ export class FunctionComponent implements OnInit {
     );
   }
 
+  getAttendees(){
+    this.funServ.getAttendees(this.nodeId, this.fId).subscribe(
+      {
+        next: (users)=>{
+          this.users = users;
+          this.attendees = this.users.length;
+          console.log(this.attendees)
+        },
+        error: (errors)=>{
+          console.log(errors)
+        }
+      }
+    )
+  }
+
   createNew(){
     this.router.navigateByUrl("nodes/" + this.nodeId + "/function/create")
+  }
+
+  disableFunction(){
+    this.funServ.disableFunction(this.nodeId, this.fId).subscribe(
+      {
+        next: (funct)=>{
+          this.router.navigateByUrl("nodes/"+this.nodeId)
+        },
+        error: (errors)=>{
+          console.log(errors)
+        }
+      }
+    )
   }
 
 
