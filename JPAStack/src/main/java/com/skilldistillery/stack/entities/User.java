@@ -74,14 +74,18 @@ public class User {
 
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
-
+	
 	@JoinTable(name = "user_notification", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
 	private List<Notification> notifications;
 	
 	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "node_member", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "node_id"))
+	private List<Node> memberOf;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user" )
 	private List<Node> nodes;
-	
 	
 
 	public User() {
@@ -223,6 +227,14 @@ public class User {
 
 	public void setNodes(List<Node> nodes) {
 		this.nodes = nodes;
+	}
+
+	public List<Node> getMemberOf() {
+		return memberOf;
+	}
+
+	public void setMemberOf(List<Node> memberOf) {
+		this.memberOf = memberOf;
 	}
 
 	@Override

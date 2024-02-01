@@ -5,6 +5,7 @@ import { Function } from '../models/function';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 import { SearchParams } from '../models/search-params';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,31 @@ export class FunctionService {
       };
     }
     return this.http.get<Function[]>(endpoint, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+                FunctionService.getFunctions(id: number): Observable<Function[]>;
+                Error while attempting GET to ${endpoint}.
+              `)
+        );
+      })
+    );
+  }
+  getAttendees(nid: number, fId: number): Observable<User[]> {
+    const endpoint = `${this.baseUrl}/${nid}/function/${fId}/attendees`;
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (this.auth.checkLogin()) {
+      httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest',
+        }),
+      };
+    }
+    return this.http.get<User[]>(endpoint, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

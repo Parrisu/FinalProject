@@ -1,14 +1,3 @@
-<div class="container text-center">
-
-  <p>Directory</p>
-
-  <a href="#/directory">directory</a><br>
-</div>
-<div class="w-100 d-flex justify-content-center">
-  <div class="card p-2 m-2">
-    <h4>Popular groups in the US</h4>
-  </div>
-</div>
 <div class="container d-flex-block blocks">
   <!-- add click event on image and title to redirect user to single node -->
   <div *ngFor="let node of nodeList" class="card d-inline-block node" [routerLink]="'/nodes/'+node.id">

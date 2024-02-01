@@ -18,6 +18,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -78,6 +80,12 @@ public class Function {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "node_id")
 	private Node node;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="attendee",
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="function_id"))
+	private List<User> attendees;
 
 	public Function() {
 	}
@@ -223,9 +231,18 @@ public class Function {
 		return this.node.getId();
 	}
 
+<<<<<<< HEAD
 	@JsonProperty(value = "nodeName")
 	public String getNodeName() {
 		return this.node.getName();
+=======
+	public List<User> getAttendees() {
+		return attendees;
+	}
+
+	public void setAttendees(List<User> attendees) {
+		this.attendees = attendees;
+>>>>>>> 90b33649698f3ae82e765b1905a7f0962d63a6e7
 	}
 
 	@Override

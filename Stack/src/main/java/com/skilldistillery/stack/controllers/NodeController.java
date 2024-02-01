@@ -195,16 +195,12 @@ public class NodeController {
 	// ATTENDEES MAPPING //////////////////////////////
 
 	@GetMapping(path = { "{nodeId}/function/{fId}/attendees" })
-	public Function getFunctionAttendees(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
-			HttpServletRequest req, HttpServletResponse res, Principal principal) {
-		Function found = funServ.findByFunctionIdAndNodeId(nodeId, fId);
-
-		if (found != null) {
-			res.setStatus(200);
-		} else {
-			res.setStatus(404);
-		}
-		return found;
+	public List<User> findAttendeesByNode(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId, Principal principal) {
+		Function function = funServ.findByFunctionIdAndNodeId(nodeId, fId);
+		List<User> attendees = function.getAttendees();
+		return attendees;
 
 	}
+	
 }

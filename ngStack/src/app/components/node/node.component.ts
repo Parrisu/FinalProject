@@ -173,8 +173,8 @@ export class NodeComponent implements OnInit {
   }
 
   pushToStack(tech: Technology) {
-    if (!this.node.stack.includes(tech)) {
-      this.node.stack.push(tech);
+    if (!this.editNode.stack.includes(tech)) {
+      this.editNode.stack.push(tech);
       this.technologies = this.technologies.filter(
         (item: Technology) => item !== tech
       );
@@ -182,11 +182,15 @@ export class NodeComponent implements OnInit {
   }
 
   popFromStack(tech: Technology) {
-    if (this.node.stack.includes(tech)) {
-      this.node.stack = this.node.stack.filter(
+    if (this.editNode.stack.includes(tech)) {
+      this.editNode.stack = this.editNode.stack.filter(
         (item) => item !== tech
       );
       this.technologies.push(tech);
     }
+  }
+
+  redirect(id: number){
+    this.router.navigateByUrl("nodes/" + this.node.id + "/function/" +id)
   }
 }

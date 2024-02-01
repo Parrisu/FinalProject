@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { User } from '../models/user';
 import { Technology } from '../models/technology';
+import { Nodes } from '../models/node';
 
 @Injectable({
   providedIn: 'root',
@@ -100,6 +101,29 @@ export class UserService {
     };
 
     return this.http.delete<User>(endpoint, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+                UserService.Destroy(id: number);
+                Error while attempting Delete to ${endpoint}.
+              `)
+        );
+      })
+    );
+  }
+  getGroups(id: number): Observable<Nodes[]> {
+    const endpoint = `${this.baseUrl}/${id}/nodes`;
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+    };
+
+    return this.http.get<Nodes[]>(endpoint, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

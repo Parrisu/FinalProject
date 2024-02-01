@@ -64,10 +64,10 @@
                     </div>
                     <br>
 
-                    @if (0 < node.stack.length) { <hr>
+                    @if (0 < editNode.stack.length) { <hr>
                       <h5 class="stack-header">This Nodes Stack: </h5>
                       <div class="stack d-inline-block">
-                        @for (tech of node.stack; track $index) {
+                        @for (tech of editNode.stack; track $index) {
                         <div class="tech" (click)="popFromStack(tech)">
                           <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
                           <div class="tech-name">{{tech.name}}</div>
@@ -115,6 +115,16 @@
         <div class="group-description">
           {{node.description}}
         </div>
+        @if (0 < node.stack.length) { <hr>
+          <div class="stack node-display-stack d-inline-block">
+            @for (tech of node.stack; track $index) {
+            <div class="display-tech" (click)="popFromStack(tech)">
+              <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+              <div class="display-tech-name">{{tech.name}}</div>
+            </div>
+            }
+          </div>
+          }
       </div>
     </div>
     <div class="group-body row">
@@ -122,7 +132,7 @@
         <div class="group-functions">
           <div *ngFor="let function of functions" class="function">
             <div class="function-header d-flex justify-content-between">
-              <h4>{{function.name}}</h4>
+              <h4 (click)="redirect(function.id)" id="functionName">{{function.name}}</h4>
               <h5>{{function.address.street}}</h5>
             </div>
             <div class="d-flex justify-content-between">
@@ -142,9 +152,11 @@
       <div class="col-3">
         <div class="node-members">
           @for(user of members; track $index){
-          <div class="member d-flex justify-content-center">
-            <i class="fa-regular fa-user mb-1 me-2"></i>
-            <h4>{{user.username}}</h4>
+          <div class="member">
+            <div class="shadow card py-3">
+            <i class="fa-regular fa-user mb-1 me-2" id="iconpng"></i>
+            <h4 class="text-center">{{user.username}}</h4>
+          </div>
           </div>
           @if (user !== members[members.length-1]) {
           <br>

@@ -28,5 +28,6 @@ public interface FunctionService {
 	Function setFunctionStatus(int functionId, boolean status) throws EntityDoesNotExistException;
 	
 //	List<Attendee> findAttendeeByFunctionId(int id);
+	
 
 }

@@ -79,3 +79,47 @@
   display: flex;
   position: absolute;
 }
+
+
+.display-tech img {
+  width: 100%;
+  height: auto;
+}
+
+.display-tech {
+  width: 10%;
+  display: inline-block;
+  margin: 1%;
+}
+
+.display-tech:hover {
+  cursor: pointer;
+}
+
+.display-tech-name {
+  display: none;
+  opacity: 100;
+}
+
+.display-tech:hover .display-tech-name {
+  transition: 0.9s;
+  opacity: 100%;
+  color: white;
+  text-align: center;
+  margin-top: 0.3rem;
+  background-color: grey;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  display: flex;
+  position: absolute;
+}
+
+#functionName:hover{
+  opacity: 80%;
+}
+
+#iconpng{
+  position: absolute;
+  top: 40%;
+  left: 10%;
+}

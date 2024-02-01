@@ -5,6 +5,7 @@
       <img id="profileimg" src="https://cdn.pixabay.com/photo/2023/08/10/07/06/ai-generated-8180969_1280.jpg" alt="profile pic for {{user.firstName}}">
       <button class="btn btn-outline-secondary btn-sm my-2" [routerLink]="['/account']" routerLinkActive="router-link-active" >Edit Profile</button>
       <h4>{{user.firstName}} {{user.lastName}}</h4>
+      <p id="quote">"{{user.aboutMe}}"</p>
       <div *ngIf="showStack">
         <table class="table table-hover">
           <thead class="table-dark">
@@ -45,7 +46,10 @@
 
     </div>
     <div class="col-6">
-      <h1>Nodes</h1>
+      <div class="text-center"><h2>Nodes</h2></div>
+      <div class="card" *ngFor="let group of groups">
+        <div class="card-header">{{group.name}}</div>
+      </div>
     </div>
 </div>
 </div>
