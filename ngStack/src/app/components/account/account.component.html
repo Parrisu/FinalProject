@@ -1,18 +1,22 @@
-<div class="container">
+<div class="container" id="font">
   <div class="row">
-    <div class="col">
-      <form name="editAccount">
-        <label for="firstName" class="label-control"><strong>First Name</strong></label>
-        <input class="form-control" type="text" name="firstName" [(ngModel)]="editUser.firstName">
-        <label for="lastName" class="label-control"><strong>Last Name</strong></label>
-        <input class="form-control" type="text" name="lastName" [(ngModel)]="editUser.lastName">
-        <label for="profileImageUrl" class="label-control"><strong>Image Link</strong></label>
-        <input class="form-control" type="text" name="profileImageUrl" [(ngModel)]="editUser.profileImageUrl">
-        <label for="aboutMe" class="label-control"><strong>About Me</strong></label>
-        <input class="form-control" type="text" name="aboutMe" [(ngModel)]="editUser.aboutMe">
-        <button type="button" class="btn btn-success my-2" (click)="updateUser(editUser)">Save Changes</button>
-      </form>
-      <button class="btn btn-danger" (click)="deleteCycle(editUser.id)">Delete Account</button>
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div class="shadow card" id="cardbackground">
+        <form name="editAccount" class="m-2 p-2">
+          <label for="firstName" class="label-control"><strong>First Name</strong></label>
+          <input class="form-control" type="text" name="firstName" [(ngModel)]="editUser.firstName">
+          <label for="lastName" class="label-control"><strong>Last Name</strong></label>
+          <input class="form-control" type="text" name="lastName" [(ngModel)]="editUser.lastName">
+          <label for="profileImageUrl" class="label-control"><strong>Image Link</strong></label>
+          <input class="form-control" type="text" name="profileImageUrl" [(ngModel)]="editUser.profileImageUrl">
+          <label for="aboutMe" class="label-control"><strong>About Me</strong></label>
+          <input class="form-control" type="text" name="aboutMe" [(ngModel)]="editUser.aboutMe">
+          <button type="button" class="btn btn-success my-2" (click)="updateUser(editUser)">Save Changes</button>
+          <button class="btn btn-danger mx-5 px-2" (click)="deleteCycle(editUser.id)">Delete Account</button>
+        </form>
+      </div>
     </div>
+    <div class="col-3"></div>
   </div>
 </div>

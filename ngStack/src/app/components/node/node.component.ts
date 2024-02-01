@@ -189,4 +189,8 @@ export class NodeComponent implements OnInit {
       this.technologies.push(tech);
     }
   }
+
+  redirect(id: number){
+    this.router.navigateByUrl("nodes/" + this.node.id + "/function/" +id)
+  }
 }
