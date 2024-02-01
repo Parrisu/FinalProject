@@ -113,10 +113,17 @@
   opacity: 100%;
 }
 
-.dropdown-button {
+/* .dropdown-button {
   bottom: -0.4rem;
-}
+}*/
 
 .dropdown-menu {
+  position: absolute; z-index: 21474836;
   left: -3rem;
 }
+
+.dropdown-body {
+  position: absolute;
+  z-index: 99999;
+}
+

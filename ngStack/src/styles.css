@@ -9,6 +9,7 @@
 https://css-tricks.com/almanac/properties/t/touch-action/
 */
 body {
+
   touch-action: pan-y;
 }
 
