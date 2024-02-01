@@ -78,8 +78,7 @@ public class NodeServiceImpl implements NodeService {
 
 	@Override
 	public Node getNodeById(int id) {
-		return nodeRepo.findById(id).orElse(null);
-
+		return nodeRepo.findById(id).filter(Node::isEnabled).orElse(null);
 	}
 
 	@Override
@@ -118,30 +117,41 @@ public class NodeServiceImpl implements NodeService {
 	@Override
 	public Node updateNode(int nodeId, Node node, String username)
 			throws InvalidEntityException, EntityDoesNotExistException, AuthException {
-		
+
 		Node managedNode = nodeRepo.findById(nodeId).orElseThrow(EntityDoesNotExistException::new);
-		
+
 		User user = userRepo.findByUsername(username);
 		if (user == null) {
 			throw new EntityDoesNotExistException();
 		}
-		
+
 		if (!managedNode.getUser().equals(user)) {
 			throw new AuthException();
 		}
-		
+
 		managedNode.setName(node.getName());
-		managedNode.setEnabled(node.isEnabled());
+		managedNode.setOpenToPublic(node.isOpenToPublic());
 		managedNode.setCity(node.getCity());
 		managedNode.setStateAbbreviation(node.getStateAbbreviation());
 		managedNode.setDescription(node.getDescription());
 		managedNode.setImageUrl(node.getImageUrl());
-	
+
 		if (node.getStack() != null) {
 			managedNode.setStack(node.getStack());
 		}
 
 		return nodeRepo.saveAndFlush(managedNode);
+	}
+
+	@Override
+	public void deleteNode(int nodeId, String username) throws EntityDoesNotExistException, AuthException {
+		User user = userRepo.findByUsername(username);
+		Node node = nodeRepo.findById(nodeId).orElseThrow(EntityDoesNotExistException::new);
+		if (!node.getUser().equals(user)) {
+			throw new AuthException();
+		}
+		node.setEnabled(false);
+		nodeRepo.saveAndFlush(node);
 	}
 
 }

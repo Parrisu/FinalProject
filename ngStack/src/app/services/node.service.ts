@@ -117,4 +117,22 @@ export class NodeService {
       })
     );
   }
+
+  public updateNode(nodeId: number, node: Nodes): Observable<Nodes> {
+    const endpoint = `${this.url}/${nodeId}`;
+    const options = this.getHttpOptions();
+    return this.http.put<Nodes>(endpoint, node, options).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(`
+              NodeService.updateNode(nodeId: number, node: Nodes): Observable<Nodes>;
+              Error while attempting get to endpoint ${endpoint} with body ${JSON.stringify(
+              node
+            )}`)
+        );
+      })
+    );
+  }
 }

@@ -47,6 +47,12 @@ public class NodeController {
 
 	// Node Routing //////////////////////////////////////////////////
 
+	@DeleteMapping("{nodeId}")
+	public void deleteNode(@PathVariable("nodeId") int nodeId, Principal principal)
+			throws EntityDoesNotExistException, AuthException {
+		nodeService.deleteNode(nodeId, principal.getName());
+	}
+
 	@PutMapping({ "{nodeId}" })
 	public Node updateNode(@PathVariable("nodeId") int nodeId, @RequestBody Node node, Principal principal)
 			throws AuthException, EntityDoesNotExistException, InvalidEntityException {
@@ -132,7 +138,6 @@ public class NodeController {
 		return nodeService.findUserInNodeGroup(node);
 	}
 
-
 	// Function Routing //////////////////////////////////////////////////
 
 	@GetMapping(path = { "{nodeId}/function/{fId}" })
@@ -187,20 +192,20 @@ public class NodeController {
 		}
 		return toUpdate;
 	}
-	
+
 	// ATTENDEES MAPPING //////////////////////////////
-	
+
 	@GetMapping(path = { "{nodeId}/function/{fId}/attendees" })
 	public Function getFunctionAttendees(@PathVariable("nodeId") int nodeId, @PathVariable("fId") int fId,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		Function found = funServ.findByFunctionIdAndNodeId(nodeId, fId);
-		
+
 		if (found != null) {
 			res.setStatus(200);
 		} else {
 			res.setStatus(404);
 		}
 		return found;
-		
+
 	}
 }
