@@ -64,10 +64,10 @@
                     </div>
                     <br>
 
-                    @if (0 < node.stack.length) { <hr>
+                    @if (0 < editNode.stack.length) { <hr>
                       <h5 class="stack-header">This Nodes Stack: </h5>
                       <div class="stack d-inline-block">
-                        @for (tech of node.stack; track $index) {
+                        @for (tech of editNode.stack; track $index) {
                         <div class="tech" (click)="popFromStack(tech)">
                           <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
                           <div class="tech-name">{{tech.name}}</div>
@@ -115,6 +115,16 @@
         <div class="group-description">
           {{node.description}}
         </div>
+        @if (0 < node.stack.length) { <hr>
+          <div class="stack node-display-stack d-inline-block">
+            @for (tech of node.stack; track $index) {
+            <div class="display-tech" (click)="popFromStack(tech)">
+              <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+              <div class="display-tech-name">{{tech.name}}</div>
+            </div>
+            }
+          </div>
+          }
       </div>
     </div>
     <div class="group-body row">
