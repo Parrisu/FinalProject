@@ -2,27 +2,40 @@
   <div id="spacer"></div>
   <div class="row">
     <div class="col-6">
-      <img id="profileimg" src="https://cdn.pixabay.com/photo/2023/08/10/07/06/ai-generated-8180969_1280.jpg" alt="profile pic for {{user.firstName}}">
-      <button class="btn btn-outline-secondary btn-sm my-2" [routerLink]="['/account']" routerLinkActive="router-link-active" >Edit Profile</button>
+      <img id="profileimg" src="https://cdn.pixabay.com/photo/2023/08/10/07/06/ai-generated-8180969_1280.jpg"
+        alt="profile pic for {{user.firstName}}">
+      <button class="btn btn-outline-secondary btn-sm my-2" [routerLink]="['/account']"
+        routerLinkActive="router-link-active">Edit Profile</button>
       <h4>{{user.firstName}} {{user.lastName}}</h4>
       <p id="quote">"{{user.aboutMe}}"</p>
-      <div *ngIf="showStack">
-        <table class="table table-hover">
-          <thead class="table-dark">
-            <tr>
-              <th>Technology</th>
-              <th>Name</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let tech of user.stack">
-              <th>{{tech.id}}</th>
-              <td>{{tech.name}}</td>
-              <td><i id="icon" class="fa fa-trash" aria-hidden="true" (click)="popOrPushTech(user, tech)"></i></td>
-            </tr>
-          </tbody>
-        </table>
+      @if (0 < user.stack.length) { <hr>
+        <h5 class="stack-header">My Stack: </h5>
+        <div class="stack d-inline-block">
+          @for (tech of user.stack; track $index) {
+          <div class="tech">
+            <img [src]="tech.badgeUrl" alt="{{tech.name}} badge image">
+            <div class="tech-name">{{tech.name}}</div>
+          </div>
+          }
+        </div>
+        }
+        <div *ngIf="showStack">
+          <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>Technology</th>
+                <th>Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tech of user.stack">
+                <th>{{tech.id}}</th>
+                <td>{{tech.name}}</td>
+                <td><i id="icon" class="fa fa-trash" aria-hidden="true" (click)="popOrPushTech(user, tech)"></i></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div *ngIf="showStack">
           <table class="table table-hover table-dark" id="cardbackground">
@@ -41,15 +54,19 @@
               </tr>
             </tbody>
           </table>
-      </div>
-      <button class="btn btn-outline-secondary btn-sm my-2" (click)="show()">Edit Stack</button>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm my-2" [ngClass]="{'ms-5': 0 < user.stack.length}"
+          (click)="show()">Edit Stack</button>
 
     </div>
     <div class="col-6">
-      <div class="text-center"><h2>Nodes</h2></div>
+      <div class="text-center">
+        <h2>Nodes</h2>
+      </div>
       <div class="card my-4" *ngFor="let group of groups">
-        <div class="card-header" (click)="redirect(group.id)" id="groupName">{{group.name}} | {{group.description}}</div>
+        <div class="card-header" (click)="redirect(group.id)" id="groupName">{{group.name}} | {{group.description}}
+        </div>
       </div>
     </div>
-</div>
+  </div>
 </div>
