@@ -35,5 +35,7 @@ public interface NodeService {
 			throws InvalidEntityException, EntityDoesNotExistException, AuthException;
 	
 	void deleteNode(int nodeId, String username) throws EntityDoesNotExistException, AuthException;
+	
+	Node setEnabled(int nodeId, boolean status) throws EntityDoesNotExistException;
 
 }

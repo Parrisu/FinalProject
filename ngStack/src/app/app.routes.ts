@@ -13,8 +13,10 @@ import { CreateNodeFormComponent } from './components/create-node-form/create-no
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreateFunctionFormComponent } from './components/create-function-form/create-function-form.component';
 import { DirectoryComponent } from './components/directory/directory.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
+  { path: 'admin', title: 'Admin Backend', component: AdminComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home Page', component: HomeComponent },
   { path: 'login', title: 'Login Page', component: LoginComponent },

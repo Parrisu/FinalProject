@@ -112,3 +112,11 @@
   color: white !important;
   opacity: 100%;
 }
+
+.dropdown-button {
+  bottom: -0.4rem;
+}
+
+.dropdown-menu {
+  left: -3rem;
+}

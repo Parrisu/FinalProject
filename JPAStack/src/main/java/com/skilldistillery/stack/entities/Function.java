@@ -47,7 +47,7 @@ public class Function {
 
 	@Column(name = "end_time")
 	private LocalTime end;
-	
+
 	@CreationTimestamp
 	@Column(name = "created_on")
 	private LocalDateTime created;
@@ -80,11 +80,9 @@ public class Function {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "node_id")
 	private Node node;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="attendee",
-	joinColumns=@JoinColumn(name="user_id"),
-	inverseJoinColumns=@JoinColumn(name="function_id"))
+	@JoinTable(name = "attendee", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "function_id"))
 	private List<User> attendees;
 
 	public Function() {
@@ -229,6 +227,11 @@ public class Function {
 	@JsonProperty(value = "nodeId")
 	public int getNodeId() {
 		return this.node.getId();
+	}
+
+	@JsonProperty(value = "nodeName")
+	public String getNodeName() {
+		return this.node.getName();
 	}
 
 	public List<User> getAttendees() {

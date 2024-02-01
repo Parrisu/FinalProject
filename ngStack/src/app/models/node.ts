@@ -11,6 +11,7 @@ export class Nodes {
   stateAbbreviation: string;
   user: User;
   stack: Technology[];
+  enabled: boolean;
 
   constructor(
     id: number = 0,
@@ -21,7 +22,8 @@ export class Nodes {
     city: string = '',
     stateAbbreviation: string = '',
     user: User = new User(),
-    stack: Technology[] = []
+    stack: Technology[] = [],
+    enabled: boolean = true,
   ) {
     this.id = id;
     this.name = name;
@@ -32,5 +34,6 @@ export class Nodes {
     this.stateAbbreviation = stateAbbreviation;
     this.user = user;
     this.stack = stack;
+    this.enabled = enabled;
   }
 }

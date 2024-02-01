@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Technology;
+import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 
 public interface FunctionService {
 	
@@ -24,6 +25,9 @@ public interface FunctionService {
 	
 	Function destroyFunction(int nodeId, int fId);
 	
+	Function setFunctionStatus(int functionId, boolean status) throws EntityDoesNotExistException;
+	
+//	List<Attendee> findAttendeeByFunctionId(int id);
 	
 
 }

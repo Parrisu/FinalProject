@@ -35,16 +35,29 @@
           </li>
           } @else {
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'create-node'" (click)="isMenuCollapsed = true">Make A Node</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'profile'" (click)="isMenuCollapsed = true">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'home'" (click)="auth.logout()" (click)="isMenuCollapsed = true">Log
-              Out</a>
+            <div ngbDropdown class="d-inline-block dropdown-button">
+              <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                Places
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu">
+                @if (auth.isAdmin) {
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'admin'"
+                  (click)="isMenuCollapsed = true">Admin</button>
+                }
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'create-node'"
+                  (click)="isMenuCollapsed = true">Make A
+                  Node</button>
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'profile'"
+                  (click)="isMenuCollapsed = true">Profile</button>
+                <button ngbDropdownItem class="nav-drop-item" [routerLink]="'home'" (click)="auth.logout()"
+                  (click)="isMenuCollapsed = true">Log
+                  Out</button>
+              </div>
+            </div>
           </li>
           }
+
+
         </ul>
       </div>
     </div>

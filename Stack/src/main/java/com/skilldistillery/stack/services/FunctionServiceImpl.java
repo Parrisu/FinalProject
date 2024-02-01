@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.stack.entities.Function;
 import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
+import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
 import com.skilldistillery.stack.repositories.FunctionRepository;
 import com.skilldistillery.stack.repositories.NodeRepository;
 
@@ -78,5 +79,17 @@ public class FunctionServiceImpl implements FunctionService {
 		return funRepo.saveAndFlush(function);
 		
 	}
+
+	@Override
+	public Function setFunctionStatus(int functionId, boolean status) throws EntityDoesNotExistException{
+		Function func = funRepo.findById(functionId).orElseThrow(EntityDoesNotExistException::new);
+		func.setEnabled(status);
+		return funRepo.saveAndFlush(func);
+	}
+
+//	@Override
+//	public List<Attendee> findAttendeeByFunctionId(int id) {
+//		return attRepo.findByFunction(id);
+//	}
 
 }
