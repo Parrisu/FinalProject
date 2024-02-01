@@ -40,3 +40,42 @@
 .error {
   color: red;
 }
+
+.stack {
+  background-color: rgba(1, 1, 1, 0.04);
+  padding-block: 0.5rem;
+  box-shadow: 0 0.05rem 0.3rem 0.2rem rgba(1, 1, 1, 0.1);
+  border-radius: 0.4rem;
+}
+.tech img {
+  width: 100%;
+  height: auto;
+}
+
+.tech {
+  width: 22%;
+  display: inline-block;
+  margin: 1%;
+}
+
+.tech:hover {
+  cursor: pointer;
+}
+
+.tech-name {
+  display: none;
+  opacity: 100;
+}
+
+.tech:hover .tech-name {
+  transition: 0.9s;
+  opacity: 100%;
+  color: white;
+  text-align: center;
+  margin-top: 0.3rem;
+  background-color: grey;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  display: flex;
+  position: absolute;
+}
