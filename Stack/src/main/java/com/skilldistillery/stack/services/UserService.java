@@ -1,8 +1,10 @@
 package com.skilldistillery.stack.services;
 
+import java.util.List;
 import java.util.Set;
 
 import com.skilldistillery.stack.entities.Address;
+import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
@@ -27,5 +29,5 @@ public interface UserService {
 	Set<User> getAll(String searchQuery);
 	
 	User getUserById(int id);
-
+	
 }

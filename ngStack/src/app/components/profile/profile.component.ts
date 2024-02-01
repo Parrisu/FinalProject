@@ -51,7 +51,6 @@ export class ProfileComponent implements OnInit {
         this.user = user;
         console.log(this.user)
         this.loadStackInfo();
-        this.getGroups();
 
       },
       error: (err) => {
@@ -83,6 +82,7 @@ export class ProfileComponent implements OnInit {
           this.theStack.splice(j--, 1);
       }
     }
+    this.getGroups();
   }
 
   getGroups(){
@@ -90,7 +90,8 @@ export class ProfileComponent implements OnInit {
       {
         next: (nodes)=>{
           this.groups = nodes;
-          console.log(this.groups)
+          console.log("groups =============");
+          console.log({nodes})
         },
         error: (errors)=>{
           console.log(errors);

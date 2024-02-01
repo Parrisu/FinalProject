@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stack.entities.Address;
+import com.skilldistillery.stack.entities.Node;
 import com.skilldistillery.stack.entities.Technology;
 import com.skilldistillery.stack.entities.User;
 import com.skilldistillery.stack.exceptions.EntityDoesNotExistException;
@@ -109,4 +110,5 @@ public class UserServiceImpl implements UserService {
 	public User getUserById(int id) {
 		return userRepo.findById(id).get();
 	}
+	
 }
