@@ -1,19 +1,16 @@
 .node img {
   height: 15rem;
-  width: auto;
-  overflow-x: hidden;
+  object-fit: cover;
 }
 
 .node {
   vertical-align: middle;
   margin: 0;
   height: 35rem;
-  width: 22.5vw;
+  width: 85%;
   overflow: hidden;
 }
 
 .node:hover {
   cursor: pointer;
 }
-
-

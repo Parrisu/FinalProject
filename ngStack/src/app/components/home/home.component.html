@@ -1,12 +1,21 @@
-<div class="container d-flex-block blocks">
-  <!-- add click event on image and title to redirect user to single node -->
-  <div *ngFor="let node of nodeList" class="card d-inline-block node m-3" [routerLink]="'/nodes/'+node.id" id="cardbackground">
-    <img class="card-img-top img-fluid w-100" src="{{node.imageUrl}}" alt="Card image cap" alt="Responsive image" >
-    <div class="card-body text-center">
-      <h4>{{node.name}}</h4>
-      <hr>
-      <h5>{{node.city}}, {{node.stateAbbreviation}}</h5>
-      <p class="card-text">"{{node.description}}" - {{node.user.firstName}}</p>
+<!-- add click event on image and title to redirect user to single node -->
+<div class="spacer"></div>
+@for(list of nodeNodeList; track list) {
+<div class="row">
+  @for (node of list; track node) {
+  <div class="col-4 d-flex justify-content-center ">
+    <div class="card node" [routerLink]="'/nodes/'+node.id" id="cardbackground">
+      <img class="card-img-top img-fluid w-100" src="{{node.imageUrl}}" alt="Card image cap" alt="Responsive image">
+      <div class="card-body text-center">
+        <h4>{{node.name}}</h4>
+        <hr>
+        <h5>{{node.city}}, {{node.stateAbbreviation}}</h5>
+        <h4>Description:</h4>
+        <p class="card-text">{{node.description}}</p>
+      </div>
     </div>
   </div>
+}
 </div>
+<br>
+}
