@@ -15,7 +15,7 @@
 </div>
 
 
-[View The Website Live Here!](http://52.91.240.2:8080/Stack/#/home)
+[View The Website Live Here!](http://13.56.117.221:8080/Stack/#/home)
 
 #### Final Team Project undertaken as members of Skill Distillery
 
@@ -32,14 +32,10 @@ As a user on The Stack you can search for and view groups in your area, and view
 
 
 ### Technologies and Methodologies Used
-Our stack is a SQL, Java, JPA, Spring BOOT, Angular stack, we believe this stack is effective due to its practical scalability and real world use. These technologies enabled us to achieve a product we are proud of.
-<br>
-During planning our team used great tools like [eraser.io](https://app.eraser.io), [figma](https://www.figma.com), and [trello](https://trello.com) to create a comprehensive design that we could have thoroughly flushed out before implementation, so that our implementation would hold minimal suprises. 
-<br>
-Our team focused heavily on integrating a agile workflow into our process. We wanted to mimic a production environment as much as we could. We started each day with a scrum meeting, we then went through our trello task board and assigned tasks to. To work on tasks we used a 50/50 combination of side-by-side work, and pair programming. 
-<br>
-We embraced git branching and used a branch model inspired by git flow. We used our main branch as our development branch, and we used github rules to implement rules that required approvals from other collaborators before a pull request could be merged. Our workflow enabled us to work efficiently and effectively. 
-<br>
+Our stack is a SQL, Java, JPA, Spring BOOT, Angular stack due to its practical scalability and real world use. These technologies enabled us to achieve a product we are proud of.<br><br>
+During planning our team used essential tools like [eraser.io](https://app.eraser.io), [figma](https://www.figma.com), and [trello](https://trello.com) to create a comprehensive design before implementation. Measure twice, and cut once.<br><br>
+Our team focused heavily on integrating a agile workflow into our process. We wanted to mimic a production environment as much as we could. We started each day with a scrum meeting, we then went through our trello task board and assigned tasks to. To work on tasks we used a 50/50 combination of side-by-side work, and pair programming. <br><br>
+We embraced git branching and used a branch model inspired by git flow. We used our main branch as our development branch along with github rules to restrict updates to require approvals. Our workflow enabled us to work efficiently and effectively. <br>[Check out the network graph here!](https://github.com/Parrisu/TheStack/network)<br><br>
 
 Languages: Java <br>
 Web: HTML, CSS, Bootstrap 5.3, Angular, NgBootstrap, JavaScript <br>
@@ -50,7 +46,9 @@ Configuration Management: Git <br>
 IDE: STS4, Eclipse, VSCode <br>
 
 ### Lessons Learned
-We learned a lot about effective team management, leveraging your teams strengths and weaknesses as an asset. We also learned much about the design process in software development, we found a lot of benefit in a cycle that consisted of planning, working, and integrating what we had learned. We also learned a lot of very cool new methods to achieve certain technical aspects, such as how to use the google api systems. 
+* Branching requires all members to be aware of other's current workload. Conflicts can happen fast and suddenly.
+* Designing can make or break your entire application/idea. Concepts need to be fully drawn out before starting production.
+* Using external APIs like google require API keys. This made us branch out and find that multiple websites like Linkedin and Meta have developer sections where you can gain access to API keys.
 
 
 ### Stretch Goals
@@ -62,7 +60,7 @@ We learned a lot about effective team management, leveraging your teams strength
 
 To set up this project to run on your own computer follow the steps below.
 
- 1. Download the project at the top of this project.
+ 1. Download the ZIP at the top of this page under the code dropdown menu.
  2. Import the project.
         * Open your preferred IDE, and open an existing or new workspace.
         * Right click inside of your project explorer, click import, then `existing project into workspace`.
@@ -75,7 +73,7 @@ To set up this project to run on your own computer follow the steps below.
             cd ~/SD41/Java/FinalProject/DB
             ```
     
-     * Once here, run the command
+    * Once here, run the command
 
             ```
             mysql -u root -p < stackdb.sql
@@ -84,9 +82,24 @@ To set up this project to run on your own computer follow the steps below.
             ```
        
 5. Make sure MAMP is running on port 3306, and launch from the Spring `Boot Dashboard`.
-        * Click on the globe after it's up and check out the site!
+6. Serve Angular
+   * Open a new terminal tab.
+   * Nagivate to ngStack
+            ex.
+            
+            ```
+            cd ~/SD41/Java/FinalProject/ngStack
+            ```
+   * Once here, run the command
+  
+            ```
+            ng serve
 
-Otherwise just head to the deployed website above.
+            ```
+7. Open your browser to localhost:4200
+
+
+Otherwise just head to the deployed website [here](http://13.56.117.221:8080/Stack/#/home).
 
 Thanks for visiting!
     - The Stack Team
